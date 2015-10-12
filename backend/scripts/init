@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+docker-compose -f config/docker/development.yml stop
+docker-compose -f config/docker/development.yml rm -f
+docker-compose -f config/docker/development.yml pull
+
+scripts/install
+scripts/db

@@ -1,0 +1,11 @@
+---
+
+ember:
+  container_name: bonfire_test_ember
+  command: ember test --serve
+  extends:
+    file: common.yml
+    service: ember
+  ports:
+    - "4200:4200"
+    - "35729:35729"

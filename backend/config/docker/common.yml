@@ -1,0 +1,22 @@
+---
+
+postgres:
+  image: dylanfoster/postgres:9.4
+  environment:
+    POSTGRES_PASSWORD: postgres
+    POSTGRES_USER: postgres
+
+redis:
+  image: dylanfoster/redis:3.0
+
+server:
+  image: dylanfoster/node-dev:0.12
+  environment:
+    NODE_ENV: development
+    PORT: 3800
+    POSTGRES_DATABASE: postgres
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: postgres
+  user: vader
+  volumes:
+    - ../../:/data/app

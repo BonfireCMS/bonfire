@@ -1,0 +1,6 @@
+---
+
+ember:
+  image: dylanfoster/ember-cli:1.13
+  volumes:
+    - ../../:/data/app

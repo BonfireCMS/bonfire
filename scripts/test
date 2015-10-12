@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+# test backend
+# test frontend
+# test integration? 

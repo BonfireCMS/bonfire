@@ -6,7 +6,7 @@ Bonfire is a simple yet powerful platform for curating and managing your content
 
  - Admin app: [ember.js](http://emberjs.com/)
  - Blog app: [express.js](http://expressjs.com/)
- - API [Node.js](nodejs.org) and [postgres](http://www.postgresql.org/)
+ - API [Node.js](http://nodejs.org) and [postgres](http://www.postgresql.org/)
 
 ## Installation
 

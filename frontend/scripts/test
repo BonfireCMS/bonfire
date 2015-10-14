@@ -1,4 +1,0 @@
-#!/bin/bash
-set -e
-
-docker-compos -f config/docker/test.yml up

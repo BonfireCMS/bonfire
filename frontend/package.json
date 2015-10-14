@@ -34,14 +34,12 @@
     "ember-cli-qunit": "^1.0.0",
     "ember-cli-release": "0.2.3",
     "ember-cli-sass": "5.0.1",
+    "ember-cli-simple-auth": "0.8.0",
+    "ember-cli-simple-auth-cookie-store": "0.8.0",
     "ember-cli-sri": "^1.0.3",
     "ember-cli-uglify": "^1.2.0",
     "ember-data": "1.13.8",
     "ember-disable-proxy-controllers": "^1.0.0",
     "ember-export-application-global": "^1.0.3"
-  },
-  "dependencies": {
-    "sequelize": "^3.11.0",
-    "sequelize-cli": "^1.9.1"
   }
 }

@@ -24,9 +24,8 @@ You should now see your blog running on `http://locahost:4982`
 ## Hacking
 
 The Admin app and API/blog app are separated by `fronted`(admin) and
-`backend`(api and blog app). Each app runs in a docker container during development
-and test and also has the ability to run in docker containers during production
-(best aproach). This allows for completely isolated builds.
+`backend`(api and blog app). The backend app runs in a [docker]() container,
+making development much faster and easier to get started.
 
 - [Admin app instructions](https://github.com/BonfireCMS/bonfire/tree/master/frontend)
 - [API instructions](https://github.com/BonfireCMS/bonfire/blob/master/backend/README.md)

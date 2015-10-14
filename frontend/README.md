@@ -5,8 +5,9 @@ The admin control panel for your blog
 ## Installation
 
 ```bash
-scripts/init
-scripts/start
+$ npm install
+$ bower install
+$ npm start
 ```
 
 Your blog should be availble at `http://localhost:4200`

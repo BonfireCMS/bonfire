@@ -1,6 +1,0 @@
-#!/bin/bash
-set -e
-
-# drop tables
-# migrate
-# run seeds if in dev

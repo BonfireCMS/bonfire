@@ -1,5 +1,0 @@
-#!/bin/bash
-set -e
-
-# clean init install in front and backend
-# build frontend

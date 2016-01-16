@@ -1,0 +1,15 @@
+---
+
+postgres:
+  container_name: bonfire_development_postgres
+  extends:
+    file: common.yml
+    service: postgres
+  volumes:
+    - ../../../content/data/postgres-dev:/var/lib/postgresql/data
+
+redis:
+  container_name: bonfire_development_redis
+  extends:
+    file: common.yml
+    service: redis

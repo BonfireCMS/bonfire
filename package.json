@@ -1,11 +1,11 @@
 {
   "name": "bonfire",
   "version": "1.0.0",
-  "description": "Bonfire cms",
+  "description": "Simple cms done right",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Dylan Foster <dylan947@gmail.com>",
-  "license": "MIT"
+  "author": "",
+  "license": "ISC"
 }

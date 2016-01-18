@@ -12,8 +12,6 @@ import hbs from "hbs";
 
 import Router from "./router";
 
-const THEMES_PATH = path.resolve(__dirname, "..", "..", "content/themes");
-
 class App {
   constructor(options) {
     options = options || {};

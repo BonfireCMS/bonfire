@@ -4,6 +4,13 @@
   "description": "Backend api for BonfireCMS",
   "main": "index.js",
   "scripts": {
+    "db": "npm run db:drop && npm run db:migrate",
+    "db:drop": "sequelize db:migrate:undo:all",
+    "db:migrate": "sequelize db:migrate",
+    "db:migrate:undo": "sequelize db:migrate:undo",
+    "db:seed": "sequelize db:seed",
+    "db:seed:undo": "sequelize db:seed:undo",
+    "model": "sequelize model:create --name",
     "start": "supervisor .",
     "test": "mocha --compilers js:babel-core/register --recursive",
     "watch": "npm run test -- --watch"
@@ -27,9 +34,13 @@
   "dependencies": {
     "body-parser": "^1.14.2",
     "express": "^4.13.3",
+    "express-busboy": "^2.4.5",
     "express-namespace": "^0.1.1",
     "hbs": "^4.0.0",
     "include-all": "^0.1.6",
+    "pg": "^4.4.3",
+    "pg-hstore": "^2.3.2",
+    "restify-errors": "^3.1.0",
     "sequelize": "^3.17.3"
   }
 }

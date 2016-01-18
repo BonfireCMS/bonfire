@@ -85,9 +85,12 @@ describe("Router", function () {
         .end(done);
     });
 
-    it("route paths can be configured");
+    it("route paths can be configured", function (done) {
+      router.resource("posts", { path: "/blog-posts" });
 
-    it("route actions can be configured");
+      client.get("/api/v1/blog-posts")
+        .expect(200, { posts: [{ id: 1 }] }, done);
+    });
   });
 
   describe("#namespace", function () {

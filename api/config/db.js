@@ -1,10 +1,11 @@
 module.exports = {
   development: {
-    "username": "postgres",
+    "username": "bonfire_dev",
     "password": "postgres",
     "database": "bonfire_dev",
     "host": "192.168.99.100",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   test: {
     "username": "postgres",

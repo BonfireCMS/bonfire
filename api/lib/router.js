@@ -14,6 +14,7 @@ class Router {
     this.controllers = new Map();
 
     options = options || {};
+    this.options = options;
     this.controllersPath = options.controllersPath || path.resolve(__dirname, "controllers");
 
     this._initializeControllers();
@@ -35,6 +36,16 @@ class Router {
   namespace() {
   }
 
+  resource(resourceName, options) {
+    options = options || {};
+    let controller = this.controllers.get(resourceName);
+    let path = options.path || resourceName;
+    let resourceFromPath = this._getResourceFromPath(path);
+    let singularResource = inflection.singularize(resourceFromPath);
+    let pluralResource = inflection.pluralize(resourceFromPath);
+    this._bindRoutes(singularResource, pluralResource, controller);
+  }
+
   route(path, opts) {
     let withOpts = opts.with;
     let controller = withOpts.split(":")[0];
@@ -43,19 +54,11 @@ class Router {
     this._bindRoute(path, opts.using, opts.controller[action]);
   }
 
-  resource(resourceName) {
-    let controller = this.controllers.get(resourceName);
-    let pluralResourceName = inflection.pluralize(resourceName);
-    let singularResourceName = inflection.singularize(resourceName);
-
-    this._bindRoutes(pluralResourceName, singularResourceName, controller);
-  }
-
   _bindRoute(path, method, action) {
     this.router[method](path, action);
   }
 
-  _bindRoutes(pluralName, singularName, controller) {
+  _bindRoutes(singularName, pluralName, controller) {
     this._bindRoute(`/${pluralName}`, "get", controller.index.bind(controller));
     this._bindRoute(`/${pluralName}/:id`, "get", controller.show.bind(controller));
     this._bindRoute(`/${pluralName}`, "post", controller.create.bind(controller));
@@ -63,10 +66,13 @@ class Router {
     this._bindRoute(`/${pluralName}/:id`, "delete", controller.destroy.bind(controller));
   }
 
+  _getResourceFromPath(path) {
+    return path.replace("/", "");
+    // check if it has a slash
+  }
+
   static map(options, callback) {
-    let router = new Router(options);
-    return router;
-    /*if (!callback) {
+    if (!callback) {
       callback = options;
       options = {};
     }
@@ -74,7 +80,6 @@ class Router {
     let router = new Router(options);
     callback.call(router);
     return router;
-    */
   }
 }
 

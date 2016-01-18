@@ -3,13 +3,14 @@
 postgres:
   container_name: bonfire_development_postgres
   extends:
-    file: common.yml
+    file: default.yml
     service: postgres
-  volumes:
-    - ../../../content/data/postgres-dev:/var/lib/postgresql/data
+  enviroment:
+    POSTGRES_PASSWORD: postgres
+    POSTGRES_USER: bonfire_dev
 
 redis:
   container_name: bonfire_development_redis
   extends:
-    file: common.yml
+    file: default.yml
     service: redis

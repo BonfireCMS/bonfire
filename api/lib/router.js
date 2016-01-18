@@ -25,7 +25,9 @@ class Router {
       filter: /(.+)_controller\.js$/
     });
 
-    Object.keys(controllers).forEach(controller => this.controllers.set(controller, new controllers[controller].default()));
+    Object.keys(controllers).forEach(controller =>
+      this.controllers.set(controller, new controllers[controller]["default"]())
+    );
   }
 
   getRouter() {

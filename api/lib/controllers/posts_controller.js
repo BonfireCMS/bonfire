@@ -19,7 +19,9 @@ class PostsController extends Controller {
   }
 
   show(req, res, next) {
-    this.model.findById(req.params.id).then(record => {
+    let { id } = req.params;
+
+    this.model.findById(id).then(record => {
       if (record) {
         return this.formatResponse(record);
       } else {
@@ -35,7 +37,7 @@ class PostsController extends Controller {
 
   create(req, res, next) {
     // validate things
-    let payload = req.body[this.resourceRoot];
+    let { [this.resourceRoot]: payload } = req.body;
 
     this.model.create(payload).then(record => {
       return this.formatResponse(record);
@@ -45,9 +47,10 @@ class PostsController extends Controller {
   }
 
   update(req, res, next) {
+    let { id } = req.params;
     let { post } = req.body;
 
-    this.model.findById(req.params.id).then(record => {
+    this.model.findById(id).then(record => {
       return record.updateAttributes(post);
     }).then(record => {
       return this.formatResponse(record);
@@ -57,7 +60,9 @@ class PostsController extends Controller {
   }
 
   destroy(req, res, next) {
-    this.model.findById(req.params.id).then(record => {
+    let { id } = req.params;
+
+    this.model.findById(id).then(record => {
       return record.destroy();
     }).then(() => {
       res.status(204).send();

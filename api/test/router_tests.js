@@ -34,9 +34,9 @@ describe("Router", function () {
   describe("#route", function () {
     it("maps a static route to its controller", function (done) {
       router.route("/about", { with: "foo:about", using: "get" });
-      app.use(router.api, router.getRouter());
+      app.use("/", router.getRouter());
 
-      client.get("/api/v1/about")
+      client.get("/about")
         .expect(200, "showing about")
         .end(done);
     });
@@ -45,23 +45,23 @@ describe("Router", function () {
   describe("#resource", function () {
     beforeEach(function () {
       router.resource("users");
-      app.use(router.api, router.getRouter());
+      app.use("/", router.getRouter());
     });
 
     it("maps a route to a an index action", function (done) {
-      client.get("/api/v1/users")
+      client.get("/users")
         .expect(200, { users: [{ id: 1 }] })
         .end(done);
     });
 
     it("maps a route to a show action", function (done) {
-      client.get("/api/v1/users/1")
+      client.get("/users/1")
         .expect(200, { user: { id: 1 }})
         .end(done);
     });
 
     it("maps a route to a create action", function (done) {
-      client.post("/api/v1/users")
+      client.post("/users")
         .send({
           user: { name: "foo" }
         })
@@ -70,7 +70,7 @@ describe("Router", function () {
     });
 
     it("maps a route to an update action", function (done) {
-      client.put("/api/v1/users/1")
+      client.put("/users/1")
         .send({
           user: { name: "bar" }
         })
@@ -79,7 +79,7 @@ describe("Router", function () {
     });
 
     it("maps a route to destroy action", function (done) {
-      client.delete("/api/v1/users/1")
+      client.delete("/users/1")
         .expect(204)
         .expect("Location", "http://localhost:3000/api/v1/users")
         .end(done);
@@ -88,7 +88,7 @@ describe("Router", function () {
     it("route paths can be configured", function (done) {
       router.resource("posts", { path: "/blog-posts" });
 
-      client.get("/api/v1/blog-posts")
+      client.get("/blog-posts")
         .expect(200, { posts: [{ id: 1 }] }, done);
     });
   });

@@ -9,7 +9,6 @@ import inflection from "inflection";
 
 class Router {
   constructor(options) {
-    this.api = "/api/v1";
     this.router = express.Router();
     this.controllers = new Map();
 

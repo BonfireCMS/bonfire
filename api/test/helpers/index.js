@@ -16,6 +16,10 @@ export function initHelpers() {
       return Promise.all(records.map(record => record.destroy()));
     });
   };
+
+  global.findPostById = function (id) {
+    return Post.findById(id);
+  };
 }
 
 export {

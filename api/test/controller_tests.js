@@ -11,22 +11,30 @@ import Controller from "../lib/controller";
 import Models from "../lib/models";
 
 describe("Controller", function () {
+  let controller;
+
+  beforeEach(function () {
+    controller = new Controller();
+  });
+
   describe("#loadModel", function () {
     it("loads a model by name", function () {
-      let controller = new Controller();
-
       let Model = controller.loadModel("Post");
       expect(Model).to.eql(Models.Post);
+    });
+
+    it("sets a resourceRoot", function () {
+      controller.model = controller.loadModel("User");
+      expect(controller.resourceRoot).to.eql("user");
+    });
+
+    it("sets a pluralResourceRoot", function () {
+      controller.model = controller.loadModel("User");
+      expect(controller.pluralResourceRoot).to.eql("users");
     });
   });
 
   describe("#codeFromError", function () {
-    let controller;
-
-    beforeEach(function () {
-      controller = new Controller();
-    });
-
     it("returns a 404 for ResourceNotFoundError", function () {
       let error = new controller.Errors.ResourceNotFoundError();
 
@@ -35,10 +43,7 @@ describe("Controller", function () {
   });
 
   describe("#formatResponse", function () {
-    let controller;
-
     beforeEach(function () {
-      controller = new Controller();
       controller.model = controller.loadModel("User");
     });
 

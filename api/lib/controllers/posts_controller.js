@@ -8,12 +8,6 @@ class PostsController extends Controller {
     this.model = this.loadModel("Post");
   }
 
-  create() {
-  }
-
-  destroy() {
-  }
-
   index(req, res, next) {
     // TODO query params
 
@@ -39,7 +33,35 @@ class PostsController extends Controller {
     });
   }
 
-  update() {
+  create(req, res, next) {
+    // validate things
+    let payload = req.body[this.resourceRoot];
+
+    this.model.create(payload).then(record => {
+      return this.formatResponse(record);
+    }).then(response => {
+      res.status(201).send(response);
+    }).catch(next);
+  }
+
+  update(req, res, next) {
+    let { post } = req.body;
+
+    this.model.findById(req.params.id).then(record => {
+      return record.updateAttributes(post);
+    }).then(record => {
+      return this.formatResponse(record);
+    }).then(response => {
+      res.status(200).send(response);
+    }).catch(next);
+  }
+
+  destroy(req, res, next) {
+    this.model.findById(req.params.id).then(record => {
+      return record.destroy();
+    }).then(() => {
+      res.status(204).send();
+    }).catch(next);
   }
 }
 

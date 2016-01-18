@@ -20,13 +20,14 @@ class App {
     this.options = options;
     this.app = express();
     this.app.set("port", process.env.PORT || options.port || 3000);
-    this.apiBase = "/api/v1";
+    this.version = "v1";
+    this.apiBase = `/api/${this.version}`;
     this._server = http.createServer(this.app);
 
     this.app.use(bodyParser.json());
 
-    this._initializeRoutes();
     // load middlewares
+    this._initializeRoutes();
   }
 
   boot(done) {
@@ -48,11 +49,17 @@ class App {
   }
 
   _initializeRoutes() {
-    this.router = Router.map(function () {
+    /**
+     * init routes:
+     *   - adminRouter: router for the admin area (Ember application)
+     *   - apiRouter: REST api (/users, /posts, etc)
+     *   - blogRouter: router for the user's site
+     */
+    this.apiRouter = Router.map(function () {
       this.resource("posts");
     });
 
-    this.app.use(this.apiBase, this.router.getRouter());
+    this.app.use(this.apiBase, this.apiRouter.getRouter());
   }
 }
 

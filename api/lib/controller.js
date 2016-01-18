@@ -19,6 +19,8 @@ class BaseController {
   }
 
   loadModel(name) {
+    this.resourceRoot = inflection.singularize(name.toLowerCase());
+    this.pluralResourceRoot = inflection.pluralize(name.toLowerCase());
     return this.modelManager.get(name);
   }
 
@@ -32,17 +34,15 @@ class BaseController {
 
   _recordArray(records) {
     let formattedRecordArray = {};
-    let pluralizedResourceRoot = inflection.pluralize(this.model.name.toLowerCase());
 
-    formattedRecordArray[pluralizedResourceRoot] = records;
+    formattedRecordArray[this.pluralResourceRoot] = records;
     return formattedRecordArray;
   }
 
   _recordObject(record) {
     let formattedRecordObject = {};
-    let singularResourceRoot = inflection.singularize(this.model.name.toLowerCase());
 
-    formattedRecordObject[singularResourceRoot] = record;
+    formattedRecordObject[this.resourceRoot] = record;
     return formattedRecordObject;
   }
 }

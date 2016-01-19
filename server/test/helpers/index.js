@@ -1,5 +1,7 @@
 "use strict";
 
+import path from "path";
+
 import startApp from "./start_app";
 
 import {
@@ -20,6 +22,10 @@ export function initHelpers() {
   global.findPostById = function (id) {
     return Post.findById(id);
   };
+
+  global.getFixturePath = function (what) {
+    return path.resolve(__dirname, "../fixtures", what);
+  }
 }
 
 export {

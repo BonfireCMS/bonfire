@@ -9,7 +9,7 @@ import fixtures from "../fixtures";
 import Config from "../../lib/config";
 import Controller from "../../lib/site/controller";
 
-describe.only("Controller | Site", function () {
+describe("Controller | Site", function () {
   let config, controller, req, res;
 
   function bailout(done) {
@@ -48,7 +48,7 @@ describe.only("Controller | Site", function () {
 
     it("renders home.hbs if it exists", function (done) {
       res.render = function (view) {
-        expect(view).to.eql(path.resolve(Config.get("paths.themePath"), "cinder/views/home.hbs"));
+        expect(view).to.eql("home");
         done();
       };
 
@@ -59,7 +59,7 @@ describe.only("Controller | Site", function () {
       config = Config.get();
       delete config.paths.themes.cinder.views["home.hbs"];
       res.render = function (view) {
-        expect(view).to.eql(path.resolve(__dirname, "../../../content/themes/cinder/views/index.hbs"));
+        expect(view).to.eql("index");
         done();
       }
 

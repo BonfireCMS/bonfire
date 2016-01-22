@@ -13,23 +13,33 @@ class SiteController {
   }
 
   index(req, res, next) {
-    let view = getViewForType("index", req.app.get("activeTheme"));
+    let viewOpts = {
+      name: "index",
+      pageSlug: req.params.pageSlug || null
+    };
 
+    if (req.params.pageSlug) { viewOpts.name = "page"; }
+    let view = getViewForType(req.app.get("activeTheme"), viewOpts);
     // need settings to find frontpage id and frontpage type
     res.render(view, { foo: "bar" });
   }
 }
 
-function getViewForType(type, activeTheme) {
+function getViewForType(activeTheme, options) {
   let activeThemeViews = config.get("paths.themes")[activeTheme].views;
   let allowedViews = ["index"];
-  let viewConfig = VIEW_CONFIG[type];
+
+  let viewConfig = VIEW_CONFIG[options.name];
+
+  if (viewConfig.name && viewConfig.name !== "index") {
+    allowedViews.unshift(viewConfig.name);
+  }
 
   if (viewConfig.frontPage) {
     allowedViews.unshift(viewConfig.frontPage);
   }
 
-  let template = activeThemeViews[allowedViews[0] + ".hbs"];
+  let template = _.find(allowedViews, view => activeThemeViews.hasOwnProperty(view + ".hbs"));
 
   if (!template) {
     template = activeThemeViews[_.last(allowedViews) + ".hbs"];
@@ -43,6 +53,11 @@ const VIEW_CONFIG = {
     name: "index",
     route: "/",
     frontPage: "home"
+  },
+  page: {
+    name: "page",
+    route: "/:pageSlug"
   }
 };
+
 export default SiteController;

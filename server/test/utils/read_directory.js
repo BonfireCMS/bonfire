@@ -1,12 +1,12 @@
 "use strict";
 
-import path from "path";
+const path = require("path");
 
-import { expect } from "chai";
+const expect = require("chai").expect;
 
 const NESTED_DIR = getFixturePath("utils/nested_dir");
 
-import readDir from "../../lib/utils/read_directory";
+const readDir = require("../../lib/utils/read_directory");
 
 describe("Util | read-directory", function () {
   it("reads a directory and returns its content", function () {

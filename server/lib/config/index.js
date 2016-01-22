@@ -1,16 +1,14 @@
 "use strict";
 
-import fs from "fs";
-import path from "path";
+const fs = require("fs");
+const path = require("path");
 
-import _ from "lodash";
+const _ = require("lodash");
 
-import readThemes from "../utils/read_themes";
-
-let defaultConfig = {};
+const readThemes = require("../utils/read_themes");
 
 class ConfigManager {
-  constructor(defaultConfig) {
+  constructor() {
     this._config = {};
   }
 
@@ -52,4 +50,4 @@ class ConfigManager {
   }
 }
 
-export default new ConfigManager(defaultConfig);
+module.exports = new ConfigManager();

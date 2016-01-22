@@ -1,11 +1,11 @@
 "use strict";
 
-import fs from "fs";
-import path from "path";
+const fs = require("fs");
+const path = require("path");
 
-import express from "express";
-import includeAll from "include-all";
-import inflection from "inflection";
+const express = require("express");
+const includeAll = require("include-all");
+const inflection = require("inflection");
 
 class Router {
   constructor(options) {
@@ -26,7 +26,7 @@ class Router {
     });
 
     Object.keys(controllers).forEach(controller =>
-      this.controllers.set(controller, new controllers[controller]["default"]())
+      this.controllers.set(controller, new controllers[controller]())
     );
   }
 
@@ -84,4 +84,4 @@ class Router {
   }
 }
 
-export default Router;
+module.exports = Router;

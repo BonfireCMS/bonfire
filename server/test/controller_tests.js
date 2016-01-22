@@ -1,14 +1,11 @@
 "use strict";
 
-import path from "path";
+const path = require("path");
 
-import { expect } from "chai";
-import express from "express";
-import supertest from "supertest";
-import bodyParser from "body-parser";
+const expect = require("chai").expect;
 
-import Controller from "../lib/controller";
-import Models from "../lib/models";
+const Controller = require("../lib/controller");
+const Models = require("../lib/models");
 
 describe("Controller", function () {
   let controller;

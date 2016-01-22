@@ -1,6 +1,6 @@
 "use strict";
 
-import BaseController from "../../../lib/controller";
+const BaseController = require("../../../lib/controller");
 
 class UsersController extends BaseController {
   constructor() {
@@ -49,4 +49,4 @@ class UsersController extends BaseController {
   }
 }
 
-export default UsersController;
+module.exports = UsersController;

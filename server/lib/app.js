@@ -1,19 +1,17 @@
 "use strict";
 
-import fs from "fs";
-import http from "http";
+const fs = require("fs");
+const http = require("http");
 // https?
-import path from "path";
+const path = require("path");
 
-import bodyParser from "body-parser";
-import busBoy from "express-busboy";
-import express from "express";
-import hbs from "hbs";
+const busBoy = require("express-busboy");
+const express = require("express");
+const hbs = require("hbs");
 
-import Config from "./config";
-import Router from "./router";
-import SiteController from "./site/controller";
-
+const Config = require("./config");
+const Router = require("./router");
+const SiteController = require("./site/controller");
 const siteController = new SiteController();
 
 class App {
@@ -27,23 +25,16 @@ class App {
     this.apiBase = `/api/${this.version}`;
     this._server = http.createServer(this.app);
 
-    this.app.use(bodyParser.json());
+    busBoy.extend(this.app);
 
     // load middlewares
     this._initializeRoutes();
   }
 
   boot(done) {
-    this._server.listen(this.app.get("port"), function (err) {
-      if (err) {
-        if (done) { done(err); }
-        throw err;
-      }
-
-      if (done) {
-        done();
-        return;
-      }
+    return Config.load(path.resolve(__dirname, "../../config.js")).then(config => {
+      // load middlewares and things
+      return this.app;
     });
   }
 
@@ -52,7 +43,6 @@ class App {
   }
 
   _initializeRoutes() {
-    return Config.load(path.resolve(__dirname, "../../config.js")).then(config => {
       /**
        * init routes:
        *   - adminRouter: router for the admin area (Ember application)
@@ -63,16 +53,7 @@ class App {
         this.resource("posts");
       });
 
-      this.blogRouter = express();
-      // relace this with middleware
-      this.blogRouter.set("activeTheme", "cinder");
-      this.blogRouter.set("views", path.join(config.paths.themePath, "cinder/views"));
-      hbs.registerPartials(path.join(config.paths.themePath, "cinder/views/partials"));
-      this.blogRouter.get("/", siteController.index.bind(siteController));
-      this.blogRouter.route("/:pageSlug").get(siteController.index.bind(siteController));
       this.app.use(this.apiBase, this.apiRouter.getRouter());
-      this.app.use("/", this.blogRouter);
-    });
   }
 }
 

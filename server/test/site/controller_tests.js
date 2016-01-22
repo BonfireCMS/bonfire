@@ -1,13 +1,13 @@
 "use strict";
 
-import path from "path";
+const path = require("path");
 
-import { expect } from "chai";
-import sinon from "sinon";
+const expect = require("chai").expect;
+const sinon = require("sinon");
 
-import fixtures from "../fixtures";
-import Config from "../../lib/config";
-import Controller from "../../lib/site/controller";
+const fixtures = require("../fixtures");
+const Config = require("../../lib/config");
+const Controller = require("../../lib/site/controller");
 
 describe("Controller | Site", function () {
   let config, controller, req, res;

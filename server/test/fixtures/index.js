@@ -1,18 +1,18 @@
 "use strict";
 
-import path from "path";
+const path = require("path");
 
-let post1 = {
+const post1 = {
   content: "foo",
   type: "post"
 };
 
-let post2 = {
+const post2 = {
   type: "page"
 };
 
-export default {
+module.exports = {
   config: path.resolve(__dirname, "config/config.js"),
   post1,
   post2
-}
+};

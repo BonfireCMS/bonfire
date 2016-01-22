@@ -1,13 +1,13 @@
 "use strict";
 
-import { stat } from "fs";
-import path from "path";
+const stat = require("fs").stat;
+const path = require("path");
 
-import _ from "lodash";
+const _ = require("lodash");
 
-import readDir from "./read_directory";
+const readDir = require("./read_directory");
 
-export default function readThemes(themePath) {
+module.exports = function readThemes(themePath) {
   let originalTree;
 
   return readDir(themePath).then(files => {

@@ -1,13 +1,13 @@
 "use strict";
 
-import path from "path";
+const path = require("path");
 
-import { expect } from "chai";
-import express from "express";
-import supertest from "supertest";
-import bodyParser from "body-parser";
+const busboy = require("express-busboy");
+const expect = require("chai").expect;
+const express = require("express");
+const supertest = require("supertest");
 
-import Router from "../lib/router";
+const Router = require("../lib/router");
 
 describe("Router", function () {
   let app, client, router;
@@ -18,7 +18,7 @@ describe("Router", function () {
     });
     router.getRouter().get("/", function () {});
     app = express();
-    app.use(bodyParser.json());
+    busboy.extend(app);
     client = supertest(app);
   });
 

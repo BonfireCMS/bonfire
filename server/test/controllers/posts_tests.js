@@ -1,18 +1,22 @@
 "use strict";
 
-import { expect } from "chai";
-import supertest from "supertest";
+const expect = require("chai").expect;
+const supertest = require("supertest");
 
-import fixtures from "../fixtures";
-import { initHelpers, startApp } from "../helpers";
+const fixtures = require("../fixtures");
+const initHelpers = require("../helpers").initHelpers;
 initHelpers();
 
+const App = require("../../lib/app");
+const app = new App();
+
 describe("Controller | Posts", function () {
-  let app, client;
+  let client;
 
   beforeEach(function () {
-    app = startApp();
-    client = supertest(app.getApp());
+    return app.boot().then(booted => {
+      client = supertest(booted);
+    });
   });
 
   afterEach(function () {
@@ -36,7 +40,7 @@ describe("Controller | Posts", function () {
           .end(function (err, res) {
             if (err) { return done(err); }
 
-            let [post1] = res.body.posts;
+            let post1 = res.body.posts[0];
             expect(post1.content).to.eql("foo");
             done();
           });
@@ -51,7 +55,7 @@ describe("Controller | Posts", function () {
         .end(function (err, res) {
           if (err) { return done(err); }
 
-          let { message } = res.body;
+          let message = res.body.message;
 
           expect(message).to.eql("The resource Post:1 does not exist");
           done();
@@ -65,10 +69,10 @@ describe("Controller | Posts", function () {
           .end(function (err, res) {
             if (err) { return done(err); }
 
-            let { id, content } = res.body.post;
+            let post = res.body.post;
 
-            expect(id).to.eql(post.id);
-            expect(content).to.eql("foo");
+            expect(post.id).to.eql(post.id);
+            expect(post.content).to.eql("foo");
             done();
           });
       }).catch(done)
@@ -91,7 +95,7 @@ describe("Controller | Posts", function () {
         .end(function (err, res) {
           if (err) { return done(err); }
 
-          let { content } = res.body.post;
+          let content = res.body.post.content;
 
           expect(content).to.eql("I'll never join the dark side");
           done();
@@ -118,7 +122,7 @@ describe("Controller | Posts", function () {
           .end(function (err, res) {
             if (err) { return done(err); }
 
-            let { content } = res.body.post;
+            let content = res.body.post.content;
 
             expect(content).to.eql("something other than foo");
             done();

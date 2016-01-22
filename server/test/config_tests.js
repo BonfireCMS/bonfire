@@ -1,10 +1,10 @@
 "use strict";
 
-import path from "path";
+const path = require("path");
 
-import { expect } from "chai";
+const expect = require("chai").expect;
 
-import config from "../lib/config";
+const Config = require("../lib/config");
 
 const CONFIG_PATH = path.resolve(__dirname, "../../config.js");
 
@@ -12,7 +12,7 @@ describe("config", function () {
   let loadedConfig;
 
   beforeEach(function () {
-    return config.load(CONFIG_PATH).then(loaded => {
+    return Config.load(CONFIG_PATH).then(loaded => {
       loadedConfig = loaded;
     });
   });
@@ -44,23 +44,23 @@ describe("config", function () {
 
   describe("#get", function () {
     it("returns a config value from 'path'", function () {
-      expect(config.get("paths.contentPath")).to.eql(path.resolve(__dirname, "../../content"));
+      expect(Config.get("paths.contentPath")).to.eql(path.resolve(__dirname, "../../content"));
     });
 
     it("returns the entire config object if no path is given", function () {
-      expect(config.get()).to.eql(loadedConfig);
+      expect(Config.get()).to.eql(loadedConfig);
     });
   });
 
   describe("#set", function () {
     it("sets a config item at a single path", function () {
-      config.set({ foo: "bar" });
-      expect(config.get("foo")).to.eql("bar");
+      Config.set({ foo: "bar" });
+      expect(Config.get("foo")).to.eql("bar");
     });
 
     it("sets a config item at a nested path", function () {
-      config.set({ foo: { bar: "baz" }});
-      expect(config.get("foo.bar")).to.eql("baz");
+      Config.set({ foo: { bar: "baz" }});
+      expect(Config.get("foo.bar")).to.eql("baz");
     });
   });
 });

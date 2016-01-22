@@ -1,9 +1,11 @@
 "use strict";
 
-import { readdir, stat } from "fs";
-import path from "path";
+const fs = require("fs");
+const path = require("path");
+const readdir = fs.readdir;
+const stat = fs.stat;
 
-export default function readDirectory(directoryPath) {
+module.exports = function readDirectory(directoryPath) {
   return readDirPromise(directoryPath).then(files => {
     return Promise.all(files.map(file => {
       let absolutePath = path.join(directoryPath, file);

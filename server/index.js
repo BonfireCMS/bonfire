@@ -1,7 +1,5 @@
 "use strict";
 
-require("babel-core/register");
-
 const App = require("./lib/app");
 const Router = require("./lib/router");
 

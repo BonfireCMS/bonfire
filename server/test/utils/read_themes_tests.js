@@ -1,10 +1,10 @@
 "use strict";
 
-import path from "path";
+const paht = require("path");
 
-import { expect } from "chai";
+const expect = require("chai").expect;
 
-import readThemes from "../../lib/utils/read_themes";
+const readThemes = require("../../lib/utils/read_themes");
 
 const NESTED_DIR = getFixturePath("utils/nested_dir");
 const THEMES_PATH = getFixturePath("themes");

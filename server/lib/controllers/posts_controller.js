@@ -1,6 +1,6 @@
 "use strict";
 
-import Controller from "../controller";
+const Controller = require("../controller");
 
 class PostsController extends Controller {
   constructor() {
@@ -19,7 +19,7 @@ class PostsController extends Controller {
   }
 
   show(req, res, next) {
-    let { id } = req.params;
+    let id = req.params.id;
 
     this.model.findById(id).then(record => {
       if (record) {
@@ -36,8 +36,8 @@ class PostsController extends Controller {
   }
 
   create(req, res, next) {
+    let payload = req.body[this.resourceRoot];
     // validate things
-    let { [this.resourceRoot]: payload } = req.body;
 
     this.model.create(payload).then(record => {
       return this.formatResponse(record);
@@ -47,11 +47,12 @@ class PostsController extends Controller {
   }
 
   update(req, res, next) {
-    let { id } = req.params;
-    let { post } = req.body;
+    let id = req.params.id;
+    let payload = req.body;
+    payload[this.resourceRoot] = req.body[this.resourceRoot];
 
     this.model.findById(id).then(record => {
-      return record.updateAttributes(post);
+      return record.updateAttributes(payload[this.resourceRoot]);
     }).then(record => {
       return this.formatResponse(record);
     }).then(response => {
@@ -60,7 +61,7 @@ class PostsController extends Controller {
   }
 
   destroy(req, res, next) {
-    let { id } = req.params;
+    let id = req.params.id;
 
     this.model.findById(id).then(record => {
       return record.destroy();
@@ -70,4 +71,4 @@ class PostsController extends Controller {
   }
 }
 
-export default PostsController;
+module.exports = PostsController;

@@ -1,14 +1,11 @@
 "use strict";
 
-import path from "path";
+const path = require("path");
 
-import startApp from "./start_app";
+const models = require("../../lib/models");
+const Post = models.Post;
 
-import {
-  Post
-} from "../../lib/models";
-
-export function initHelpers() {
+function initHelpers() {
   global.createPost = function (postData) {
     return Post.create(postData);
   };
@@ -28,7 +25,6 @@ export function initHelpers() {
   }
 }
 
-export {
-  initHelpers,
-  startApp
-}
+module.exports = {
+  initHelpers
+};

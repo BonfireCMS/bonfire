@@ -1,18 +1,21 @@
 "use strict";
 
-import fs, { stat } from "fs";
-import path from "path";
+const fs = require("fs");
+const path = require("path");
+const stat = fs.stat;
 
-import _ from "lodash";
+const _ = require("lodash");
 
-import config from "../config";
-import { Post } from "../models";
+const config = require("../config");
+const Post = require("../models").Post;
 
 class SiteController {
   constructor() {
   }
 
   index(req, res, next) {
+    req.params = req.params || {};
+
     let viewOpts = {
       name: "index",
       pageSlug: req.params.pageSlug || null
@@ -60,4 +63,4 @@ const VIEW_CONFIG = {
   }
 };
 
-export default SiteController;
+module.exports = SiteController;

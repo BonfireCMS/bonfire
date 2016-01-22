@@ -1,9 +1,9 @@
 "use strict";
 
-import inflection from "inflection";
-import RestifyErrors from "restify-errors";
+const inflection = require("inflection");
+const RestifyErrors = require("restify-errors");
 
-import Models from "./models";
+const Models = require("./models");
 
 class BaseController {
   constructor() {
@@ -53,4 +53,4 @@ const ERROR_MAP = {
   ResourceNotFound: 404
 };
 
-export default BaseController;
+module.exports = BaseController;

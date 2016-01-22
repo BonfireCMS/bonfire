@@ -2,14 +2,14 @@
 
 import path from "path";
 
-import { expect, should } from "chai";
+import { expect } from "chai";
 import sinon from "sinon";
 
 import fixtures from "../fixtures";
 import Config from "../../lib/config";
 import Controller from "../../lib/site/controller";
 
-describe("Controller | Site", function () {
+describe.only("Controller | Site", function () {
   let config, controller, req, res;
 
   function bailout(done) {
@@ -40,6 +40,10 @@ describe("Controller | Site", function () {
       }).then(created => {
         post = created;
       });
+    });
+
+    afterEach(function () {
+      return post.destroy();
     });
 
     it("renders home.hbs if it exists", function (done) {

@@ -10,7 +10,11 @@ import busBoy from "express-busboy";
 import express from "express";
 import hbs from "hbs";
 
+import Config from "./config";
 import Router from "./router";
+import SiteController from "./site/controller";
+
+const siteController = new SiteController();
 
 class App {
   constructor(options) {
@@ -29,16 +33,20 @@ class App {
   }
 
   boot(done) {
-    this._server.listen(this.app.get("port"), function (err) {
-      if (err) {
-        if (done) { done(err); }
-        throw err;
-      }
+    Config.load(path.resolve(__dirname, "../../config.js")).then(config => {
+      // take this out
+      this.app.set("activeTheme", "cinder");
+      this._server.listen(this.app.get("port"), function (err) {
+        if (err) {
+          if (done) { done(err); }
+          throw err;
+        }
 
-      if (done) {
-        done();
-        return;
-      }
+        if (done) {
+          done();
+          return;
+        }
+      });
     });
   }
 
@@ -57,7 +65,12 @@ class App {
       this.resource("posts");
     });
 
+    // take this out
+    this.blogRouter = express();
+
+    this.blogRouter.get("/", siteController.index.bind(siteController));
     this.app.use(this.apiBase, this.apiRouter.getRouter());
+    this.app.use("/", this.blogRouter);
   }
 }
 

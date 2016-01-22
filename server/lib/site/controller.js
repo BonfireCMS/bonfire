@@ -15,6 +15,7 @@ class SiteController {
   index(req, res, next) {
     let view = getViewForType("index", req.app.get("activeTheme"));
 
+    // need settings to find frontpage id and frontpage type
     res.render(view, { foo: "bar" });
   }
 }

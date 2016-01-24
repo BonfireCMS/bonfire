@@ -31,6 +31,7 @@
   "dependencies": {
     "express": "^4.13.3",
     "express-busboy": "^2.4.5",
+    "express-hbs": "^0.8.4",
     "express-namespace": "^0.1.1",
     "hbs": "^4.0.0",
     "include-all": "^0.1.6",

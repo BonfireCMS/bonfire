@@ -4,11 +4,13 @@ const path = require("path");
 
 const post1 = {
   content: "foo",
-  type: "post"
+  type: "post",
+  name: "foo"
 };
 
 const post2 = {
-  type: "page"
+  type: "page",
+  name: "bar"
 };
 
 module.exports = {

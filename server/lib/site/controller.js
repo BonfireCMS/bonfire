@@ -23,8 +23,16 @@ class SiteController {
 
     if (req.params.pageSlug) { viewOpts.name = "page"; }
     let view = getViewForType(req.app.get("activeTheme"), viewOpts);
-    // need settings to find frontpage id and frontpage type
+    /**
+     * TODO: pull setting for frontPageType and id
+     * if frontPageType = page serve frontpage post
+     * if frontPageType = blog serve paginated posts
+     */
     res.render(view, { foo: "bar" });
+  }
+
+  page(req, res, next) {
+    next();
   }
 }
 

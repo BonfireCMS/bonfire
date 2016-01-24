@@ -3,6 +3,7 @@
 const path = require("path");
 
 const models = require("../../lib/models");
+const setupForTesting = require("./test_setup");
 const Post = models.Post;
 
 function initHelpers() {
@@ -25,6 +26,12 @@ function initHelpers() {
   }
 }
 
+function cleanAll() {
+  return models.sequelize.sync();
+}
+
 module.exports = {
-  initHelpers
+  initHelpers,
+  cleanAll,
+  setupForTesting
 };

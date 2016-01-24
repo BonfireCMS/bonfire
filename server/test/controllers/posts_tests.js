@@ -4,18 +4,17 @@ const expect = require("chai").expect;
 const supertest = require("supertest");
 
 const fixtures = require("../fixtures");
-const initHelpers = require("../helpers").initHelpers;
-initHelpers();
+const helpers = require("../helpers");
+const models = require("../../lib/models");
 
-const App = require("../../lib/app");
-const app = new App();
+helpers.initHelpers();
 
 describe("Controller | Posts", function () {
   let client;
 
   beforeEach(function () {
-    return app.boot().then(booted => {
-      client = supertest(booted);
+    return helpers.setupForTesting().then(app => {
+      client = supertest(app);
     });
   });
 
@@ -25,26 +24,26 @@ describe("Controller | Posts", function () {
 
   describe("GET /posts", function () {
     it("returns an empty collection if no records exist", function (done) {
-      client.get("/api/v1/posts")
-        .expect(200, {
-          posts: []
-        })
+      cleanAll().then(function () {
+        client.get("/api/v1/posts")
+          .expect(200, {
+            posts: []
+          })
         .end(done);
+      }).catch(done);
     });
 
     it("returns a list of posts", function (done) {
-      createPost(fixtures.post1).then(post => {
-        client.get("/api/v1/posts")
-          .expect("Content-Type", /json/)
-          .expect(200)
-          .end(function (err, res) {
-            if (err) { return done(err); }
+      client.get("/api/v1/posts")
+        .expect("Content-Type", /json/)
+        .expect(200)
+        .end(function (err, res) {
+          if (err) { return done(err); }
 
-            let post1 = res.body.posts[0];
-            expect(post1.content).to.eql("foo");
-            done();
-          });
-      }).catch(done);
+          let post1 = res.body.posts[0];
+          expect(post1).to.have.any.key("name");
+          done();
+        });
     });
   });
 
@@ -63,19 +62,18 @@ describe("Controller | Posts", function () {
     });
 
     it("returns a single post by id", function (done) {
-      createPost(fixtures.post1).then(post => {
-        client.get(`/api/v1/posts/${post.id}`)
+      models.Post.findAll().then(posts => {
+        client.get(`/api/v1/posts/${posts[0].id}`)
           .expect(200)
           .end(function (err, res) {
             if (err) { return done(err); }
 
             let post = res.body.post;
 
-            expect(post.id).to.eql(post.id);
-            expect(post.content).to.eql("foo");
+            expect(post.id).to.eql(posts[0].id);
             done();
           });
-      }).catch(done)
+      }).catch(done);
     });
 
     it("returns a single post by permalink");
@@ -88,7 +86,8 @@ describe("Controller | Posts", function () {
       client.post("/api/v1/posts")
         .send({
           post: {
-            content: "I'll never join the dark side"
+            content: "I'll never join the dark side",
+            name: "something"
           }
         })
         .expect(201)
@@ -109,22 +108,21 @@ describe("Controller | Posts", function () {
 
   describe("PUT /posts/:id", function () {
     it("updates a post", function (done) {
-      createPost(fixtures.post1).then(post => {
-        expect(post.content).to.eql("foo");
-
-        client.put(`/api/v1/posts/${post.id}`)
+      models.Post.findAll().then(posts => {
+        client.put(`/api/v1/posts/${posts[0].id}`)
           .send({
             post: {
               content: "something other than foo"
             }
           })
-          .expect(200)
+        .expect(200)
           .end(function (err, res) {
             if (err) { return done(err); }
 
-            let content = res.body.post.content;
+            let post = res.body.post;
 
-            expect(content).to.eql("something other than foo");
+            expect(post.content).to.eql("something other than foo");
+            expect(post.id).to.eql(posts[0].id);
             done();
           });
       }).catch(done);
@@ -133,13 +131,13 @@ describe("Controller | Posts", function () {
 
   describe("DELETE /posts/:id", function () {
     it("destroys a post", function (done) {
-      createPost(fixtures.post1).then(post => {
-        client.delete(`/api/v1/posts/${post.id}`)
+      models.Post.findAll().then(posts => {
+        client.delete(`/api/v1/posts/${posts[0].id}`)
           .expect(204)
           .end(function (err, res) {
             if (err) { return done(err); }
 
-            findPostById(post.id).then(record => {
+            findPostById(posts[0].id).then(record => {
               expect(record).to.be.null;
               done();
             }).catch(done);

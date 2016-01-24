@@ -9,12 +9,11 @@ const inflection = require("inflection");
 
 class Router {
   constructor(options) {
-    this.router = express.Router();
-    this.controllers = new Map();
-
     options = options || {};
-    this.options = options;
+    this.controllers = new Map();
     this.controllersPath = options.controllersPath || path.resolve(__dirname, "controllers");
+    this.options = options;
+    this.router = express.Router();
 
     this._initializeControllers();
   }

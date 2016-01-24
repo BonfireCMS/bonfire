@@ -1,5 +1,7 @@
 "use strict";
 
+// TODO: add error handlers to all catch
+
 const Controller = require("../controller");
 
 class PostsController extends Controller {
@@ -32,7 +34,7 @@ class PostsController extends Controller {
     }).catch(err => {
       let code = this.codeFromError(err);
       res.status(code).send(err.body);
-    });
+    }).catch(next);
   }
 
   create(req, res, next) {

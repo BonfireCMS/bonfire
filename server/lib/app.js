@@ -10,6 +10,7 @@ const express = require("express");
 const hbs = require("hbs");
 
 const Config = require("./config");
+const middlewares = require("./middlewares");
 const Router = require("./router");
 const SiteController = require("./site/controller");
 const siteController = new SiteController();
@@ -17,7 +18,6 @@ const siteController = new SiteController();
 class App {
   constructor(options) {
     options = options || {};
-    this.options = options;
     this.app = express();
     this.app.set("port", process.env.PORT || options.port || 3000);
     this.app.set("view engine", "hbs");
@@ -53,8 +53,13 @@ class App {
         this.resource("posts");
       });
 
+      this.blogRouter = express.Router();
+      this.blogRouter.use(middlewares.themeHandler.updateActiveTheme);
+      this.blogRouter.route("/").get(siteController.index);
+      this.blogRouter.get("*", siteController.page);
       this.app.use(this.apiBase, this.apiRouter.getRouter());
+      this.app.use("/", this.blogRouter);
   }
 }
 
-module.exports = App;
+module.exports = new App();

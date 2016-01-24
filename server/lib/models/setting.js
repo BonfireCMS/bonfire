@@ -2,8 +2,8 @@
 
 module.exports = function(sequelize, DataTypes) {
   const Setting = sequelize.define("Setting", {
-    settingKey: DataTypes.STRING,
-    settingValue: DataTypes.STRING
+    key: DataTypes.STRING,
+    value: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

@@ -22,7 +22,32 @@ module.exports = {
         type: Sequelize.STRING(10000),
         allowNull: true
       },
+      name: {
+        type: Sequelize.STRING
+      },
       type: {
+        type: Sequelize.STRING
+      }
+    };
+
+    tables.Settings = {
+      id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      key: {
+        type: Sequelize.STRING
+      },
+      value: {
         type: Sequelize.STRING
       }
     };

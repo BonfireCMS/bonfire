@@ -16,6 +16,10 @@ describe("App", function () {
     });
   });
 
+  afterEach(function () {
+    return helpers.cleanAll();
+  });
+
   describe("routing", function () {
     describe("GET /", function () {
       it("serves the content for Home", function (done) {
@@ -27,15 +31,20 @@ describe("App", function () {
     });
 
     describe("GET /:slug", function () {
+      beforeEach(function () {
+        return helpers.createPost({ name: "baz", type: "post" }).then(post => {
+          return helpers.createSetting("blogPage", post.id);
+        });
+      });
+
       it("returns a 404 for missing page", function (done) {
         client.get("/foo")
           .expect(404)
-          .expect("Content-Type", /html/)
           .end(done);
       });
 
-      xit("serves the content for Page", function (done) {
-        client.get("/bar")
+      it("serves the content for Page", function (done) {
+        client.get("/baz")
           .expect(200)
           .expect("Content-Type", /html/)
           .end(done);

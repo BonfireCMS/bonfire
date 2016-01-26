@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   const Comment = sequelize.define("Comment", {
-    data: DataTypes.STRING
+    text: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

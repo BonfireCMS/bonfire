@@ -14,6 +14,7 @@ const middlewares = require("./middlewares");
 const Router = require("./router");
 const SiteController = require("./site/controller");
 const siteController = new SiteController();
+const utils = require("./utils");
 
 class App {
   constructor(options) {
@@ -59,6 +60,18 @@ class App {
       this.blogRouter.get("*", siteController.page);
       this.app.use(this.apiBase, this.apiRouter.getRouter());
       this.app.use("/", this.blogRouter);
+      this.app.use((err, req, res, next) => {
+        const activeThemeViews = Config.get("paths.themes")[this.app.get("activeTheme")].views;
+        const responseCode = utils.statusFromCode(err.body.code);
+
+        if (activeThemeViews.hasOwnProperty(responseCode + ".hbs")) {
+          res.status(responseCode).render(responseCode);
+        } else {
+          let helpers = Config.get("paths.helpers");
+
+          res.status(responseCode).render(path.join(helpers, responseCode + ".hbs"));
+        }
+      });
   }
 }
 

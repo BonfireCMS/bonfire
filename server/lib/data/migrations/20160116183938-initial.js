@@ -4,6 +4,47 @@ module.exports = {
   up: function (queryInterface, Sequelize) {
     const tables = {};
 
+    tables.Comments = {
+      id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updatedAd: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      text: {
+        type: Sequelize.STRING
+      }
+    };
+
+    tables.Users = {
+      id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updatedAd: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      firstName: {
+        type: Sequelize.STRING
+      },
+      lastName: {
+        type: Sequelize.STRING
+      }
+    };
+
     tables.Posts = {
       createdAt: {
         type: Sequelize.DATE,
@@ -23,9 +64,32 @@ module.exports = {
         allowNull: true
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        unique: true
       },
       type: {
+        type: Sequelize.STRING
+      }
+    };
+
+    tables.PostMeta = {
+      id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true
+      },
+      createdAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updatedAt: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      key: {
+        type: Sequelize.STRING
+      },
+      value: {
         type: Sequelize.STRING
       }
     };

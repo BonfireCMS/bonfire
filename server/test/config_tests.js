@@ -36,6 +36,7 @@ describe("config", function () {
 
       expect(pathConfig).to.have.keys([
           "contentPath",
+          "helpers",
           "themePath",
           "themes"
       ]);

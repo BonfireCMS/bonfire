@@ -6,6 +6,7 @@ const expect = require("chai").expect;
 const sinon = require("sinon");
 
 const fixtures = require("../fixtures");
+const helpers = require("../helpers");
 const Config = require("../../lib/config");
 const Controller = require("../../lib/site/controller");
 
@@ -29,23 +30,15 @@ describe("Controller | Site", function () {
       }
     };
     res = {};
+
+    return helpers.setupForTesting();
+  });
+
+  afterEach(function () {
+    return helpers.cleanAll();
   });
 
   describe("index", function () {
-    let post;
-
-    beforeEach(function () {
-      return Config.load(path.resolve(__dirname, "../../../config")).then(() => {
-        return createPost(fixtures.post2)
-      }).then(created => {
-        post = created;
-      });
-    });
-
-    afterEach(function () {
-      return post.destroy();
-    });
-
     it("renders home.hbs if it exists", function (done) {
       res.render = function (view) {
         expect(view).to.eql("home");
@@ -64,6 +57,38 @@ describe("Controller | Site", function () {
       }
 
       controller.index(req, res, bailout(done));
+    });
+  });
+
+  describe("page", function () {
+    beforeEach(function () {
+      res.status = function () {
+        return this;
+      };
+
+      return helpers.createPost({ name: "baz", type: "post" }).then(post => {
+        return helpers.createSetting("blogPage", post.id);
+      });
+    });
+
+    it("renders a static page", function (done) {
+      req.path = "/bar";
+      res.render = function (view) {
+        expect(view).to.eql("page");
+        done();
+      };
+
+      controller.page(req, res, bailout(done));
+    });
+
+    it("renders index.hbs with posts if slug matches blog page", function (done) {
+      req.path = "/baz";
+      res.render = function (view) {
+        expect(view).to.eql("index");
+        done();
+      };
+
+      controller.page(req, res, bailout(done));
     });
   });
 });

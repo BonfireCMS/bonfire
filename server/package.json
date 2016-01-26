@@ -36,6 +36,7 @@
     "hbs": "^4.0.0",
     "include-all": "^0.1.6",
     "lodash": "^4.0.0",
+    "path-match": "^1.2.3",
     "pg": "^4.4.3",
     "pg-hstore": "^2.3.2",
     "restify-errors": "^3.1.0",

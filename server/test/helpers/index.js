@@ -5,6 +5,7 @@ const path = require("path");
 const models = require("../../lib/models");
 const setupForTesting = require("./test_setup");
 const Post = models.Post;
+const Setting = models.Setting;
 
 function initHelpers() {
   global.createPost = function (postData) {
@@ -27,11 +28,28 @@ function initHelpers() {
 }
 
 function cleanAll() {
-  return models.sequelize.sync();
+  return models.sequelize.truncate();
+}
+
+function findPostByName(name) {
+  return Post.find({
+    where: { name: name }
+  });
+};
+
+function createSetting(key, value) {
+  return Setting.create({ key: key, value: value });
+};
+
+function createPost(data) {
+  return Post.create(data);
 }
 
 module.exports = {
-  initHelpers,
   cleanAll,
+  createPost,
+  createSetting,
+  findPostByName,
+  initHelpers,
   setupForTesting
 };

@@ -15,7 +15,7 @@ App.boot().then(app => {
 
 function runSetup() {
   return Post.create({ name: "your-first-post", type: "page" }).then(post => {
-    return Setting.create({ key: "blogApp", value: post.id });
+    return Setting.create({ key: "blogPage", value: post.id });
   }).then(function () {
     return Setting.create({ key: "activeTheme", value: "cinder" });
   }).then(function () {

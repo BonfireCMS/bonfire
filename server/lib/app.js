@@ -63,15 +63,23 @@ class App {
       this.app.use("/", this.blogRouter);
       this.app.use((err, req, res, next) => {
         const activeThemeViews = Config.get("paths.themes")[this.app.get("activeTheme")].views;
-        const responseCode = utils.statusFromCode(err.body.code);
+        let responseCode;
 
-        if (activeThemeViews.hasOwnProperty(responseCode + ".hbs")) {
-          res.status(responseCode).render(responseCode);
+        if (err instanceof Error && err.body && err.body.code) {
+          responseCode = utils.statusFromCode(err.body.code);
+
+          if (activeThemeViews.hasOwnProperty(responseCode + ".hbs")) {
+            res.status(responseCode).render(responseCode);
+          } else {
+            let helpers = Config.get("paths.helpers");
+
+            res.status(responseCode).render(path.join(helpers, responseCode + ".hbs"));
+          }
         } else {
-          let helpers = Config.get("paths.helpers");
-
-          res.status(responseCode).render(path.join(helpers, responseCode + ".hbs"));
+          // add logging
+          console.error(err.stack);
         }
+
       });
   }
 }

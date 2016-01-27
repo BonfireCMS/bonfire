@@ -1,19 +1,15 @@
 "use strict";
 
-// TODO: add error handlers to all catch
+const BaseController = require("../controller");
 
-const Controller = require("../controller");
-
-class PostsController extends Controller {
+class SettingsController extends BaseController {
   constructor() {
     super(...arguments);
-    this.model = this.loadModel("Post");
+    this.model = this.loadModel("Setting");
   }
 
   index(req, res, next) {
-    // TODO query params
-
-    this.model.findAll().then(records => {
+    return this.model.findAll().then(records => {
       return this.formatResponse(records);
     }).then(response => {
       res.status(200).send(response);
@@ -21,14 +17,13 @@ class PostsController extends Controller {
   }
 
   show(req, res, next) {
-    let id = req.params.id;
+    let settingId = req.params.id;
 
-    this.model.findById(id).then(record => {
-      if (record) {
-        return this.formatResponse(record);
-      } else {
+    this.model.findById(settingId).then(setting => {
+      if (!setting) {
         throw new this.Errors.ResourceNotFoundError(`The resource ${this.model.name}:${req.params.id} does not exist`);
       }
+      return this.formatResponse(setting);
     }).then(response => {
       res.status(200).send(response);
     }).catch(err => {
@@ -39,7 +34,6 @@ class PostsController extends Controller {
 
   create(req, res, next) {
     let payload = req.body[this.resourceRoot];
-    // validate things
 
     this.model.create(payload).then(record => {
       return this.formatResponse(record);
@@ -62,15 +56,15 @@ class PostsController extends Controller {
     }).catch(next);
   }
 
-  destroy(req, res, next) {
+  destroy(req, res, next){
     let id = req.params.id;
 
     this.model.findById(id).then(record => {
       return record.destroy();
-    }).then(() => {
+    }).then(function () {
       res.status(204).send();
     }).catch(next);
   }
 }
 
-module.exports = PostsController;
+module.exports = SettingsController;

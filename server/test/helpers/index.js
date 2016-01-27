@@ -37,6 +37,10 @@ function findPostByName(name) {
   });
 };
 
+function findSettingById(id) {
+  return Setting.findById(id);
+}
+
 function createSetting(key, value) {
   return Setting.create({ key: key, value: value });
 };
@@ -50,6 +54,7 @@ module.exports = {
   createPost,
   createSetting,
   findPostByName,
+  findSettingById,
   initHelpers,
   setupForTesting
 };

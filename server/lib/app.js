@@ -52,6 +52,7 @@ class App {
        */
       this.apiRouter = Router.map(function () {
         this.resource("posts");
+        this.resource("settings");
       });
 
       this.blogRouter = express.Router();

@@ -8,6 +8,8 @@ const Post = models.Post;
 const Setting = models.Setting;
 
 App.boot().then(app => {
+  // TODO: App.log
+  console.log("Gathering firewood...");
   return startServer(app);
 }).then(app => {
   return runSetup();
@@ -18,9 +20,11 @@ function runSetup() {
     return Setting.create({ key: "blogPage", value: post.id });
   }).then(function () {
     return Setting.create({ key: "activeTheme", value: "cinder" });
-  }).then(function () {
-    console.log("Your fire is ready!");
-  });
+  }).then(appIsReady);
+}
+
+function appIsReady() {
+  console.log("Your fire is ready!");
 }
 
 function startServer(app) {

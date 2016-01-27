@@ -39,14 +39,6 @@ class SiteController {
     const match = routeMatch("/:slug");
     const slugMatch = match(pathName);
 
-
-    /**
-     * pull settings to find blog page id
-     * pull post matching this slug
-     * check if blog id and slug id match
-     * if match, pull all posts and render with those
-     * if no match, render the slug post
-     */
     Setting.find(keyQuery("blogPage")).then(blogPage => {
       return Post.find(slugQuery(slugMatch.slug)).then(post => {
         if (post) {

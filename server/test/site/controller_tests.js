@@ -58,6 +58,10 @@ describe("Controller | Site", function () {
 
       controller.index(req, res, bailout(done));
     });
+
+    it("renders home.hbs with the home post");
+
+    it("renders index.hbs with the most recent posts");
   });
 
   describe("page", function () {
@@ -90,5 +94,13 @@ describe("Controller | Site", function () {
 
       controller.page(req, res, bailout(done));
     });
+
+    it("renders a nested route with page.hbs");
+
+    it("renders a nested route with index.hbs if it is set as blogPage and the path matches post.path");
+
+    it("renders page.hbs with the page post");
+
+    it("renders index.hbs with post found by slug and paginated list of all posts");
   });
 });

@@ -24,7 +24,6 @@ class SiteController {
       name: "index"
     };
 
-    if (req.params.pageSlug) { viewOpts.name = "page"; }
     let view = getViewForType(req.app.get("activeTheme"), viewOpts);
     /**
      * TODO: pull setting for frontPageType and id

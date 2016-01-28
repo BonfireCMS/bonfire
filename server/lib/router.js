@@ -1,6 +1,5 @@
 "use strict";
 
-const fs = require("fs");
 const path = require("path");
 
 const express = require("express");
@@ -19,7 +18,7 @@ class Router {
   }
 
   _initializeControllers() {
-    let controllers = includeAll({
+    const controllers = includeAll({
       dirname: this.controllersPath,
       filter: /(.+)_controller\.js$/
     });
@@ -38,24 +37,24 @@ class Router {
 
   resource(resourceName, options) {
     options = options || {};
-    let controller = this.controllers.get(resourceName);
-    let path = options.path || resourceName;
-    let resourceFromPath = this._getResourceFromPath(path);
-    let singularResource = inflection.singularize(resourceFromPath);
-    let pluralResource = inflection.pluralize(resourceFromPath);
+    const controller = this.controllers.get(resourceName);
+    const route = options.path || resourceName;
+    const resourceFromPath = this._getResourceFromPath(route);
+    const singularResource = inflection.singularize(resourceFromPath);
+    const pluralResource = inflection.pluralize(resourceFromPath);
     this._bindRoutes(singularResource, pluralResource, controller);
   }
 
-  route(path, opts) {
-    let withOpts = opts.with;
-    let controller = withOpts.split(":")[0];
-    let action = withOpts.split(":")[1];
+  route(resourceName, opts) {
+    const withOpts = opts.with;
+    const controller = withOpts.split(":")[0];
+    const action = withOpts.split(":")[1];
     opts.controller = this.controllers.get(controller);
-    this._bindRoute(path, opts.using, opts.controller[action]);
+    this._bindRoute(resourceName, opts.using, opts.controller[action]);
   }
 
-  _bindRoute(path, method, action) {
-    this.router[method](path, action);
+  _bindRoute(route, method, action) {
+    this.router[method](route, action);
   }
 
   _bindRoutes(singularName, pluralName, controller) {
@@ -66,8 +65,8 @@ class Router {
     this._bindRoute(`/${pluralName}/:id`, "delete", controller.destroy.bind(controller));
   }
 
-  _getResourceFromPath(path) {
-    return path.replace("/", "");
+  _getResourceFromPath(route) {
+    return route.replace("/", "");
     // check if it has a slash
   }
 
@@ -77,7 +76,7 @@ class Router {
       options = {};
     }
 
-    let router = new Router(options);
+    const router = new Router(options);
     callback.call(router);
     return router;
   }

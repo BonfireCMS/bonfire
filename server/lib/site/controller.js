@@ -1,8 +1,5 @@
 "use strict";
 
-const fs = require("fs");
-const path = require("path");
-const stat = fs.stat;
 const url = require("url");
 
 const _ = require("lodash");
@@ -13,80 +10,40 @@ const config = require("../config");
 const Post = require("../models").Post;
 const Setting = require("../models").Setting;
 
-class SiteController {
-  constructor() {
-  }
-
-  index(req, res, next) {
-    req.params = req.params || {};
-
-    let viewOpts = {
-      name: "index"
-    };
-
-    let view = getViewForType(req.app.get("activeTheme"), viewOpts);
-    /**
-     * TODO: pull setting for frontPageType and id
-     * if frontPageType = page serve frontpage post
-     * if frontPageType = blog serve paginated posts
-     */
-    res.render(view, { foo: "bar" });
-  }
-
-  page(req, res, next) {
-    const pathName = url.parse(req.path).pathname;
-    const match = routeMatch("/:slug");
-    const slugMatch = match(pathName);
-
-    Setting.find(keyQuery("postsPage")).then(postsPage=> {
-      return Post.find(slugQuery(slugMatch.slug)).then(post => {
-        if (post) {
-          let isBlog = parseInt(postsPage.value, 10) === post.id;
-
-          if (isBlog) {
-            // pull posts and set context with all
-            return Post.findAll().then(posts => {
-              return setContext("blog", { post: post, posts: posts });
-            });
-          } else {
-            // return this slug only for context
-            return setContext("page", post);
-          }
-        } else {
-          throw new errors.ResourceNotFoundError(`Page '${slugMatch.slug}' does not exist`);
-        }
-      });
-    }).then(context => {
-      const viewOpts = {
-        name: context.type
-      };
-
-      let view = getViewForType(req.app.get("activeTheme"), viewOpts);
-      res.render(view, context.data);
-    }).catch(next);
-  }
+function keyQuery(key) {
+  return {
+    where: { key: key }
+  };
 }
 
 function setContext(type, data) {
-  return {
-    type: type,
-    data: data
-  };
+  return { data, type }
 }
 
-function slugQuery(slug) {
-  return {
-    where: {
-      name: slug
-    }
-  };
+function slugQuery(name) {
+  return { where: { name } };
 }
+
+const VIEW_CONFIG = {
+  blog: {
+    name: "blog"
+  },
+  index: {
+    name: "index",
+    route: "/",
+    frontPage: "home"
+  },
+  page: {
+    name: "page",
+    route: "/:pageSlug"
+  }
+};
 
 function getViewForType(activeTheme, options) {
-  let activeThemeViews = config.get("paths.themes")[activeTheme].views;
-  let allowedViews = ["index"];
+  const activeThemeViews = config.get("paths.themes")[activeTheme].views;
+  const allowedViews = ["index"];
 
-  let viewConfig = VIEW_CONFIG[options.name];
+  const viewConfig = VIEW_CONFIG[options.name];
 
   if (viewConfig.name && viewConfig.name !== "index") {
     allowedViews.unshift(viewConfig.name);
@@ -105,25 +62,57 @@ function getViewForType(activeTheme, options) {
   return template;
 }
 
-const VIEW_CONFIG = {
-  blog: {
-    name: "blog"
-  },
-  index: {
-    name: "index",
-    route: "/",
-    frontPage: "home"
-  },
-  page: {
-    name: "page",
-    route: "/:pageSlug"
+class SiteController {
+  constructor() {
   }
-};
 
-function keyQuery(key) {
-  return {
-    where: { key: key }
-  };
+  index(req, res, next) {
+    req.params = req.params || {};
+    const name = "index";
+
+    const viewOpts = { name };
+
+    const view = getViewForType(req.app.get("activeTheme"), viewOpts);
+    /**
+     * TODO: pull setting for frontPageType and id
+     * if frontPageType = page serve frontpage post
+     * if frontPageType = blog serve paginated posts
+     */
+    res.render(view, { foo: "bar" });
+    next();
+  }
+
+  page(req, res, next) {
+    const pathName = url.parse(req.path).pathname;
+    const match = routeMatch("/:slug");
+    const slugMatch = match(pathName);
+
+    Setting.find(keyQuery("postsPage")).then(postsPage=> {
+      return Post.find(slugQuery(slugMatch.slug)).then(post => {
+        if (post) {
+          const isBlog = parseInt(postsPage.value, 10) === post.id;
+
+          if (isBlog) {
+            // pull posts and set context with all
+            return Post.findAll().then(posts => {
+              return setContext("blog", { post, posts });
+            });
+          } else {
+            // return this slug only for context
+            return setContext("page", post);
+          }
+        } else {
+          throw new errors.ResourceNotFoundError(`Page '${slugMatch.slug}' does not exist`);
+        }
+      });
+    }).then(context => {
+      const name = context.type;
+      const viewOpts = { name };
+
+      const view = getViewForType(req.app.get("activeTheme"), viewOpts);
+      res.render(view, context.data);
+    }).catch(next);
+  }
 }
 
 module.exports = SiteController;

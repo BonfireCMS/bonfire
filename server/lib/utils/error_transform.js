@@ -1,9 +1,5 @@
 "use strict";
 
-module.exports = function (restCode) {
-  return ERROR_CODE_MAP[restCode];
-};
-
 const ERROR_CODE_MAP = {
   BadRequestError: 400,
   ConflictError: 409,
@@ -13,4 +9,8 @@ const ERROR_CODE_MAP = {
   ResourceNotFound: 404,
   UnauthorizedError: 401,
   UnprocessableEntityError: 422
+};
+
+module.exports = function (restCode) {
+  return ERROR_CODE_MAP[restCode];
 };

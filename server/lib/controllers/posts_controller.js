@@ -21,24 +21,27 @@ class PostsController extends Controller {
   }
 
   show(req, res, next) {
-    let id = req.params.id;
+    const id = req.params.id;
 
     this.model.findById(id).then(record => {
-      if (record) {
-        return this.formatResponse(record);
-      } else {
-        throw new this.Errors.ResourceNotFoundError(`The resource ${this.model.name}:${req.params.id} does not exist`);
+      if (!record) {
+        throw new this.Errors.ResourceNotFoundError(
+            `The resource ${this.model.name}:${req.params.id} does not exist`
+        );
       }
+
+      return this.formatResponse(record);
     }).then(response => {
       res.status(200).send(response);
     }).catch(err => {
-      let code = this.codeFromError(err);
+      const code = this.codeFromError(err);
       res.status(code).send(err.body);
+      next();
     });
   }
 
   create(req, res, next) {
-    let payload = req.body[this.resourceRoot];
+    const payload = req.body[this.resourceRoot];
     // validate things
 
     this.model.create(payload).then(record => {
@@ -49,8 +52,8 @@ class PostsController extends Controller {
   }
 
   update(req, res, next) {
-    let id = req.params.id;
-    let payload = req.body;
+    const id = req.params.id;
+    const payload = req.body;
     payload[this.resourceRoot] = req.body[this.resourceRoot];
 
     this.model.findById(id).then(record => {
@@ -63,7 +66,7 @@ class PostsController extends Controller {
   }
 
   destroy(req, res, next) {
-    let id = req.params.id;
+    const id = req.params.id;
 
     this.model.findById(id).then(record => {
       return record.destroy();

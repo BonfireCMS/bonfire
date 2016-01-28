@@ -1,18 +1,18 @@
 "use strict";
 
-let firstPost = {
+const firstPost = {
   name: "your-first-post",
   content: "This is your first post",
   type: "post"
 };
 
-let firstPage = {
+const firstPage = {
   name: "your-first-page",
   content: "<h1>This is your first page</h1>",
   type: "page"
 };
 
-let settings = [{
+const settings = [{
   key: "activeTheme",
   value: "cinder"
 }, {

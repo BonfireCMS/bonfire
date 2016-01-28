@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 const path = require("path");
 
@@ -7,13 +7,8 @@ const hbs = require("express-hbs");
 const Setting = require("../models").Setting;
 const config = require("../config");
 
-function updateActiveTheme(req, res, next) {
-  Setting.find(keyQuery("activeTheme")).then(activeTheme => {
-    if (activeTheme.value !== req.app.get("activeTheme")) {
-      activateTheme(activeTheme.value, req.app);
-    }
-    next();
-  }).catch(next);
+function keyQuery(key) {
+  return { where: { key } };
 }
 
 function activateTheme(activeTheme, blogApp) {
@@ -28,12 +23,13 @@ function activateTheme(activeTheme, blogApp) {
   blogApp.set("views", activeThemePath);
 }
 
-function keyQuery(key) {
-  return {
-    where: {
-      key: key
+function updateActiveTheme(req, res, next) {
+  Setting.find(keyQuery("activeTheme")).then(activeTheme => {
+    if (activeTheme.value !== req.app.get("activeTheme")) {
+      activateTheme(activeTheme.value, req.app);
     }
-  };
+    next();
+  }).catch(next);
 }
 
 module.exports = {

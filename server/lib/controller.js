@@ -5,6 +5,10 @@ const RestifyErrors = require("restify-errors");
 
 const Models = require("./models");
 
+const ERROR_MAP = {
+  ResourceNotFound: 404
+};
+
 class BaseController {
   constructor() {
     this.modelManager = new Map();
@@ -27,20 +31,20 @@ class BaseController {
   formatResponse(record) {
     if (Array.isArray(record)) {
       return this._recordArray(record);
-    } else {
-      return this._recordObject(record);
     }
+
+    return this._recordObject(record);
   }
 
   _recordArray(records) {
-    let formattedRecordArray = {};
+    const formattedRecordArray = {};
 
     formattedRecordArray[this.pluralResourceRoot] = records;
     return formattedRecordArray;
   }
 
   _recordObject(record) {
-    let formattedRecordObject = {};
+    const formattedRecordObject = {};
 
     formattedRecordObject[this.resourceRoot] = record;
     return formattedRecordObject;
@@ -48,9 +52,5 @@ class BaseController {
 }
 
 BaseController.prototype.Errors = RestifyErrors;
-
-const ERROR_MAP = {
-  ResourceNotFound: 404
-};
 
 module.exports = BaseController;

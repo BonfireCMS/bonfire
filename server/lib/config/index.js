@@ -1,8 +1,5 @@
 "use strict";
 
-const fs = require("fs");
-const path = require("path");
-
 const _ = require("lodash");
 
 const readThemes = require("../utils/read_themes");
@@ -33,7 +30,7 @@ class ConfigManager {
   }
 
   readConfig(file) {
-    let env = process.env.NODE_ENV || "development";
+    const env = process.env.NODE_ENV || "development";
     let config;
 
     try {

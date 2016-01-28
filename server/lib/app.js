@@ -1,13 +1,11 @@
 "use strict";
 
-const fs = require("fs");
 const http = require("http");
 // https?
 const path = require("path");
 
 const busBoy = require("express-busboy");
 const express = require("express");
-const hbs = require("hbs");
 
 const Config = require("./config");
 const Router = require("./router");
@@ -35,7 +33,7 @@ class App {
   }
 
   boot() {
-    return models.Post.bulkCreate([setup.firstPost, setup.firstPage]).then(posts => {
+    return models.Post.bulkCreate([setup.firstPost, setup.firstPage]).then(() => {
       return models.Setting.bulkCreate(setup.settings);
     }).then(() => {
       return Config.load(path.resolve(__dirname, "../../config.js"));
@@ -49,43 +47,43 @@ class App {
   }
 
   _initializeRoutes() {
-      /**
-       * init routes:
-       *   - adminRouter: router for the admin area (Ember application)
-       *   - apiRouter: REST api (/users, /posts, etc)
-       *   - blogRouter: router for the user's site
-       */
-      this.apiRouter = Router.map(function () {
-        this.resource("posts");
-        this.resource("settings");
-      });
+    /**
+     * init routes:
+     *   - adminRouter: router for the admin area (Ember application)
+     *   - apiRouter: REST api (/users, /posts, etc)
+     *   - blogRouter: router for the user's site
+     */
+    this.apiRouter = Router.map(function () {
+      this.resource("posts");
+      this.resource("settings");
+    });
 
-      this.blogRouter = express.Router();
-      this.blogRouter.use(middlewares.themeHandler.updateActiveTheme);
-      this.blogRouter.route("/").get(siteController.index);
-      this.blogRouter.get("*", siteController.page);
-      this.app.use(this.apiBase, this.apiRouter.getRouter());
-      this.app.use("/", this.blogRouter);
-      this.app.use((err, req, res, next) => {
-        const activeThemeViews = Config.get("paths.themes")[this.app.get("activeTheme")].views;
-        let responseCode;
+    this.blogRouter = express.Router();
+    this.blogRouter.use(middlewares.themeHandler.updateActiveTheme);
+    this.blogRouter.route("/").get(siteController.index);
+    this.blogRouter.get("*", siteController.page);
+    this.app.use(this.apiBase, this.apiRouter.getRouter());
+    this.app.use("/", this.blogRouter);
+    this.app.use((err, req, res) => {
+      const activeThemeViews = Config.get("paths.themes")[this.app.get("activeTheme")].views;
+      let responseCode;
 
-        if (err instanceof Error && err.body && err.body.code) {
-          responseCode = utils.statusFromCode(err.body.code);
+      if (err instanceof Error && err.body && err.body.code) {
+        responseCode = utils.statusFromCode(err.body.code);
 
-          if (activeThemeViews.hasOwnProperty(responseCode + ".hbs")) {
-            res.status(responseCode).render(responseCode);
-          } else {
-            let helpers = Config.get("paths.helpers");
-
-            res.status(responseCode).render(path.join(helpers, responseCode + ".hbs"));
-          }
+        if (activeThemeViews.hasOwnProperty(responseCode + ".hbs")) {
+          res.status(responseCode).render(responseCode);
         } else {
-          // add logging
-          console.error(err.stack);
-        }
+          const helpers = Config.get("paths.helpers");
 
-      });
+          res.status(responseCode).render(path.join(helpers, responseCode + ".hbs"));
+        }
+      } else {
+        // add logging
+        console.error(err.stack);
+      }
+
+    });
   }
 }
 

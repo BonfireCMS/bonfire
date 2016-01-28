@@ -79,7 +79,6 @@ class SiteController {
      * if frontPageType = blog serve paginated posts
      */
     res.render(view, { foo: "bar" });
-    next();
   }
 
   page(req, res, next) {

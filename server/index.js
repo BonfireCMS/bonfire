@@ -11,17 +11,7 @@ App.boot().then(app => {
   // TODO: App.log
   console.log("Gathering firewood...");
   return startServer(app);
-}).then(app => {
-  return runSetup();
-}).catch(console.error);
-
-function runSetup() {
-  return Post.create({ name: "your-first-post", type: "page" }).then(post => {
-    return Setting.create({ key: "blogPage", value: post.id });
-  }).then(function () {
-    return Setting.create({ key: "activeTheme", value: "cinder" });
-  }).then(appIsReady);
-}
+}).then(appIsReady).catch(console.error);
 
 function appIsReady() {
   console.log("Your fire is ready!");

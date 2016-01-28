@@ -7,8 +7,10 @@ const sinon = require("sinon");
 
 const fixtures = require("../fixtures");
 const helpers = require("../helpers");
+
 const Config = require("../../lib/config");
 const Controller = require("../../lib/site/controller");
+const models = require("../../lib/models");
 
 describe("Controller | Site", function () {
   let config, controller, req, res;
@@ -71,8 +73,15 @@ describe("Controller | Site", function () {
       };
 
       return helpers.createPost({ name: "baz", type: "post" }).then(post => {
-        return helpers.createSetting("blogPage", post.id);
+        return models.Setting.find({ where: { key: "postsPage" }}).then(setting => {
+          setting.value = post.id;
+          return setting.save();
+        });
       });
+    });
+
+    afterEach(function () {
+      return helpers.cleanAll();
     });
 
     it("renders a static page", function (done) {

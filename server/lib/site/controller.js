@@ -38,10 +38,10 @@ class SiteController {
     const match = routeMatch("/:slug");
     const slugMatch = match(pathName);
 
-    Setting.find(keyQuery("blogPage")).then(blogPage => {
+    Setting.find(keyQuery("postsPage")).then(postsPage=> {
       return Post.find(slugQuery(slugMatch.slug)).then(post => {
         if (post) {
-          let isBlog = parseInt(blogPage.value, 10) === post.id;
+          let isBlog = parseInt(postsPage.value, 10) === post.id;
 
           if (isBlog) {
             // pull posts and set context with all

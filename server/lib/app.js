@@ -10,9 +10,11 @@ const express = require("express");
 const hbs = require("hbs");
 
 const Config = require("./config");
-const middlewares = require("./middlewares");
 const Router = require("./router");
 const SiteController = require("./site/controller");
+const middlewares = require("./middlewares");
+const models = require("./models");
+const setup = require("./data/setup");
 const siteController = new SiteController();
 const utils = require("./utils");
 
@@ -32,9 +34,12 @@ class App {
     this._initializeRoutes();
   }
 
-  boot(done) {
-    return Config.load(path.resolve(__dirname, "../../config.js")).then(config => {
-      // load middlewares and things
+  boot() {
+    return models.Post.bulkCreate([setup.firstPost, setup.firstPage]).then(posts => {
+      return models.Setting.bulkCreate(setup.settings);
+    }).then(() => {
+      return Config.load(path.resolve(__dirname, "../../config.js"));
+    }).then(() => {
       return this.app;
     });
   }

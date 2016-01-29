@@ -49,6 +49,20 @@ function createPost(data) {
   return Post.create(data);
 }
 
+function setFrontPage() {
+  return Setting.find({ where: { key: "frontPageType" }}).then(type => {
+    type.value = "page";
+    return type.save();
+  }).then(function () {
+    return Post.create({ name: "my-front-page" });
+  }).then(post => {
+    return Setting.find({ where: { key: "frontPage" }}).then(page => {
+      page.value = post.id;
+      return page.save();
+    });
+  });
+}
+
 module.exports = {
   cleanAll,
   createPost,
@@ -56,5 +70,6 @@ module.exports = {
   findPostByName,
   findSettingById,
   initHelpers,
+  setFrontPage,
   setupForTesting
 };

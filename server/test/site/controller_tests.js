@@ -61,9 +61,25 @@ describe("Controller | Site", function () {
       controller.index(req, res, bailout(done));
     });
 
-    it("renders home.hbs with the home post");
+    it("renders the view with posts by default", function (done) {
+      res.render = function (view, context) {
+        expect(context.posts).to.have.length.above(0);
+        done();
+      };
 
-    it("renders index.hbs with the most recent posts");
+      controller.index(req, res, bailout(done));
+    });
+
+    it("renders the view with the view's post if set to static", function (done) {
+      helpers.setFrontPage().then(function () {
+        res.render = function (view, context) {
+          expect(context.post.name).to.eql("my-front-page");
+          done();
+        };
+
+        controller.index(req, res, bailout(done));
+      }).catch(done);
+    });
   });
 
   describe("page", function () {

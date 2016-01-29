@@ -11,9 +11,7 @@ const Post = require("../models").Post;
 const Setting = require("../models").Setting;
 
 function keyQuery(key) {
-  return {
-    where: { key: key }
-  };
+  return { where: { key } };
 }
 
 function setContext(type, data) {
@@ -42,7 +40,6 @@ const VIEW_CONFIG = {
 function getViewForType(activeTheme, options) {
   const activeThemeViews = config.get("paths.themes")[activeTheme].views;
   const allowedViews = ["index"];
-
   const viewConfig = VIEW_CONFIG[options.name];
 
   if (viewConfig.name && viewConfig.name !== "index") {
@@ -69,16 +66,19 @@ class SiteController {
   index(req, res, next) {
     req.params = req.params || {};
     const name = "index";
-
     const viewOpts = { name };
 
     const view = getViewForType(req.app.get("activeTheme"), viewOpts);
-    /**
-     * TODO: pull setting for frontPageType and id
-     * if frontPageType = page serve frontpage post
-     * if frontPageType = blog serve paginated posts
-     */
-    res.render(view, { foo: "bar" });
+
+    Setting.find(keyQuery("frontPageType")).then(type => {
+      if (type.value === "posts") {
+        return this.setContextForPosts();
+      }
+
+      return this.setContextForPage();
+    }).then(context => {
+      res.render(view, context);
+    }).catch(next);
   }
 
   page(req, res, next) {
@@ -111,6 +111,21 @@ class SiteController {
       const view = getViewForType(req.app.get("activeTheme"), viewOpts);
       res.render(view, context.data);
     }).catch(next);
+  }
+
+  setContextForPage() {
+    return Setting.find(keyQuery("frontPage")).then(frontPage => {
+      return Post.findById(frontPage.value);
+    }).then(page => {
+      return { post: page }
+    });
+  }
+
+  setContextForPosts() {
+    // TODO: move this to a setting
+    return Post.findAll({ limit: 10 }).then(posts => {
+      return { posts };
+    });
   }
 }
 

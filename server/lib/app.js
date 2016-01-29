@@ -60,8 +60,8 @@ class App {
 
     this.blogRouter = express.Router();
     this.blogRouter.use(middlewares.themeHandler.updateActiveTheme);
-    this.blogRouter.route("/").get(siteController.index);
-    this.blogRouter.get("*", siteController.page);
+    this.blogRouter.route("/").get(siteController.index.bind(siteController));
+    this.blogRouter.get("*", siteController.page.bind(siteController));
     this.app.use(this.apiBase, this.apiRouter.getRouter());
     this.app.use("/", this.blogRouter);
     this.app.use((err, req, res) => {

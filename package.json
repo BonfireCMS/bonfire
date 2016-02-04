@@ -4,8 +4,9 @@
   "description": "Simple cms done right",
   "main": "index.js",
   "scripts": {
+    "start": "supervisor .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "MIT"
 }

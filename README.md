@@ -18,6 +18,7 @@ git clone https://github.com/BonfireCms/bonfire.git
 cd bonfire
 scripts/init
 scripts/start
+npm start (in a seperate terminal)
 ```
 
 You should now see your site running on `http://locahost:3000`

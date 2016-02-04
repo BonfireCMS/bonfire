@@ -5,8 +5,9 @@ Bonfire is a simple yet powerful platform for curating and managing your content
 ## Technologies
 
  - Admin app: [ember.js](http://emberjs.com/)
+ - API [express.js](http://expressjs.com/) and [postgres](http://www.postgresql.org/)
  - Blog app: [express.js](http://expressjs.com/)
- - API [Node.js](http://nodejs.org) and [postgres](http://www.postgresql.org/)
+ - [Docker](https://www.docker.com/)
 
 ## Installation
 
@@ -19,16 +20,16 @@ scripts/init
 scripts/start
 ```
 
-You should now see your blog running on `http://locahost:4982`
+You should now see your site running on `http://locahost:3000`
 
 ## Hacking
 
-The Admin app and API/blog app are separated by `fronted`(admin) and
-`backend`(api and blog app). The backend app runs in a [docker](https://www.docker.com/) container,
+The Admin app and API/site app are separated by `admin` and
+`server`(api and site app). The backend app runs in a [docker](https://www.docker.com/) container,
 making development much faster and easier to get started.
 
-- [Admin app instructions](https://github.com/BonfireCMS/bonfire/tree/master/frontend/README.md)
-- [API instructions](https://github.com/BonfireCMS/bonfire/blob/master/backend/README.md)
+- [Admin app instructions](https://github.com/BonfireCMS/bonfire/tree/master/admin/README.md)
+- [API instructions](https://github.com/BonfireCMS/bonfire/tree/master/server/README.md)
 
 ## Contributing
 

@@ -7,6 +7,11 @@
     "start": "supervisor .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": [{
+    "name": "Dylan Foster",
+    "email": "dylan947@gmail.com"
+  }],
+  "contributors": [{
+  }],
   "license": "MIT"
 }

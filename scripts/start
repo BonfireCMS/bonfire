@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+docker-compose -f server/config/docker/development.yml up
+
+# TODO: add admin startup

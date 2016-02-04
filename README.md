@@ -1,4 +1,4 @@
-# Bonfire
+![](bonfire_logo.png)
 
 Bonfire is a simple yet powerful platform for curating and managing your content.
 
@@ -35,7 +35,7 @@ making development much faster and easier to get started.
 
 ## Contributing
 
-> TODO: add content
+> see [CONTRIBUTING](CONTRIBUTING.md)
 
 ## LICENSE
 

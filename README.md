@@ -18,6 +18,7 @@ git clone https://github.com/BonfireCms/bonfire.git
 cd bonfire
 scripts/init
 scripts/start
+scripts/db
 npm start (in a seperate terminal)
 ```
 

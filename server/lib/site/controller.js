@@ -83,14 +83,16 @@ class SiteController {
 
   page(req, res, next) {
     const pathName = url.parse(req.path).pathname;
-    const match = routeMatch("/:slug");
+    const match = routeMatch("*/:slug");
     const slugMatch = match(pathName);
 
-    Setting.find(keyQuery("postsPage")).then(postsPage=> {
-      return Post.find(slugQuery(slugMatch.slug)).then(post => {
+    console.log(slugMatch);
+    Post.find(slugQuery(slugMatch.slug)).then(post => {
+      return verifyPostRoute(req.path, post);
+    }).then(post => {
+      return Setting.find(keyQuery("postsPage")).then(postsPage=> {
         if (post) {
           const isBlog = parseInt(postsPage.value, 10) === post.id;
-
           if (isBlog) {
             // pull posts and set context with all
             return Post.findAll().then(posts => {
@@ -128,5 +130,12 @@ class SiteController {
     });
   }
 }
+
+function verifyPostRoute(route, post) {
+  if (post.route && post.route !== route) {
+  }
+
+  return post;
+};
 
 module.exports = SiteController;

@@ -69,6 +69,9 @@ module.exports = {
       },
       type: {
         type: Sequelize.STRING
+      },
+      route: {
+        type: Sequelize.STRING
       }
     };
 

@@ -15,6 +15,7 @@ module.exports = function (sequelize, DataTypes) {
         return name;
       }
     },
+    route: DataTypes.STRING,
     type: DataTypes.STRING
   }, {
     classMethods: {

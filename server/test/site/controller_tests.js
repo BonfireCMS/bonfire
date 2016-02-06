@@ -12,7 +12,7 @@ const Config = require("../../lib/config");
 const Controller = require("../../lib/site/controller");
 const models = require("../../lib/models");
 
-describe("Controller | Site", function () {
+describe.only("Controller | Site", function () {
   let config, controller, req, res;
 
   function bailout(done) {
@@ -120,7 +120,21 @@ describe("Controller | Site", function () {
       controller.page(req, res, bailout(done));
     });
 
-    it("renders a nested route with page.hbs");
+    it("renders a nested route with page.hbs", function (done) {
+      helpers.createPost({
+        type: "page",
+        name: "bird",
+        route: "/nested/bird"
+      }).then(post => {
+        req.path = "/nested/bird";
+        res.render = function (view) {
+          expect(view).to.eql("page");
+          done();
+        }
+
+        controller.page(req, res, bailout(done));
+      }).catch(done);
+    });
 
     it("renders a nested route with index.hbs if it is set as blogPage and the path matches post.path");
 

@@ -4,7 +4,8 @@
   "description": "Simple cms done right",
   "main": "index.js",
   "scripts": {
-    "start": "supervisor ."
+    "start:dev": "scripts/db && supervisor --extensions js,hbs .",
+    "start": "node ."
   },
   "author": [{
     "name": "Dylan Foster",

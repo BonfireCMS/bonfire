@@ -10,6 +10,7 @@ const App = require("../lib/app");
 const models = require("../lib/models");
 
 describe("App", function () {
+  this.timeout(20000);
   let client;
 
   beforeEach(function () {

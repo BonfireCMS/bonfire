@@ -12,7 +12,7 @@ const Config = require("../../lib/config");
 const Controller = require("../../lib/site/controller");
 const models = require("../../lib/models");
 
-describe.only("Controller | Site", function () {
+describe("Controller | Site", function () {
   let config, controller, req, res;
 
   function bailout(done) {
@@ -141,5 +141,14 @@ describe.only("Controller | Site", function () {
     it("renders page.hbs with the page post");
 
     it("renders index.hbs with post found by slug and paginated list of all posts");
+
+    it("returns a 404 if the post does not exist", function (done) {
+      req.path = "/foo";
+
+      controller.page(req, res, function (err) {
+        expect(err.body.code).to.eql("NotFoundError");
+        done();
+      });
+    });
   });
 });

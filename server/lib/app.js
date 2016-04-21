@@ -80,9 +80,8 @@ class App {
         }
       } else {
         // add logging
-        console.error(err.stack);
+        // console.error(err.stack);
       }
-
     });
   }
 }

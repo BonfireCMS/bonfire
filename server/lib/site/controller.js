@@ -131,6 +131,10 @@ class SiteController {
 }
 
 function verifyPostRoute(route, post) {
+  if (!post) {
+    throw new errors.NotFoundError();
+  }
+
   if (post.route && post.route !== route) {
   }
 

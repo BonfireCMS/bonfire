@@ -33,13 +33,7 @@ class App {
   }
 
   boot() {
-    return models.Post.bulkCreate([setup.firstPost, setup.firstPage]).then(() => {
-      return models.Setting.bulkCreate(setup.settings);
-    }).then(() => {
-      return Config.load(path.resolve(__dirname, "../../config.js"));
-    }).then(() => {
-      return this.app;
-    });
+    return Config.load(path.resolve(__dirname, "../../config.js")).then(() => this.app);
   }
 
   getApp() {

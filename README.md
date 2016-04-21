@@ -22,7 +22,11 @@ scripts/db
 npm start (in a seperate terminal)
 ```
 
-You should now see your site running on `http://locahost:3000`
+Your site should now be running in the following locations:
+
+ - **api**: `http://locahost:3000/api/v1`
+ - **site**: `http://localhost:3000`
+ - **admin area**: `http://localhost:3000/bonfire`
 
 ## Hacking
 

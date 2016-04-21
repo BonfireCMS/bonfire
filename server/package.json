@@ -4,14 +4,15 @@
   "description": "Backend api for BonfireCMS",
   "main": "index.js",
   "scripts": {
-    "db": "npm run db:drop && npm run db:migrate",
+    "db": "npm run db:drop && npm run db:migrate && npm run db:seed",
     "db:drop": "sequelize db:migrate:undo:all",
     "db:migrate": "sequelize db:migrate",
     "db:migrate:undo": "sequelize db:migrate:undo",
-    "db:seed": "sequelize db:seed",
+    "db:seed": "sequelize db:seed:all",
     "db:seed:undo": "sequelize db:seed:undo",
     "lint": "eslint .",
     "model": "sequelize model:create --name",
+    "seed": "sequelize seed:create --name",
     "start": "supervisor .",
     "test": "mocha --recursive",
     "watch": "npm run test -- --watch"

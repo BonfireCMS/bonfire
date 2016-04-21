@@ -1,4 +1,14 @@
 {{>header}}
 <div class="content">
+  {{#each posts}}
+  <div class="post">
+    <h2 class="heading heading_title post__title">
+      {{{dataValues.name}}}
+    </h2>
+    <div class="post__content">
+      {{{dataValues.content}}}
+    </div>
+  </div>
+  {{/each}}
 </div>
 {{>footer}}

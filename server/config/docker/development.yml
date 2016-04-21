@@ -5,7 +5,7 @@ postgres:
   extends:
     file: default.yml
     service: postgres
-  enviroment:
+  environment:
     POSTGRES_PASSWORD: postgres
     POSTGRES_USER: bonfire_dev
 

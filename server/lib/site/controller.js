@@ -86,7 +86,6 @@ class SiteController {
     const match = routeMatch("*/:slug");
     const slugMatch = match(pathName);
 
-    console.log(slugMatch);
     Post.find(slugQuery(slugMatch.slug)).then(post => {
       return verifyPostRoute(req.path, post);
     }).then(post => {

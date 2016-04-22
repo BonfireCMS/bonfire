@@ -98,7 +98,7 @@ class SiteController {
 
           if (isBlog) {
             // pull posts and set context with all
-            return Post.findAll().then(posts => {
+            return Post.findAll({ where: { type: "post" }}).then(posts => {
               return setContext("blog", { post, posts });
             });
           } else {

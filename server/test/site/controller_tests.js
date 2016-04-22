@@ -164,7 +164,24 @@ describe("Controller | Site", function () {
       }).catch(done);
     });
 
-    it("renders index.hbs with post found by slug and paginated list of all posts");
+    it("renders index.hbs with post found by slug and list of all posts", function (done) {
+      let onlyPost;
+
+      helpers.findPostByName("something").then(post => {
+        onlyPost = post;
+        return helpers.setBlogPage(post.id);
+      }).then(() => {
+        req.path = "/something";
+        res.render = function (view, context) {
+          expect(view).to.eql("index");
+          expect(context.post).to.eql(onlyPost);
+          expect(context.posts).to.have.length(2);
+          done();
+        }
+
+        controller.page(req, res, bailout(done));
+      }).catch(done);
+    });
 
     it("returns a 404 if the post does not exist", function (done) {
       req.path = "/foo";

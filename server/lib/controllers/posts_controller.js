@@ -36,7 +36,6 @@ class PostsController extends Controller {
     }).catch(err => {
       const code = this.codeFromError(err);
       res.status(code).send(err.body);
-      next();
     });
   }
 

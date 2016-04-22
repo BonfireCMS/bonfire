@@ -38,8 +38,8 @@ describe("Controller | Settings", function () {
         .end(function (err, res) {
           if (err) { return done(err); }
 
-          let setting = res.body.settings[0];
-          expect(setting.key).to.eql("activeTheme");
+          let settings = res.body.settings;
+          expect(settings).to.have.length.gt(0);
           done();
         });
     });

@@ -87,7 +87,7 @@ describe("Controller | Posts", function () {
         .send({
           post: {
             content: "I'll never join the dark side",
-            name: "something"
+            name: "something-new"
           }
         })
         .expect(201)

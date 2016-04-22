@@ -12,23 +12,46 @@ module.exports = function setupForTesting() {
 };
 
 function initFixtures() {
-  return Promise.all(Object.keys(fixtures).map(fixture => {
-    return models[inflection.capitalize(fixture)].create(fixtures[fixture]);
+  return Promise.all(fixtures.map(fixture => {
+    return models[inflection.capitalize(fixture.type)].create(fixture.data);
   }));
 }
 
-let fixtures = {
-  post: {
+const fixtures = [{
+  type: "post",
+  data: {
     content: "foo",
     type: "post",
     name: "something"
-  },
-  post: {
+  }
+}, {
+  type: "post",
+  data: {
     type: "page",
     name: "bar"
-  },
-  setting: {
+  }
+}, {
+  type: "setting",
+  data: {
     key: "activeTheme",
     value: "cinder"
   }
-};
+}, {
+  type: "setting",
+  data: {
+    key: "frontPageType",
+    value: "posts"
+  }
+}, {
+  type: "setting",
+  data: {
+    key:"frontPage",
+    value: null
+  }
+}, {
+  type: "setting",
+  data: {
+    key:"postsPage",
+    value: null
+  }
+}]

@@ -67,7 +67,6 @@ class SiteController {
     req.params = req.params || {};
     const name = "index";
     const viewOpts = { name };
-
     const view = getViewForType(req.app.get("activeTheme"), viewOpts);
 
     Setting.find(keyQuery("frontPageType")).then(type => {
@@ -91,7 +90,7 @@ class SiteController {
     }).then(post => {
       return Setting.find(keyQuery("postsPage")).then(postsPage=> {
         if (post) {
-          const isBlog = parseInt(postsPage.value, 10) === post.id;
+          const isBlog = postsPage && parseInt(postsPage.value, 10) === post.id;
           if (isBlog) {
             // pull posts and set context with all
             return Post.findAll().then(posts => {

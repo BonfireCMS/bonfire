@@ -4,7 +4,7 @@
   "description": "Backend api for BonfireCMS",
   "main": "index.js",
   "scripts": {
-    "db": "npm run db:drop && npm run db:migrate && npm run db:seed",
+    "db": "npm run db:drop && npm run db:migrate",
     "db:drop": "sequelize db:migrate:undo:all",
     "db:migrate": "sequelize db:migrate",
     "db:migrate:undo": "sequelize db:migrate:undo",

@@ -3,7 +3,7 @@ module.exports = {
     username: "bonfire_dev",
     password: "postgres",
     database: "bonfire_dev",
-    host: "docker.local",
+    host: "192.168.99.100",
     dialect: "postgres",
     logging: false
   },
@@ -11,7 +11,7 @@ module.exports = {
     username: "postgres",
     password: "postgres",
     database: "bonfire_test",
-    host: "docker.local",
+    host: "192.168.99.100",
     dialect: "postgres"
   },
   production: {

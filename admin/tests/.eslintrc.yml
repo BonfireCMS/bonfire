@@ -1,2 +1,9 @@
 ---
 extends: "unstandard/test"
+env:
+  browser: true
+parserOptions:
+  ecmaVersion: 6
+  sourceType: "module"
+rules:
+  no-unused-expressions: 0

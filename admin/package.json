@@ -10,7 +10,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember test"
+    "test": "ember t -f 'JSHint' -i"
   },
   "repository": "",
   "engines": {
@@ -44,7 +44,11 @@
   },
   "eslintConfig": {
     "extends": "unstandard",
+    "env": {
+      "browser": true
+    },
     "parserOptions": {
+      "ecmaVersion": 6,
       "sourceType": "module"
     }
   }

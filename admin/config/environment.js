@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   var ENV = {
-    modulePrefix: 'admin',
+    modulePrefix: 'bonfire',
     environment: environment,
     baseURL: '/',
     locationType: 'auto',

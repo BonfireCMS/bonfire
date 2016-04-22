@@ -6,6 +6,9 @@
     "ember-cli-test-loader": "0.2.2",
     "mocha": "~2.2.4",
     "chai": "~2.3.0",
-    "ember-mocha-adapter": "~0.3.1"
+    "ember-mocha-adapter": "~0.3.1",
+    "pretender": "~0.10.1",
+    "lodash": "~3.7.0",
+    "Faker": "~3.0.0"
   }
 }

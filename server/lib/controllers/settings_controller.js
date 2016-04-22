@@ -15,7 +15,6 @@ class SettingsController extends BaseController {
       return this.formatResponse(records);
     }).then(response => {
       res.status(200).send(response);
-      next();
     }).catch(next);
   }
 
@@ -35,7 +34,6 @@ class SettingsController extends BaseController {
     }).catch(err => {
       let code = this.codeFromError(err);
       res.status(code).send(err.body);
-      next();
     }).catch(next);
   }
 

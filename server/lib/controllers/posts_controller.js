@@ -37,6 +37,7 @@ class PostsController extends Controller {
       res.status(200).send(response);
     }).catch(err => {
       const code = this.codeFromError(err);
+
       res.status(code).send(err.body);
     });
   }

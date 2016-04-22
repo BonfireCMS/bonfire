@@ -6,6 +6,7 @@ const ERROR_CODE_MAP = {
   ForbiddenError: 403,
   InternalServerError: 500,
   MethodNotAllowedError: 405,
+  NotFoundError: 404,
   ResourceNotFound: 404,
   UnauthorizedError: 401,
   UnprocessableEntityError: 422

@@ -56,6 +56,25 @@ class App {
     this.blogRouter.use(middlewares.themeHandler.updateActiveTheme);
     this.blogRouter.route("/").get(siteController.index.bind(siteController));
     this.blogRouter.get("*", siteController.page.bind(siteController));
+    this.blogRouter.use((err, req, res, next) => {
+      const activeThemeViews = Config.get("paths.themes")[this.app.get("activeTheme")].views;
+      let responseCode;
+
+      if (err instanceof Error && err.body && err.body.code) {
+        responseCode = utils.statusFromCode(err.body.code);
+
+        if (activeThemeViews.hasOwnProperty(responseCode + ".hbs")) {
+          res.status(responseCode).render(responseCode);
+        } else {
+          const helpers = Config.get("paths.helpers");
+
+          res.status(responseCode).render(path.join(helpers, responseCode + ".hbs"));
+        }
+      } else {
+        // add logging
+        // console.error(err.stack);
+      }
+    });
     this.app.use(this.apiBase, this.apiRouter.getRouter());
     this.app.use("/", this.blogRouter);
     this.app.use((err, req, res) => {

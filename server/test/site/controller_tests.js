@@ -110,6 +110,16 @@ describe("Controller | Site", function () {
       controller.page(req, res, bailout(done));
     });
 
+    it("renders post.hbs with a post", function (done) {
+      req.path = "/something";
+      res.render = function (view) {
+        expect(view).to.eql("post");
+        done();
+      };
+
+      controller.page(req, res, bailout(done));
+    });
+
     it("renders index.hbs with posts if slug matches blog page", function (done) {
       req.path = "/baz";
       res.render = function (view) {
@@ -136,14 +146,37 @@ describe("Controller | Site", function () {
       }).catch(done);
     });
 
-    it("renders a nested route with index.hbs if it is set as blogPage and the path matches post.path");
+    it("renders a nested route with index.hbs if it is set as blogPage and the path matches post.path", function (done) {
+      helpers.createPost({
+        type: "page",
+        name: "bird",
+        route: "/nested/bird"
+      }).then(post => {
+        return helpers.setBlogPage(post.id);
+      }).then(() => {
+        req.path = "/nested/bird";
+        res.render = function (view) {
+          expect(view).to.eql("index");
+          done();
+        }
 
-    it("renders page.hbs with the page post");
+        controller.page(req, res, bailout(done));
+      }).catch(done);
+    });
 
     it("renders index.hbs with post found by slug and paginated list of all posts");
 
     it("returns a 404 if the post does not exist", function (done) {
       req.path = "/foo";
+
+      controller.page(req, res, function (err) {
+        expect(err.body.code).to.eql("NotFoundError");
+        done();
+      });
+    });
+
+    it("returns a 404 if a nested route does not exist", function (done) {
+      req.path = "/foo/bar";
 
       controller.page(req, res, function (err) {
         expect(err.body.code).to.eql("NotFoundError");

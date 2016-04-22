@@ -28,7 +28,8 @@ const fixtures = [{
   type: "post",
   data: {
     type: "page",
-    name: "bar"
+    name: "bar",
+    route: "/bar"
   }
 }, {
   type: "setting",

@@ -49,6 +49,13 @@ function createPost(data) {
   return Post.create(data);
 }
 
+function setBlogPage(id) {
+  return Setting.find({ where: { key: "postsPage" }}).then(page => {
+    page.value = id;
+    return page.save();
+  });
+}
+
 function setFrontPage() {
   return Setting.find({ where: { key: "frontPageType" }}).then(type => {
     type.value = "page";
@@ -70,6 +77,7 @@ module.exports = {
   findPostByName,
   findSettingById,
   initHelpers,
+  setBlogPage,
   setFrontPage,
   setupForTesting
 };

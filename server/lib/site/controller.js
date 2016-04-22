@@ -140,6 +140,7 @@ function verifyPostRoute(route, post) {
   }
 
   if (post.route && post.route !== route) {
+    throw new errors.NotFoundError();
   }
 
   return post;

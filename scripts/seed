@@ -1,0 +1,6 @@
+#!/bin/bash
+set -e
+
+pushd server &> /dev/null
+npm run db:seed
+popd &> /dev/null

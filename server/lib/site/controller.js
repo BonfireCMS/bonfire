@@ -34,6 +34,10 @@ const VIEW_CONFIG = {
   page: {
     name: "page",
     route: "/:pageSlug"
+  },
+  post: {
+    name: "post",
+    route: "/:postSlug"
   }
 };
 
@@ -91,6 +95,7 @@ class SiteController {
       return Setting.find(keyQuery("postsPage")).then(postsPage=> {
         if (post) {
           const isBlog = postsPage && parseInt(postsPage.value, 10) === post.id;
+
           if (isBlog) {
             // pull posts and set context with all
             return Post.findAll().then(posts => {
@@ -98,7 +103,7 @@ class SiteController {
             });
           } else {
             // return this slug only for context
-            return setContext("page", post);
+            return setContext(post.type, post);
           }
         } else {
           throw new errors.ResourceNotFoundError(`Page '${slugMatch.slug}' does not exist`);

@@ -4,7 +4,7 @@
   "description": "Simple cms done right",
   "main": "index.js",
   "scripts": {
-    "start:dev": "scripts/db && supervisor --extensions js,hbs .",
+    "start:dev": "scripts/db && scripts/seed && supervisor --extensions js,hbs .",
     "start": "node ."
   },
   "author": [{

@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+ADMIN_DIR="admin"
+
+pushd $ADMIN_DIR &> /dev/null
+npm install
+popd &> /dev/null

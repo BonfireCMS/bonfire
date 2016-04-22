@@ -7,5 +7,4 @@ docker-compose -f server/config/docker/development.yml pull
 pushd server &> /dev/null
 npm install
 popd &> /dev/null
-
-# TODO: add admin init
+scripts/build

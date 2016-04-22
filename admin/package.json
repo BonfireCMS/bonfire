@@ -8,7 +8,9 @@
     "test": "tests"
   },
   "scripts": {
+    "bower": "bower install --allow-root",
     "build": "ember build",
+    "postinstall": "npm run bower && npm run build -- --environment production",
     "start": "ember server",
     "test": "ember test"
   },
@@ -19,6 +21,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "bower": "^1.7.9",
     "broccoli-asset-rev": "^2.2.0",
     "ember-cli": "1.13.14",
     "ember-cli-app-version": "^1.0.0",

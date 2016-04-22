@@ -13,13 +13,16 @@ Bonfire is a simple yet powerful platform for curating and managing your content
 
 Let's go!
 
-```shell
+```bash
 git clone https://github.com/BonfireCms/bonfire.git
 cd bonfire
 scripts/init
 scripts/start
+
+# in a separate terminal
 scripts/db
-npm start (in a seperate terminal)
+scripts/seed
+npm start
 ```
 
 Your site should now be running in the following locations:

@@ -1,11 +1,14 @@
-import Ember from 'ember';
-import config from './config/environment';
+import Ember from "ember";
+import config from "./config/environment";
 
 const Router = Ember.Router.extend({
   location: config.locationType
 });
 
-Router.map(function() {
+/* eslint-disable prefer-arrow-callback */
+Router.map(function routerMap() {
 });
+
+/* eslint-enable prefer-arrow-callback */
 
 export default Router;

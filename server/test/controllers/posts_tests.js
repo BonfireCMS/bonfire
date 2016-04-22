@@ -101,6 +101,13 @@ describe("Controller | Posts", function () {
         });
     });
 
+    it("returns a BadRequestError if POST body is invalid", function (done) {
+      client.post("/api/v1/posts")
+        .send({ content: "I'll never join the dark side", name: "something-new" })
+        .expect(400)
+        .end(done);
+    });
+
     it("returns a validation error for missing title");
 
     it("returns a validation error for missing type");
@@ -110,12 +117,8 @@ describe("Controller | Posts", function () {
     it("updates a post", function (done) {
       models.Post.findAll().then(posts => {
         client.put(`/api/v1/posts/${posts[0].id}`)
-          .send({
-            post: {
-              content: "something other than foo"
-            }
-          })
-        .expect(200)
+          .send({ post: { content: "something other than foo" } })
+          .expect(200)
           .end(function (err, res) {
             if (err) { return done(err); }
 
@@ -125,6 +128,15 @@ describe("Controller | Posts", function () {
             expect(post.id).to.eql(posts[0].id);
             done();
           });
+      }).catch(done);
+    });
+
+    it("returns a BadRequestError if PUT body is invalid", function (done) {
+      models.Post.findAll().then(posts => {
+        client.put(`/api/v1/posts/${posts[0].id}`)
+          .send({ content: "something other than foo" })
+          .expect(400)
+          .end(done);
       }).catch(done);
     });
   });

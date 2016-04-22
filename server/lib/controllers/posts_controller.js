@@ -2,6 +2,8 @@
 
 // TODO: add error handlers to all catch
 
+const errors = require("restify-errors");
+
 const Controller = require("../controller");
 
 class PostsController extends Controller {
@@ -41,6 +43,10 @@ class PostsController extends Controller {
 
   create(req, res, next) {
     const payload = req.body[this.resourceRoot];
+
+    if (!payload) {
+      return next(new errors.BadRequestError());
+    }
     // validate things
 
     this.model.create(payload).then(record => {
@@ -52,11 +58,14 @@ class PostsController extends Controller {
 
   update(req, res, next) {
     const id = req.params.id;
-    const payload = req.body;
-    payload[this.resourceRoot] = req.body[this.resourceRoot];
+    const payload = req.body[this.resourceRoot];
+
+    if (!payload) {
+      return next(new errors.BadRequestError());
+    }
 
     this.model.findById(id).then(record => {
-      return record.updateAttributes(payload[this.resourceRoot]);
+      return record.updateAttributes(payload);
     }).then(record => {
       return this.formatResponse(record);
     }).then(response => {

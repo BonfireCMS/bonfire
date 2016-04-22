@@ -1,5 +1,7 @@
 "use strict";
 
+const errors = require("restify-errors");
+
 const BaseController = require("../controller");
 
 class SettingsController extends BaseController {
@@ -40,6 +42,8 @@ class SettingsController extends BaseController {
   create(req, res, next) {
     const payload = req.body[this.resourceRoot];
 
+    if (!payload) { return next(new errors.BadRequestError()); }
+
     this.model.create(payload).then(record => {
       return this.formatResponse(record);
     }).then(response => {
@@ -49,11 +53,12 @@ class SettingsController extends BaseController {
 
   update(req, res, next) {
     const id = req.params.id;
-    const payload = req.body;
-    payload[this.resourceRoot] = req.body[this.resourceRoot];
+    const payload = req.body[this.resourceRoot];
+
+    if (!payload) { return next(new errors.BadRequestError()); }
 
     this.model.findById(id).then(record => {
-      return record.updateAttributes(payload[this.resourceRoot]);
+      return record.updateAttributes(payload);
     }).then(record => {
       return this.formatResponse(record);
     }).then(response => {

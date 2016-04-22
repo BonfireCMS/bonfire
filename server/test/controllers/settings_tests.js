@@ -88,6 +88,13 @@ describe("Controller | Settings", function () {
           done();
         });
     });
+
+    it("returns a BadRequestError if POST body is invalid", function (done) {
+      client.post("/api/v1/settings")
+        .send({ key: "foo", value: "bar" })
+        .expect(400)
+        .end(done);
+    });
   });
 
   describe("PUT /settings/:id", function () {
@@ -109,6 +116,15 @@ describe("Controller | Settings", function () {
             expect(setting.value).to.eql("something");
             done();
           });
+      }).catch(done);
+    });
+
+    it("returns a BadRequestError if PUT body is invalid", function (done) {
+      models.Setting.findAll().then(settings => {
+        client.put(`/api/v1/settings/${settings[0].id}`)
+          .send({ value: "something" })
+          .expect(400)
+          .end(done);
       }).catch(done);
     });
 

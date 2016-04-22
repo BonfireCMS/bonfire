@@ -55,7 +55,7 @@ describe("Controller | Settings", function () {
 
             let setting = res.body.setting;
 
-            expect(setting.key).to.eql("activeTheme");
+            expect(setting).to.have.any.key("key");
             done();
           });
       }).catch(done);

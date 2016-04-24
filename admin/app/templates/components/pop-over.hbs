@@ -1,0 +1,14 @@
+<div class="popover-wrap">
+  <div class="popover__tip">
+  </div>
+  <ul class="popover__content">
+    {{#each popoverItems as |item|}}
+    <li class="popover__item">
+      {{fa-icon icon=item.icon class="icon"}} {{item.text}}
+    </li>
+    {{/each}}
+    <li class="popover__item">{{fa-icon icon="external-link" class="icon"}} View</li>
+    <li class="popover__item">{{fa-icon icon="edit" class="icon"}} Edit</li>
+    <li class="popover__item">{{fa-icon icon="trash" class="icon"}} Trash</li>
+  </ul>
+</div>

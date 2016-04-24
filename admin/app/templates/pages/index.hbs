@@ -3,7 +3,7 @@
   {{page-filter}}
   <div class="page-list">
     {{#each pages as |page|}}
-    {{page-list-item post=page toggleMenu=(action "toggleMenu" "page-list-popover")}}
+    {{page-list-item goTo="goTo" for="page-list" popoverItems=pageActionItems post=page}}
     {{/each}}
   </div>
 </div>

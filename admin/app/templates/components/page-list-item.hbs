@@ -10,15 +10,4 @@
 <div class="page-list__item__action" {{action "toggleMenu"}}>
   {{fa-icon icon="ellipsis-v" class="icon"}}
 </div>
-<div class="popover popover_page-list {{if popoverIsShowing "show" "hide"}}">
-  <div class="popover-wrap">
-    <div class="popover__tip">
-    </div>
-    <ul class="popover__content">
-      <li class="popover__item">{{fa-icon icon="external-link" class="icon"}} View</li>
-      <li class="popover__item">{{fa-icon icon="edit" class="icon"}} Edit</li>
-      <li class="popover__item">{{fa-icon icon="trash" class="icon"}} Trash</li>
-    </ul>
-  </div>
-</div>
-
+{{pop-over items=popoverIitems for=for}}

@@ -36,7 +36,13 @@ export default Ember.Component.extend({
       }
     }
   },
-  click() {
+  click(e) {
+    const target = e.target;
+
+    if (target.classList.contains("page-list__item__action")) {
+      return;
+    }
+
     const action = this.get("action");
     const forType = this.get("for");
     const pageItemActions = this.get("globalActions.pageItem");

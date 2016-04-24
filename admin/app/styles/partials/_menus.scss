@@ -6,7 +6,10 @@
   background-color: $white;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5),-4px 4px 8px rgba(0, 0, 0, 0.5);
   @include modifier("page-list") {
-    top: 70px;
+    top: 40px;
+  }
+  @include modifier("post-list") {
+    top: 40px;
   }
   @include element("item") {
     padding: 8px;

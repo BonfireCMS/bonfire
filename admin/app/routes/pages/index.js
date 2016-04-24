@@ -7,5 +7,5 @@ export default Ember.Route.extend({
 
   setupController(controller, model) {
     controller.set("pages", model);
-  }
+  },
 });

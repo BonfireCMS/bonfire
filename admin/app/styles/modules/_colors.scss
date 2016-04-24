@@ -3,7 +3,9 @@ $offwhite: #FAFAFA;
 
 $brand: (
   "brown": #D67111,
-  "orange": #FFAD5E
+  "orange": #FFAD5E,
+  "blue-light": #4F67B4,
+  "blue": #1B3691
 );
 
 @each $color, $value in $brand {

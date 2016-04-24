@@ -10,7 +10,7 @@
   @include element("action") {
     height: 50px;
     width: 50px;
-    background-color: #1B3691;
+    @extend .f-bg-blue;
     border-radius: 100%;
     margin-right: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
@@ -23,7 +23,7 @@
     }
     &:hover {
       cursor: pointer;
-      background-color: #4F67B4;
+      @extend .f-bg-blue-light;
     }
   }
 }

@@ -1,10 +1,12 @@
 <div class="action-bar">
-  <div class="action-bar__action action-bar__add-page">
+  <div class="action-bar__action action-bar__add-page" {{action "goTo" "pages.new"}}>
     {{fa-icon icon="plus" class="icon"}}
   </div>
 </div>
 <div class="content-wrapper">
-  <div class="page__list">
+  <div class="page-filter">
+  </div>
+  <div class="page-list">
     {{#each pages as |page|}}
     <div class="page-list__item">
       <div class="page-list__item__name">
@@ -16,7 +18,8 @@
         <span class="meta__item">Updated: {{moment-from-now page.updatedAt}}</span>
         <span class="meta__item">State: {{page.status}}</span>
       </div>
-      <div class="page-list__item__action">
+      <div class="page-list__item__action" {{action "togglePreview"}}>
+        {{fa-icon icon="ellipsis-v" class="icon"}}
       </div>
     </div>
     {{/each}}

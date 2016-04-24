@@ -8,15 +8,17 @@ const Router = Ember.Router.extend({
 
 Router.map(function routerMap() {
   this.route("posts", function postsRoute() {
-    this.route("show", { path: ":id" });
-    this.route("edit", { path: ":id/edit" });
+    this.route("edit", { path: "/:id/edit" });
+    this.route("new", { path: "/new" });
+    this.route("show", { path: "/:id" });
   });
   this.route("settings");
   this.route("pages", function() {
-    this.route("edit");
-    this.route("show");
+    this.route("edit", { path: "/:id/edit" });
+    this.route("new", { path: "/new" });
+    this.route("show", { path: "/:id" });
   });
-  this.route('themes', function() {});
+  this.route("themes", function() {});
 });
 
 export default Router;

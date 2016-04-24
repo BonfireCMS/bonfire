@@ -1,0 +1,21 @@
+.popover {
+  position: absolute;
+  right: 40px;
+  width: 200px;
+  z-index: 1000;
+  background-color: $white;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5),-4px 4px 8px rgba(0, 0, 0, 0.5);
+  @include modifier("page-list") {
+    top: 70px;
+  }
+  @include element("item") {
+    padding: 8px;
+    @extend .f-orange;
+    .icon {
+      @extend .f-orange;
+    }
+    &:hover {
+      @extend .f-bg-brown;
+    }
+  }
+}

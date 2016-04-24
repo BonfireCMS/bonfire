@@ -1,26 +1,7 @@
-<div class="action-bar">
-  <div class="action-bar__action action-bar__add-page">
-    {{fa-icon icon="plus" class="icon"}}
-  </div>
-</div>
+{{action-bar actionArgs='["posts.new"]' goTo="goTo"}}
 <div class="content-wrapper">
-  <div class="page-filter">
-  </div>
-  <div class="page-list">
-    {{#each posts as |post|}}
-    <div class="page-list__item">
-      <div class="page-list__item__name">
-        {{post.name}}
-      </div>
-      <div class="page-list__item__meta">
-        <span class="meta__item">Author: {{title-case-string post.author.name}}</span>
-        <span class="meta__item">Created: {{moment-from-now post.createdAt}}</span>
-        <span class="meta__item">Updated: {{moment-from-now post.updatedAt}}</span>
-        <span class="meta__item">State: {{post.status}}</span>
-      </div>
-      <div class="page-list__item__action">
-      </div>
-    </div>
-    {{/each}}
-  </div>
+  {{page-filter}}
+  {{#each posts as |post|}}
+  {{page-list-item post=post}}
+  {{/each}}
 </div>

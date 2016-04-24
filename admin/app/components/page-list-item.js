@@ -1,24 +1,32 @@
 import Ember from "ember";
+const inflector = new Ember.Inflector(Ember.Inflector.defaultRules);
 
 export default Ember.Component.extend({
   popoverIsShowing: false,
   tagName: "div",
   classNames: ["page-list__item"],
   globalActions: Ember.inject.service(),
-  action: Ember.computed("globalActions.pageItem", function () {
+  pageItemActions: Ember.computed("globalActions", function () {
     const forType = this.get("for");
-    const pageItemActions = this.get("globalActions.pageItem");
+    const globalActions = this.get("globalActions");
 
-    return pageItemActions[forType].action;
+    return globalActions[forType].pageItem;
   }),
+  action: Ember.computed("globalActions", function () {
+    const forType = this.get("for");
+    const globalActions = this.get("globalActions");
+
+    return globalActions[forType].pageItem.action;
+  }),
+
   actions: {
     toggleMenu() {
-      const forType = this.get("for");
       // popover is open, so close it
       if (!!this.get("popoverIsShowing")) {
         this.set("popoverIsShowing", false);
         this.$(document).off("click");
       } else {
+        // popover is closed, open it and add the body listener
         this.set("popoverIsShowing", true);
         this.$(document).on("click", event => {
           const allowedClicks = ["popover__item", "icon", "page-list__item__action"];
@@ -32,25 +40,32 @@ export default Ember.Component.extend({
             this.set("popoverIsShowing", false);
           }
         });
-        // popover is closed, open it and add the body listener
       }
+    },
+    triggerAction(type) {
+      const forType = this.get("for");
+      const capitalizedResource = inflector.singularize(forType.capitalize());
+      const camelCasedAction = `${type}${capitalizedResource}`;
+      this.sendAction(camelCasedAction, this.get("post.id"));
     }
   },
-  click(e) {
-    const target = e.target;
 
-    if (target.classList.contains("page-list__item__action")) {
+  click(e) {
+    const action = this.get("action");
+    const target = e.target;
+    const isClickable = ["page-list__item__action", "icon", "popover__item"].every(item => {
+      return !target.classList.contains(item);
+    });
+
+    if (!isClickable) {
       return;
     }
 
-    const action = this.get("action");
-    const forType = this.get("for");
-    const pageItemActions = this.get("globalActions.pageItem");
-    const data = pageItemActions[forType].data;
-    const dataToSend = Object.keys(data).map(prop => {
-      return this.get(data[prop].key);
-    });
 
-    this.sendAction(action, ...dataToSend);
+    this.sendAction(action, this.get("post.id"));
+  },
+
+  willDestroyElement() {
+    this.$(document).off("click");
   }
 });

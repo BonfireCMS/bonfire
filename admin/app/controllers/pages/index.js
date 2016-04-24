@@ -8,6 +8,9 @@ export default Ember.Controller.extend({
     return globalActions.get("pageListItem");
   }),
   actions: {
+    editPage(id) {
+      return this.get("application").send("goTo", "pages.edit", id);
+    },
     newPage() {
       this.get("application").send("goTo", "pages.new");
     },

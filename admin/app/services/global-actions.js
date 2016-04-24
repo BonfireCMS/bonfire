@@ -13,15 +13,25 @@ export default Ember.Service.extend({
           action: "newPage",
         }],
         pageItem: {
-        },
-        pageItemPopover: {
+          action: "editPage",
+          popover: [{
+            icon: "external-link",
+            action: "",
+            text:"View page"
+          }, {
+            icon: "edit",
+            action: "edit",
+            text:"Edit page"
+          }, {
+            icon: "trash",
+            action: "",
+            text:"Trash"
+          }]
         }
       },
       "pages:new": {
         actionBar: [],
         pageItem: {
-        },
-        pageItemPopover: {
         }
       },
       posts: {
@@ -31,8 +41,20 @@ export default Ember.Service.extend({
           action: "newPost",
         }],
         pageItem: {
-        },
-        pageItemPopover: {
+          action: "editPost",
+          popover: [{
+            icon: "external-link",
+            action: "",
+            text:"View ppost"
+          }, {
+            icon: "edit",
+            action: "edit",
+            text:"Edit page"
+          }, {
+            icon: "trash",
+            action: "",
+            text:"Trash"
+          }]
         }
       },
       "posts:new": {

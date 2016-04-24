@@ -1,7 +1,9 @@
 {{action-bar for="posts" newPost=(action "newPost")}}
 <div class="content-wrapper">
   {{page-filter}}
-  {{#each posts as |post|}}
-  {{page-list-item goTo="goTo" for="post-list" popoverItems=postActionItems post=post}}
-  {{/each}}
+  <div class=="post-list">
+    {{#each posts as |post|}}
+    {{page-list-item for="posts" post=post newPost="newPost" editPost="editPost"}}
+    {{/each}}
+  </div>
 </div>

@@ -10,4 +10,8 @@
 <div class="page-list__item__action" {{action "toggleMenu"}}>
   {{fa-icon icon="ellipsis-v" class="icon"}}
 </div>
-{{pop-over items=popoverIitems for=for}}
+{{pop-over
+for="pages"
+popoverItems=pageItemActions.popover
+edit=(action "triggerAction" "edit")
+}}

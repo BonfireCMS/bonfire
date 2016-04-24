@@ -7,17 +7,24 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function routerMap() {
-  this.route("posts", function postsRoute() {
-    this.route("edit", { path: "/:id/edit" });
-    this.route("new", { path: "/new" });
-    this.route("show", { path: "/:id" });
-  });
-  this.route("settings");
+  // pages
   this.route("pages", function() {
     this.route("edit", { path: "/:id/edit" });
     this.route("new", { path: "/new" });
     this.route("show", { path: "/:id" });
   });
+
+  // posts
+  this.route("posts", function postsRoute() {
+    this.route("edit", { path: "/:id/edit" });
+    this.route("new", { path: "/new" });
+    this.route("show", { path: "/:id" });
+  });
+
+  // settings
+  this.route("settings");
+
+  // themes
   this.route("themes", function() {});
 });
 

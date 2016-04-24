@@ -34,6 +34,11 @@ export default Ember.Service.extend({
           isIcon: "true",
           icon: "plus",
           action: "newPage"
+        }, {
+          isIcon: "true",
+          icon: "trash",
+          action: "destroyPage",
+          color: "red"
         }],
         pageItem: {
         }
@@ -71,6 +76,11 @@ export default Ember.Service.extend({
           isIcon: "true",
           icon: "plus",
           action: "newPost"
+        }, {
+          isIcon: "true",
+          icon: "trash",
+          action: "",
+          color: "red"
         }],
         pageItem: {
         }

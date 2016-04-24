@@ -15,6 +15,12 @@
     margin-right: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
     transition: background-color .2s ease;
+    @include modifier("trash") {
+      @extend .f-bg-red;
+      &:hover {
+        @extend .f-bg-red-light;
+      }
+    }
     .icon {
       color: $white;
       font-size: 1.25rem;

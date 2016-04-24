@@ -5,7 +5,9 @@ $brand: (
   "brown": #D67111,
   "orange": #FFAD5E,
   "blue-light": #4F67B4,
-  "blue": #1B3691
+  "blue": #1B3691,
+  "red": #AD0404,
+  "red-light": #D61111
 );
 
 @each $color, $value in $brand {

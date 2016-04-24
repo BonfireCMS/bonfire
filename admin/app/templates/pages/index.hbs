@@ -1,9 +1,9 @@
-{{action-bar for="pages" newPage=(action "newPage")}}
+{{action-bar for="pages" newPage="newPage"}}
 <div class="content-wrapper">
   {{page-filter}}
   <div class="page-list">
     {{#each pages as |page|}}
-    {{page-list-item for="pages" post=page newPage="newPage" editPage=(action "editPage")}}
+    {{page-list-item for="pages" post=page newPage="newPage" editPage="editPage"}}
     {{/each}}
   </div>
 </div>

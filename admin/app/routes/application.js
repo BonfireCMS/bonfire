@@ -8,6 +8,18 @@ export default Ember.Route.extend({
       }
 
       return this.transitionTo(type);
+    },
+    editPage(id) {
+      return this.send("goTo", "pages.edit", id);
+    },
+    newPage() {
+      this.send("goTo", "pages.new");
+    },
+    editPost(id) {
+      this.send("goTo", "posts.edit", id);
+    },
+    newPost() {
+      this.send("goTo", "posts.new");
     }
   },
 });

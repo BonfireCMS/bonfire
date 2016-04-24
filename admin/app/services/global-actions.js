@@ -29,6 +29,15 @@ export default Ember.Service.extend({
           }]
         }
       },
+      "pages:edit": {
+        actionBar: [{
+          isIcon: "true",
+          icon: "plus",
+          action: "newPage"
+        }],
+        pageItem: {
+        }
+      },
       "pages:new": {
         actionBar: [],
         pageItem: {
@@ -55,6 +64,15 @@ export default Ember.Service.extend({
             action: "",
             text:"Trash"
           }]
+        }
+      },
+      "posts:edit": {
+        actionBar: [{
+          isIcon: "true",
+          icon: "plus",
+          action: "newPost"
+        }],
+        pageItem: {
         }
       },
       "posts:new": {

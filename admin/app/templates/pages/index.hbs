@@ -1,0 +1,24 @@
+<div class="action-bar">
+  <div class="action-bar__action action-bar__add-page">
+    {{fa-icon icon="plus" class="icon"}}
+  </div>
+</div>
+<div class="content-wrapper">
+  <div class="page__list">
+    {{#each pages as |page|}}
+    <div class="page-list__item">
+      <div class="page-list__item__name">
+        {{page.name}}
+      </div>
+      <div class="page-list__item__meta">
+        <span class="meta__item">Author: {{title-case-string page.author.name}}</span>
+        <span class="meta__item">Created: {{moment-from-now page.createdAt}}</span>
+        <span class="meta__item">Updated: {{moment-from-now page.updatedAt}}</span>
+        <span class="meta__item">State: {{page.status}}</span>
+      </div>
+      <div class="page-list__item__action">
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>

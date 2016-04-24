@@ -1,0 +1,7 @@
+$helvetica: "Helvetica";
+$base-font-size: 1em;
+
+.link {
+  text-decoration: none;
+  @extend .f-orange;
+}

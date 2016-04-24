@@ -12,6 +12,11 @@ Router.map(function routerMap() {
     this.route("edit", { path: ":id/edit" });
   });
   this.route("settings");
+  this.route("pages", function() {
+    this.route("edit");
+    this.route("show");
+  });
+  this.route('themes', function() {});
 });
 
 export default Router;

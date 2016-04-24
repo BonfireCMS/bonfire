@@ -1,0 +1,32 @@
+.navigation {
+  @include modifier("global") {
+    position: fixed;
+    width: 230px;
+    top: 0;
+    bottom: 0;
+    @extend .f-bg-brown;
+  }
+}
+
+.menu {
+  @include modifier("global") {
+  }
+  @include element("item") {
+    transition: background-color .2s ease;
+    &:hover, &.active {
+      @extend .f-bg-orange;
+      .link {
+        @extend .f-brown;
+      }
+    }
+    .link {
+      display: block;
+      padding: 20px 8px;
+      width: 100%;
+      transition: color .2s ease;
+    }
+    .icon {
+      padding: 0 20px 0;
+    }
+  }
+}

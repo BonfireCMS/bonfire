@@ -1,0 +1,33 @@
+<div class="navigation navigation_global">
+  <div class="logo">
+    <img src="/images/logo.png" />
+  </div>
+  <div class="navigation__menu navigation_global__menu">
+    <ul class="menu menu_global">
+      {{#link-to "pages.index" tagName="li" href=false class="menu__item"}}
+      <a class="link link_menu" href="{{view.href}}">
+        {{fa-icon icon="file-o" class="icon"}}
+        Pages
+      </a>
+      {{/link-to}}
+      {{#link-to "posts.index" tagName="li" href=false class="menu__item"}}
+      <a class="link link_menu" href="{{view.href}}">
+        {{fa-icon icon="align-left" class="icon"}}
+        Posts
+      </a>
+      {{/link-to}}
+      {{#link-to "themes.index" tagName="li" href=false class="menu__item"}}
+      <a class="link link_menu" href="{{view.href}}">
+        {{fa-icon icon="list-alt" class="icon"}}
+        Themes
+      </a>
+      {{/link-to}}
+      {{#link-to "settings" tagName="li" href=false class="menu__item"}}
+      <a class="link link_menu" href="{{view.href}}">
+        {{fa-icon icon="cog" class="icon"}}
+        Settings
+      </a>
+      {{/link-to}}
+    </ul>
+  </div>
+</div>

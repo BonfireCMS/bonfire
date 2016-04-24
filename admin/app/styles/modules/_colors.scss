@@ -1,0 +1,16 @@
+$white: #FFFFFF;
+$offwhite: #FAFAFA;
+
+$brand: (
+  "brown": #D67111,
+  "orange": #FFAD5E
+);
+
+@each $color, $value in $brand {
+  .f-#{$color} {
+    color: #{$value};
+  }
+  .f-bg-#{$color} {
+    background-color: #{$value};
+  }
+}

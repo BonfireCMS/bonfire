@@ -1,0 +1,26 @@
+@import "reset";
+@import "typography";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: $helvetica;
+  font-size: $base-font-size;
+  background-color: $offwhite;
+}
+
+.page {
+  margin-left: 230px;
+}
+
+.logo {
+  padding: 10px 20px;
+}
+
+.content-wrapper {
+  margin: 30px;
+  background-color: $white;
+}

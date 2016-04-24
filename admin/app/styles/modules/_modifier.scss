@@ -1,0 +1,5 @@
+@mixin modifier($modifier) {
+  &_#{$modifier} {
+    @content;
+  }
+}

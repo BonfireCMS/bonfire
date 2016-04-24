@@ -6,6 +6,9 @@ module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     "ember-cli-mocha": {
       useLintTree: false
+    },
+    emberCliFontAwesome: {
+      useScss: true
     }
   });
 

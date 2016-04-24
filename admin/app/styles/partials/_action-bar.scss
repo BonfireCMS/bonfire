@@ -1,0 +1,30 @@
+.action-bar {
+  height: 65px;
+  width: 100%;
+  @extend .f-bg-brown;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  text-align: center;
+  @include element("action") {
+    height: 50px;
+    width: 50px;
+    background-color: #1B3691;
+    border-radius: 100%;
+    margin-right: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+    transition: background-color .2s ease;
+    .icon {
+      color: $white;
+      font-size: 1.25rem;
+      position: relative;
+      transform: translateY(80%);
+    }
+    &:hover {
+      cursor: pointer;
+      background-color: #4F67B4;
+    }
+  }
+}
+

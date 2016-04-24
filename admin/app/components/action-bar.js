@@ -1,23 +1,18 @@
-import Ember from 'ember';
+import Ember from "ember";
 
 export default Ember.Component.extend({
   globalActions: Ember.inject.service(),
-  globalActionsType: Ember.computed("globalActions", function () {
+  actionBarActions: Ember.computed("globalActions", function () {
     const forType = this.get("for");
+    const globalActions = this.get("globalActions");
 
-    return this.get("globalActions.actionBar")[forType];
+    return globalActions[forType].actionBar;
   }),
   tagName: "div",
   classNames: ["action-bar"],
   actions: {
-    goTo() {
-      const globalActionsType = this.get("globalActionsType");
-      const action = globalActionsType.find(item => item.action === "goTo");
-      const dataToSend = action.data.map(prop => {
-        return this.get(prop.key);
-      });
-
-      this.sendAction(action.action, ...dataToSend);
+    triggerAction(type) {
+      this.sendAction(type);
     }
   }
 });

@@ -8,4 +8,6 @@ export default Ember.Route.extend({
   setupController(controller, model) {
     controller.set("pages", model);
   },
+
+  actions:{ newPage() { console.log("foo"); } }
 });

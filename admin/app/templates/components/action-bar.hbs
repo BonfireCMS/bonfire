@@ -1,5 +1,7 @@
-{{#each globalActionsType as |item|}}
-<div class="action-bar__action" {{action item.action}}>
-  {{fa-icon icon=item.icon class="icon"}}
+{{#each actionBarActions as |actionItem|}}
+{{#if actionItem.isIcon}}
+<div class="action-bar__action" {{action "triggerAction" actionItem.action}}>
+  {{fa-icon icon=actionItem.icon class="icon"}}
 </div>
+{{/if}}
 {{/each}}

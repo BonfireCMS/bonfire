@@ -9,5 +9,5 @@ export default Ember.Route.extend({
 
       return this.transitionTo(type);
     }
-  }
+  },
 });

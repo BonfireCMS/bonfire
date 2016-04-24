@@ -4,7 +4,6 @@ export default Ember.Component.extend({
   globalActions: Ember.inject.service(),
   globalActionsType: Ember.computed("globalActions", function () {
     const forType = this.get("for");
-    console.log(this.get("globalActions.actionBar")[forType]);
 
     return this.get("globalActions.actionBar")[forType];
   }),
@@ -17,7 +16,6 @@ export default Ember.Component.extend({
       const dataToSend = action.data.map(prop => {
         return this.get(prop.key);
       });
-      console.log(dataToSend);
 
       this.sendAction(action.action, ...dataToSend);
     }

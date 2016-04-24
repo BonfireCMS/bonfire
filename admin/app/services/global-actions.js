@@ -20,7 +20,7 @@ export default Ember.Service.extend({
             text:"View page"
           }, {
             icon: "edit",
-            action: "edit",
+            action: "editPage",
             text:"Edit page"
           }, {
             icon: "trash",
@@ -45,11 +45,11 @@ export default Ember.Service.extend({
           popover: [{
             icon: "external-link",
             action: "",
-            text:"View ppost"
+            text:"View post"
           }, {
             icon: "edit",
-            action: "edit",
-            text:"Edit page"
+            action: "editPost",
+            text:"Edit post"
           }, {
             icon: "trash",
             action: "",

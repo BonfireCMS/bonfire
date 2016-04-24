@@ -13,7 +13,7 @@ export default Ember.Component.extend({
   isShowing: Ember.computed.oneWay("parentView.popoverIsShowing"),
   actions: {
     triggerAction(type) {
-      this.sendAction(type);
+      this.sendAction("triggerAction", type);
     }
   }
 });

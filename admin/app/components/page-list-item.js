@@ -43,10 +43,7 @@ export default Ember.Component.extend({
       }
     },
     triggerAction(type) {
-      const forType = this.get("for");
-      const capitalizedResource = inflector.singularize(forType.capitalize());
-      const camelCasedAction = `${type}${capitalizedResource}`;
-      this.sendAction(camelCasedAction, this.get("post.id"));
+      this.sendAction(type, this.get("post.id"));
     }
   },
 

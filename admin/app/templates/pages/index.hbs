@@ -3,7 +3,7 @@
   {{page-filter}}
   <div class="page-list">
     {{#each pages as |page|}}
-    {{page-list-item for="pages" post=page newPage="newPage" editPage="editPage"}}
+    {{page-list-item for="pages" post=page newPage="newPage" editPage=(action "editPage")}}
     {{/each}}
   </div>
 </div>

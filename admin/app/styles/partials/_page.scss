@@ -2,6 +2,7 @@
   @include module("filter") {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     height: 55px;
     background-color: $white;
     margin-bottom: 30px;
@@ -23,6 +24,15 @@
       }
       &:hover {
         cursor: pointer;
+      }
+    }
+    @include element("search") {
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      .icon {
+        @extend .f-blue;
+        font-size: 1.2rem;
       }
     }
   }

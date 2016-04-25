@@ -1,1 +1,7 @@
-{{yield}}
+<ul class="page-filter__list">
+  <li class="page-filter__filter {{publishedIsActive}}" {{action "updateFilter" "published"}}>Published </li>
+  <li class="page-filter__filter {{draftIsActive}}" {{action "updateFilter" "draft"}}>Drafts </li>
+  <li class="page-filter__filter {{trashIsActive}}" {{action "updateFilter" "trash"}}>Trash </li>
+</ul>
+<div class="page-filter__search">
+</div>

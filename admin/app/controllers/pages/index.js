@@ -3,13 +3,19 @@ import Ember from "ember";
 export default Ember.Controller.extend({
   application: Ember.inject.controller(),
   globalActions: Ember.inject.service(),
-  pageActionItems: Ember.computed("globalActions", function (actions) {
-    const globalActions = this.get("globalActions");
-    return globalActions.get("pageListItem");
+
+  filteredPages: Ember.computed("status", "pages", function () {
+    const pages = this.get("pages");
+    const status = this.get("status");
+
+    return pages.filterBy("status", status);
   }),
+  queryParams: ["status"],
+  status: "published",
+
   actions: {
-    toggleMenu(type) {
-      this.toggleProperty("popoverIsShowing");
+    updateFilter(type) {
+      this.set("status", type);
     }
   }
 });

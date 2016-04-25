@@ -1,8 +1,8 @@
 {{action-bar for="pages" newPage="newPage"}}
 <div class="content-wrapper">
-  {{page-filter}}
+  {{page-filter activeFilter=status updateFilter=(action "updateFilter")}}
   <div class="page-list">
-    {{#each pages as |page|}}
+    {{#each filteredPages as |page|}}
     {{page-list-item for="pages" post=page newPage="newPage" editPage="editPage"}}
     {{/each}}
   </div>

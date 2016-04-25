@@ -1,0 +1,4 @@
+@mixin border-bottom($thickness, $color) {
+  @extend .f-bb-#{$color};
+  border-bottom-width: #{$thickness}px;
+}

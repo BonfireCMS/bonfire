@@ -1,9 +1,30 @@
 .page {
   @include module("filter") {
+    display: flex;
+    flex-direction: row;
     height: 55px;
     background-color: $white;
     margin-bottom: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    @include element("list") {
+      display: flex;
+      flex-direction: row;
+    }
+    @include element("filter") {
+      display: inline-block;
+      height: 100%;
+      padding: 0 20px 15px;
+      margin-top: 20px;
+      @extend .f-orange;
+      transition: color .2s ease;
+      &.active, &:hover {
+        @extend .f-brown;
+        @include border-bottom(3, brown);
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
   @include module("list") {
     @include element("item") {
@@ -21,7 +42,7 @@
       @include element("name") {
         @extend .f-brown;
         padding: 30px 20px;
-        font-size: 1rem;
+        font-size: 1.2rem;
         line-height: 1;
       }
       @include element("meta") {
@@ -39,5 +60,11 @@
         }
       }
     }
+  }
+}
+
+.meta {
+  @include element("item") {
+    padding: 8px 15px;
   }
 }

@@ -17,4 +17,7 @@ $brand: (
   .f-bg-#{$color} {
     background-color: #{$value};
   }
+  .f-bb-#{$color} {
+    border-bottom: 1px solid #{$value};
+  }
 }

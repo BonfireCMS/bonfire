@@ -5,5 +5,11 @@
     @include modifier("inline") {
       margin: 0 8px;
     }
+    @include modifier("page-filter") {
+      width: 100%;
+      padding: 0;
+      height: calc(100% - 4px);
+      border: none;
+    }
   }
 }

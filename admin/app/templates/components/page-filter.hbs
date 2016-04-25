@@ -3,7 +3,20 @@
   <li class="page-filter__filter {{draftIsActive}}" {{action "updateFilter" "draft"}}>Drafts </li>
   <li class="page-filter__filter {{trashIsActive}}" {{action "updateFilter" "trash"}}>Trash </li>
 </ul>
-<div class="page-filter__search">
-  {{input type="search" class="form__input form__input_inline" placeholder="search..." value=query}}
+<div class="page-filter__search-box {{if searchBoxIsOpen "show" "hide"}}">
   {{fa-icon icon="search" class="icon"}}
+  {{input
+  class="form__input form__input_inline form__input_page-filter"
+  placeholder="search..."
+  value=query
+  autofocus="autofocus"
+  }}
+</div>
+<div class="page-filter__search-icon" {{action "toggleSearchBox"}}>
+  {{#unless searchBoxIsOpen}}
+  {{fa-icon icon="search" class="icon"}}
+  {{/unless}}
+  {{#if searchBoxIsOpen}}
+  {{fa-icon icon="times" class="icon"}}
+  {{/if}}
 </div>

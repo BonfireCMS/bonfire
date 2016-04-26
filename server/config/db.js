@@ -19,6 +19,8 @@ module.exports = {
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: "bonfire",
-    dialect: "postgres"
+    dialect: "postgres",
+    seederStorage: "json",
+    sedderStoragePath: "seeds.json"
   }
 };

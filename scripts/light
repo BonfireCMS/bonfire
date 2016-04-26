@@ -1,5 +1,6 @@
 #!/bin/bash
 
+BONFIRE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 BONFIRE_DB=bonfire
 DEFAULT_PG_USERNAME=postgres
 DEFAULT_PG_PASSWORD=postgres
@@ -48,6 +49,7 @@ start_bonfire() {
     -d dylanfoster/bonfire
 }
 
+scripts/install
 prompt_for_username
 prompt_for_password
 start_postgres

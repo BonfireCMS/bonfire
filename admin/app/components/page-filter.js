@@ -19,6 +19,7 @@ export default Ember.Component.extend({
     }
   }),
   searchBoxIsOpen: false,
+  searchText: null,
   trashIsActive: Ember.computed("activeFilter", function () {
     const activeFilter = this.get("activeFilter");
 

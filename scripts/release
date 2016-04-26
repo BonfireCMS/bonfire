@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+# install and build admin app
+pushd admin &> /dev/null
+npm install
+popd &> /dev/null
+
+# install API deps
+pushd server &> /dev/null
+npm install
+popd &> /dev/null
+
+# build docker image
+docker build -t dylanfoster/bonfire .

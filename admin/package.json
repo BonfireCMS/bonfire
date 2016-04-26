@@ -8,7 +8,9 @@
     "test": "tests"
   },
   "scripts": {
+    "bower": "bower install --allow-root",
     "build": "ember build",
+    "postinstall": "npm run bower && npm run build -- --environment production",
     "start": "ember server",
     "test": "ember t -f 'JSHint' -i"
   },

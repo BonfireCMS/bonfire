@@ -57,7 +57,8 @@ class App {
     this.blogRouter.route("/").get(siteController.index.bind(siteController));
     this.blogRouter.get("*", siteController.page.bind(siteController));
     this.blogRouter.use((err, req, res, next) => {
-      const activeThemeViews = Config.get("paths.themes")[this.app.get("activeTheme")].views;
+      const activeTheme = this.app.get("activeTheme") || "cinder";
+      const activeThemeViews = Config.get("paths.themes")[activeTheme].views;
       let responseCode;
 
       if (err instanceof Error && err.body && err.body.code) {

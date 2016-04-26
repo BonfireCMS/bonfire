@@ -28,12 +28,25 @@ export default Ember.Component.extend({
     }
   }),
 
+  escapeListener(event) {
+    const ESCAPE = 27;
+    const props = ["keyCode", "which"];
+    const isEscape = props.some(prop => event[prop] === ESCAPE);
+
+    if (isEscape) { this.set("searchBoxIsOpen", false); }
+    Ember.$(document).off("keyup");
+  },
+
   actions: {
     toggleSearchBox() {
-      this.set("query", null);
+      this.set("searchText", null);
       this.toggleProperty("searchBoxIsOpen");
       Ember.run.next(() => {
         this.$(".form__input_page-filter").focus();
+
+        if (this.get("searchBoxIsOpen")) {
+          Ember.$(document).on("keyup", this.escapeListener.bind(this));
+        }
       });
     },
     updateFilter(type) {

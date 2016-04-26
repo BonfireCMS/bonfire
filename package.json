@@ -7,11 +7,15 @@
     "start:dev": "scripts/db && scripts/seed && supervisor --extensions js,hbs .",
     "start": "node ."
   },
-  "author": [{
-    "name": "Dylan Foster",
-    "email": "dylan947@gmail.com"
-  }],
-  "contributors": [{
-  }],
-  "license": "MIT"
+  "author": [
+    {
+      "name": "Dylan Foster",
+      "email": "dylan947@gmail.com"
+    }
+  ],
+  "contributors": [
+    {}
+  ],
+  "license": "MIT",
+  "dependencies": {}
 }

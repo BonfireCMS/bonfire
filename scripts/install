@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+npm install
+pushd server &> /dev/null
+npm install
+popd &> /dev/null
+scripts/build

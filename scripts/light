@@ -1,6 +1,56 @@
 #!/bin/bash
-set -e
 
-# run postgres container
+BONFIRE_DB=bonfire
+DEFAULT_PG_USERNAME=postgres
+DEFAULT_PG_PASSWORD=postgres
+pgUser=
+pgPass=
 
-# run bonfire container
+# prompt for stuffs
+prompt_for_username() {
+  read -p "Enter desired PostgreSQL username: ($DEFAULT_PG_USERNAME)" pgUser
+  pgUser=${pgUser:-$DEFAULT_PG_USERNAME}
+}
+
+prompt_for_password() {
+  read -p "Enter desired PostgreSQL password: ($DEFAULT_PG_USERNAME)" pgPass
+  pgPass=${pgPass:-$DEFAULT_PG_PASSWORD}
+}
+
+# start postgres container
+start_postgres() {
+  docker run --name postgres -it \
+    -e POSTGRES_USER=$pgUser \
+    -e POSTGRES_PASSWORD=$pgPass \
+    -e POSTGRES_DB=$BONFIRE_DB \
+    -d postgres
+}
+
+# run migrations
+migrate() {
+  docker run --rm -it \
+    --link postgres \
+    -e POSTGRES_USER=$pgUser \
+    -e POSTGRES_PASSWORD=$pgPass \
+    -e POSTGRES_DB=$BONFIRE_DB \
+    dylanfoster/bonfire \
+    sh -c 'cd server && npm run db:migrate && npm run db:seed'
+}
+
+# start bonfire
+start_bonfire() {
+  docker run --name bonfire \
+    --link postgres \
+    -e POSTGRES_USER=$pgUser \
+    -e POSTGRES_PASSWORD=$pgPass \
+    -e POSTGRES_DB=$BONFIRE_DB \
+    -p 3000:3000 \
+    -d dylanfoster/bonfire
+}
+
+prompt_for_username
+prompt_for_password
+start_postgres
+sleep 5
+migrate
+start_bonfire

@@ -35,6 +35,10 @@ check_data_volume() {
   docker volume ls | grep pg-data || docker volume create --name pg-data
 }
 
+clean() {
+  scripts/clean
+}
+
 header() {
   echo -e " _                     __  _              "
   echo -e "| |                   / _|(_)             "
@@ -95,6 +99,7 @@ start_postgres() {
 # go!                                                                          #
 ################################################################################
 header
+clean
 info "installing dependencies..."
 scripts/install
 prompt_for_username

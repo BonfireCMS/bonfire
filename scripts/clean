@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+rm -rf admin/{bower_components,dist,node_modules,tmp} \
+  && rm -rf server/node_modules

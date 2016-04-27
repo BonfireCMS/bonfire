@@ -30,8 +30,12 @@ build_admin_app() {
   pushd admin &> /dev/null
   install_npm
   install_bower
-  build_ember
+  build_ember --environment production
   popd &> /dev/null
+}
+
+build_ember() {
+  ember build $@
 }
 
 build_api() {
@@ -60,8 +64,12 @@ docker_tag() {
   done
 }
 
+git_release() {
+  git release $TAG
+}
+
 install_bower() {
-  bower install --allow root
+  bower install --allow-root
 }
 
 install_npm() {
@@ -69,7 +77,7 @@ install_npm() {
 }
 
 require_version() {
-  if [ -n $1 ]; then
+  if [ -z "$TAG" ]; then
     error "please specify a version"
     exit 1
   fi

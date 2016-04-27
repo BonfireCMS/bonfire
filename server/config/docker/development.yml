@@ -6,8 +6,7 @@ postgres:
     file: default.yml
     service: postgres
   environment:
-    POSTGRES_PASSWORD: postgres
-    POSTGRES_USER: bonfire_dev
+    POSTGRES_DB: bonfire_dev
 
 redis:
   container_name: bonfire_development_redis

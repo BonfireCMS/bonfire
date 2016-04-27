@@ -16,6 +16,10 @@ module.exports = function (sequelize, DataTypes) {
       }
     },
     route: DataTypes.STRING,
+    status: {
+      type: DataTypes.STRING,
+      defaultValue: "draft"
+    },
     type: DataTypes.STRING
   }, {
     classMethods: {

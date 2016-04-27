@@ -70,6 +70,9 @@ module.exports = {
       type: {
         type: Sequelize.STRING
       },
+      status: {
+        type: Sequelize.STRING
+      },
       route: {
         type: Sequelize.STRING
       }

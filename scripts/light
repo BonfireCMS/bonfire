@@ -37,6 +37,7 @@ check_data_volume() {
 
 clean() {
   scripts/clean
+  docker pull dylanfoster/bonfire
 }
 
 header() {

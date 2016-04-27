@@ -1,15 +1,84 @@
 #!/bin/bash
 set -e
 
-# install and build admin app
-pushd admin &> /dev/null
-npm install
-popd &> /dev/null
+################################################################################
+# variables                                                                    #
+################################################################################
+DOCKER_IMAGE_NAME=dylanfoster/bonfire
+TAG=$1
 
-# install API deps
-pushd server &> /dev/null
-npm install
-popd &> /dev/null
+################################################################################
+# functions                                                                    #
+################################################################################
+log(){
+  echo -e "$1";
+}
 
-# build docker image
-docker build -t dylanfoster/bonfire .
+info() {
+  log "\033[1;32m==> $@\033[0m";
+}
+
+success() {
+  log "\033[0;32m✔ $@\033[0m";
+}
+
+error() {
+  log "\033[1;31m✖ $@\033[0m";
+}
+
+build_admin_app() {
+  pushd admin &> /dev/null
+  install_npm
+  install_bower
+  build_ember
+  popd &> /dev/null
+}
+
+build_api() {
+  pushd server &> /dev/null
+  install_npm
+  popd &> /dev/null
+}
+
+docker_build () {
+  docker build -t dylanfoster/bonfire .
+}
+
+docker_push() {
+  local tags=("latest" $TAG)
+  for tag in $(DOCKER_IMAGE_TAGS); do
+    docker push $(DOCKER_IMAGE_NAME):$tag
+  done
+}
+
+docker_tag() {
+  local tags=("latest" $TAG)
+
+  for tag in $(tags); do
+    docker tag -f $(DOCKER_IMAGE_NAME):latest \
+      $(DOCKER_IMAGE_NAME):$tag
+  done
+}
+
+install_bower() {
+  bower install --allow root
+}
+
+install_npm() {
+  npm install
+}
+
+require_version() {
+  if [ -n $1 ]; then
+    error "please specify a version"
+    exit 1
+  fi
+}
+
+require_version
+build_admin_app
+build_api
+docker_build
+docker_tag
+git_release
+docker_push

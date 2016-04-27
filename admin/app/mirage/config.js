@@ -1,5 +1,5 @@
 export default function() {
-  this.urlPrefix = "http://localhost:4200",
+  this.urlPrefix = window.location.origin;
   this.namespace = "api/v1";
 
   this.get("/posts", function (db, request) {

@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: "bonfire",
     environment: environment,
-    baseURL: "/",
+    baseURL: "/bonfire",
     locationType: "auto",
     EmberENV: {
       FEATURES: {

@@ -47,11 +47,18 @@ class App {
      *   - apiRouter: REST api (/users, /posts, etc)
      *   - blogRouter: router for the user's site
      */
+
+    // admin app
+    this.adminApp = express.Router();
+    this.adminApp.get("*", express.static(path.resolve(__dirname, "..", "..", "admin", "dist")));
+
+    // API
     this.apiRouter = Router.map(function () {
       this.resource("posts");
       this.resource("settings");
     });
 
+    // site app
     this.blogRouter = express.Router();
     this.blogRouter.use(middlewares.themeHandler.updateActiveTheme);
     this.blogRouter.route("/").get(siteController.index.bind(siteController));
@@ -76,6 +83,10 @@ class App {
         // console.error(err.stack);
       }
     });
+
+    // this.app.use("/bonfire", express.static(path.resolve(__dirname, "..", "..", "admin", "dist")));
+    this.app.use("/bonfire", this.adminApp);
+    this.app.use("/bonfire/*", this.adminApp);
     this.app.use(this.apiBase, this.apiRouter.getRouter());
     this.app.use("/", this.blogRouter);
     this.app.use((err, req, res) => {

@@ -21,6 +21,6 @@ module.exports = {
     database: "bonfire",
     dialect: "postgres",
     seederStorage: "json",
-    sedderStoragePath: "seeds.json"
+    seederStoragePath: "seeds.json"
   }
 };

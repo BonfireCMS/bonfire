@@ -4,7 +4,4 @@ set -e
 docker-compose -f server/config/docker/development.yml stop
 docker-compose -f server/config/docker/development.yml rm -f
 docker-compose -f server/config/docker/development.yml pull
-pushd server &> /dev/null
-npm install
-popd &> /dev/null
-scripts/build
+scripts/install

@@ -15,9 +15,12 @@ module.exports = {
     dialect: "postgres"
   },
   production: {
-    username: "postgres",
-    password: "postgres",
+    host: process.env.POSTGRES_PORT_5432_TCP_ADDR,
+    username: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
     database: "bonfire",
-    dialect: "postgres"
+    dialect: "postgres",
+    seederStorage: "json",
+    seederStoragePath: "seeds.json"
   }
 };

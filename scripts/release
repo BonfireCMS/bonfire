@@ -49,18 +49,19 @@ docker_build () {
 }
 
 docker_push() {
-  local tags=("latest" $TAG)
-  for tag in $(DOCKER_IMAGE_TAGS); do
-    docker push $(DOCKER_IMAGE_NAME):$tag
+  local tags=("latest" "$TAG")
+
+  for tag in ${tags[@]}; do
+    docker push $DOCKER_IMAGE_NAME:$tag
   done
 }
 
 docker_tag() {
-  local tags=("latest" $TAG)
+  local tags=("latest" "$TAG")
 
-  for tag in $(tags); do
-    docker tag -f $(DOCKER_IMAGE_NAME):latest \
-      $(DOCKER_IMAGE_NAME):$tag
+  for tag in ${tags[@]}; do
+    docker tag -f $tag:latest \
+      $DOCKER_IMAGE_NAME:$tag
   done
 }
 

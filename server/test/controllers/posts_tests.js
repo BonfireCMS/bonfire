@@ -56,7 +56,7 @@ describe("Controller | Posts", function () {
 
           let message = res.body.message;
 
-          expect(message).to.eql("The resource Post:1 does not exist");
+          expect(message).to.eql("resource 'post' with id '1' does not exist");
           done();
         });
     });

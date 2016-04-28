@@ -37,6 +37,10 @@ function findPostByName(name) {
   });
 };
 
+function findPostById(id) {
+  return Post.findById(id);
+}
+
 function findSettingById(id) {
   return Setting.findById(id);
 }
@@ -74,6 +78,7 @@ module.exports = {
   cleanAll,
   createPost,
   createSetting,
+  findPostById,
   findPostByName,
   findSettingById,
   initHelpers,

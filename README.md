@@ -1,6 +1,8 @@
-![](bonfire_logo.png)
+![][logo]
 
 Bonfire is a simple yet powerful platform for curating and managing your content.
+
+[![check it out][screenshot]][sample]
 
 ## Technologies
 
@@ -41,10 +43,6 @@ making development much faster and easier to get started.
 - [Admin app instructions](https://github.com/BonfireCMS/bonfire/tree/master/admin/README.md)
 - [API instructions](https://github.com/BonfireCMS/bonfire/tree/master/server/README.md)
 
-## Contributing
-
-> see [CONTRIBUTING](CONTRIBUTING.md)
-
 ## LICENSE
 
 The MIT License (MIT)
@@ -68,3 +66,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+
+[logo]: bonfire_logo.png
+[screenshot]: bonfire.png
+[sample]: http://159.203.238.141/bonfire/pages

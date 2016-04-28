@@ -6,10 +6,6 @@ const RestifyErrors = require("restify-errors");
 
 const Models = require("./models");
 
-const ERROR_MAP = {
-  ResourceNotFound: 404
-};
-
 class BaseController {
   constructor() {
     this.modelManager = new Map();
@@ -17,10 +13,6 @@ class BaseController {
     Object.keys(Models).forEach(model => {
       this.modelManager.set(model, Models[model]);
     });
-  }
-
-  codeFromError(err) {
-    return ERROR_MAP[err.restCode];
   }
 
   index(req, res, next) {

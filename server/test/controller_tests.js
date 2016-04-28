@@ -309,14 +309,6 @@ describe("Controller", function () {
     });
   });
 
-  describe("#codeFromError", function () {
-    it("returns a 404 for ResourceNotFoundError", function () {
-      let error = new controller.Errors.ResourceNotFoundError();
-
-      expect(controller.codeFromError(error)).to.eql(404);
-    });
-  });
-
   describe("#formatResponse", function () {
     beforeEach(function () {
       controller.model = controller.loadModel("User");

@@ -7,6 +7,7 @@ BONFIRE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 BONFIRE_DB=bonfire
 DEFAULT_PG_USERNAME=postgres
 DEFAULT_PG_PASSWORD=postgres
+DOCKER_IMAGES=("dylanfoster/bonfire" "dylanfoster/nginx-node" "postgres:9.4")
 pgUser=
 pgPass=
 
@@ -37,7 +38,10 @@ check_data_volume() {
 
 clean() {
   scripts/clean
-  docker pull dylanfoster/bonfire
+
+  for image in ${DOCKER_IMAGES[@]}; do
+    docker pull $image
+  done
 }
 
 header() {
@@ -84,6 +88,16 @@ start_bonfire() {
   success "bonfire running"
 }
 
+start_nginx() {
+  info "starting nginx..."
+  docker run --name nginx \
+    --link bonfire:app \
+    -v $(pwd):/data/http \
+    -p 80:80 \
+    -d dylanfoster/nginx-node
+  success "nginx running"
+}
+
 # start postgres container
 start_postgres() {
   info "starting postgres..."
@@ -92,7 +106,7 @@ start_postgres() {
     -e POSTGRES_PASSWORD=$pgPass \
     -e POSTGRES_DB=$BONFIRE_DB \
     -v pg-data:/var/lib/postgresql/data \
-    -d postgres
+    -d postgres:9.4
   success "postgres running"
 }
 
@@ -107,6 +121,8 @@ prompt_for_username
 prompt_for_password
 check_data_volume
 start_postgres
-sleep 5
+sleep 8
 start_bonfire
+sleep 8
+start_nginx
 migrate

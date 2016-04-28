@@ -20,6 +20,6 @@ module.exports = {
     password: process.env.POSTGRES_PASSWORD,
     database: "bonfire",
     dialect: "postgres",
-    seederStorage: "json"
+    seederStorage: "sequelize"
   }
 };

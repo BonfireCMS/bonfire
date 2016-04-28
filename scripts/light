@@ -8,6 +8,7 @@ BONFIRE_DB=bonfire
 DEFAULT_PG_USERNAME=postgres
 DEFAULT_PG_PASSWORD=postgres
 DOCKER_IMAGES=("dylanfoster/bonfire" "dylanfoster/nginx-node" "postgres:9.4")
+DOCKER_CONTAINERS=("bonfire" "nginx" "postgres")
 pgUser=
 pgPass=
 
@@ -38,6 +39,10 @@ check_data_volume() {
 
 clean() {
   scripts/clean
+
+  for container in ${DOCKER_CONTAINERS[@]}; do
+    docker rm -f $container
+  done
 
   for image in ${DOCKER_IMAGES[@]}; do
     docker pull $image

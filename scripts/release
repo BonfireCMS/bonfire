@@ -44,6 +44,10 @@ build_api() {
   popd &> /dev/null
 }
 
+clean() {
+  scripts/clean
+}
+
 docker_build () {
   docker build -t dylanfoster/bonfire .
 }
@@ -85,9 +89,10 @@ require_version() {
 }
 
 require_version
+clean
 build_admin_app
 build_api
 docker_build
 docker_tag
-git_release
 docker_push
+git_release

@@ -1,5 +1,6 @@
 "use strict";
 
+const errors = require("restify-errors");
 const inflection = require("inflection");
 
 module.exports = function (sequelize, DataTypes) {
@@ -8,11 +9,25 @@ module.exports = function (sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       get() {
         let name = this.getDataValue("name");
 
         if (name) { name = inflection.dasherize(name.toLowerCase()) }
         return name;
+      },
+      validate: {
+        isUnique(name, next) {
+          return Post.find({ where: { name }}).then(post => {
+            if (post) {
+              const message = `resource 'post' with name '${name}' already exists`;
+
+              return next(new errors.UnprocessableEntityError(message));
+            }
+
+            next();
+          });
+        }
       }
     },
     route: DataTypes.STRING,

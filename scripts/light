@@ -39,14 +39,6 @@ check_data_volume() {
 
 clean() {
   scripts/clean
-
-  for container in ${DOCKER_CONTAINERS[@]}; do
-    docker rm -f $container
-  done
-
-  for image in ${DOCKER_IMAGES[@]}; do
-    docker pull $image
-  done
 }
 
 header() {
@@ -77,6 +69,22 @@ prompt_for_password() {
 prompt_for_username() {
   read -p "Enter desired PostgreSQL username: ($DEFAULT_PG_USERNAME)" pgUser
   pgUser=${pgUser:-$DEFAULT_PG_USERNAME}
+}
+
+# pull down the latest images
+pull_new_images() {
+  info "pulling down latest images: ${DOCKER_IMAGES[*]}..."
+  for image in ${DOCKER_IMAGES[@]}; do
+    docker pull $image
+  done
+}
+
+# remove existing containers
+remove_running_containers() {
+  info "removing running containers: ${DOCKER_CONTAINERS[*]}..."
+  for container in ${DOCKER_CONTAINERS[@]}; do
+    docker stop $container && docker rm $container
+  done
 }
 
 # start bonfire
@@ -120,11 +128,13 @@ start_postgres() {
 ################################################################################
 header
 clean
+pull_new_images
 info "installing dependencies..."
 scripts/install
 prompt_for_username
 prompt_for_password
 check_data_volume
+remove_running_containers
 start_postgres
 sleep 8
 start_bonfire

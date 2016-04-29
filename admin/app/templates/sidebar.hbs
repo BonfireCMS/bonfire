@@ -1,6 +1,6 @@
-<div class="navigation navigation_global">
+<div class="navigation navigation_global {{if sideBarIsOpen "open"}}">
   <div class="navigation__menu navigation_global__menu">
-    <ul class="menu menu_global">
+    <ul class="menu menu_global {{if sideBarIsOpen "open"}}">
       {{#link-to "pages.index" tagName="li" href=false class="menu__item"}}
       <a class="link link_menu" href="{{view.href}}">
         {{fa-icon icon="file-o" class="icon"}}

@@ -1,7 +1,17 @@
 import Ember from "ember";
 
 export default Ember.Route.extend({
+  activate() {
+    if ("ontouchstart" in document.documentElement) {
+      document.documentElement.className += "touch";
+    }
+  },
+
   actions: {
+    didTransition() {
+      this.controllerFor("sidebar").set("sideBarIsOpen", false);
+    },
+
     goTo(type, model) {
       if (model) {
         return this.transitionTo(type, model);
@@ -20,6 +30,9 @@ export default Ember.Route.extend({
     },
     newPost() {
       this.send("goTo", "posts.new");
+    },
+    toggleSideBar() {
+      this.controllerFor("sidebar").toggleProperty("sideBarIsOpen");
     }
   }
 });

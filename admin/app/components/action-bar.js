@@ -16,6 +16,9 @@ export default Ember.Component.extend({
   tagName: "div",
   classNames: ["action-bar"],
   actions: {
+    toggleSideBar() {
+      this.sendAction("toggleSideBar");
+    },
     triggerAction(type) {
       this.sendAction(type);
     }

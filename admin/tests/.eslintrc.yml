@@ -6,4 +6,8 @@ parserOptions:
   ecmaVersion: 6
   sourceType: "module"
 rules:
+  consistent-return: 0
+  max-len: 0
+  no-implicit-coercion: 0
+  no-invalid-this: 0
   no-unused-expressions: 0

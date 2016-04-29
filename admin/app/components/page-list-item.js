@@ -1,18 +1,17 @@
 import Ember from "ember";
-const inflector = new Ember.Inflector(Ember.Inflector.defaultRules);
 
 export default Ember.Component.extend({
   popoverIsShowing: false,
   tagName: "div",
   classNames: ["page-list__item"],
   globalActions: Ember.inject.service(),
-  pageItemActions: Ember.computed("globalActions", function () {
+  pageItemActions: Ember.computed("globalActions", function pageItemActions() {
     const forType = this.get("for");
     const globalActions = this.get("globalActions");
 
     return globalActions[forType].pageItem;
   }),
-  action: Ember.computed("globalActions", function () {
+  action: Ember.computed("globalActions", function action() {
     const forType = this.get("for");
     const globalActions = this.get("globalActions");
 
@@ -21,8 +20,10 @@ export default Ember.Component.extend({
 
   actions: {
     toggleMenu() {
+      const isShowing = !!this.get("popoverIsShowing");
+
       // popover is open, so close it
-      if (!!this.get("popoverIsShowing")) {
+      if (isShowing) {
         this.set("popoverIsShowing", false);
         this.$(document).off("click");
       } else {
@@ -32,9 +33,7 @@ export default Ember.Component.extend({
           const allowedClicks = ["popover__item", "icon", "page-list__item__action"];
           const target = event.target;
           const classList = target.classList;
-          const isAllowed = allowedClicks.every(item => {
-            return !classList.contains(item);
-          });
+          const isAllowed = allowedClicks.every(item => !classList.contains(item));
 
           if (this.get("popoverIsShowing") && isAllowed) {
             this.set("popoverIsShowing", false);
@@ -50,14 +49,13 @@ export default Ember.Component.extend({
   click(e) {
     const action = this.get("action");
     const target = e.target;
-    const isClickable = ["page-list__item__action", "icon", "popover__item"].every(item => {
-      return !target.classList.contains(item);
-    });
+    const isClickable = ["page-list__item__action", "icon", "popover__item"].every(item =>
+      !target.classList.contains(item)
+    );
 
     if (!isClickable) {
       return;
     }
-
 
     this.sendAction(action, this.get("post.id"));
   },

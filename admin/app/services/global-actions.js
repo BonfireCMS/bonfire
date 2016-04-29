@@ -10,22 +10,22 @@ export default Ember.Service.extend({
         actionBar: [{
           isIcon: true,
           icon: "plus",
-          action: "newPage",
+          action: "newPage"
         }],
         pageItem: {
           action: "editPage",
           popover: [{
             icon: "external-link",
             action: "",
-            text:"View page"
+            text: "View page"
           }, {
             icon: "edit",
             action: "editPage",
-            text:"Edit page"
+            text: "Edit page"
           }, {
             icon: "trash",
             action: "",
-            text:"Trash"
+            text: "Trash"
           }]
         }
       },
@@ -52,22 +52,22 @@ export default Ember.Service.extend({
         actionBar: [{
           isIcon: true,
           icon: "plus",
-          action: "newPost",
+          action: "newPost"
         }],
         pageItem: {
           action: "editPost",
           popover: [{
             icon: "external-link",
             action: "",
-            text:"View post"
+            text: "View post"
           }, {
             icon: "edit",
             action: "editPost",
-            text:"Edit post"
+            text: "Edit post"
           }, {
             icon: "trash",
             action: "",
-            text:"Trash"
+            text: "Trash"
           }]
         }
       },

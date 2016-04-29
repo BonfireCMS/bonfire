@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
   searchText: null,
   status: "published",
 
-  filteredPages: Ember.computed("pages", "searchText", "status", function () {
+  filteredPages: Ember.computed("pages", "searchText", "status", function getFilteredPages() {
     const pages = this.get("pages");
     const searchText = this.get("searchText");
     const status = this.get("status");

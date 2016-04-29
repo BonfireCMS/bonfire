@@ -21,5 +21,5 @@ export default Ember.Route.extend({
     newPost() {
       this.send("goTo", "posts.new");
     }
-  },
+  }
 });

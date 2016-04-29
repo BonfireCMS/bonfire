@@ -2,7 +2,7 @@ import Ember from "ember";
 
 export default Ember.Component.extend({
   globalActions: Ember.inject.service(),
-  actionBarActions: Ember.computed("globalActions", function () {
+  actionBarActions: Ember.computed("globalActions", function actionBarActions() {
     const forType = this.get("for");
     const globalActions = this.get("globalActions");
 

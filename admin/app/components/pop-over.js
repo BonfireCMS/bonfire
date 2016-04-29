@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   tagName: "div",
   classNames: ["popover"],
   classNameBindings: ["pageType", "isShowing:show:hide"],
-  pageType: Ember.computed("for", function () {
+  pageType: Ember.computed("for", function getPageType() {
     const forType = this.get("for");
 
     return `popover_${forType}`;

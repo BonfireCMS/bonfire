@@ -4,27 +4,27 @@ export default Ember.Component.extend({
   tagName: "div",
   classNames: ["page-filter"],
   activeFilter: null,
-  draftIsActive: Ember.computed("activeFilter", function () {
+  draftIsActive: Ember.computed("activeFilter", function drafIsActive() {
     const activeFilter = this.get("activeFilter");
 
     if (activeFilter === "draft") {
-      return "active"
+      return "active";
     }
   }),
-  publishedIsActive: Ember.computed("activeFilter", function () {
+  publishedIsActive: Ember.computed("activeFilter", function publishedIsActive() {
     const activeFilter = this.get("activeFilter");
 
     if (activeFilter === "published") {
-      return "active"
+      return "active";
     }
   }),
   searchBoxIsOpen: false,
   searchText: null,
-  trashIsActive: Ember.computed("activeFilter", function () {
+  trashIsActive: Ember.computed("activeFilter", function trashIsActive() {
     const activeFilter = this.get("activeFilter");
 
     if (activeFilter === "trash") {
-      return "active"
+      return "active";
     }
   }),
 

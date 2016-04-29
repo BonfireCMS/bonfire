@@ -1,6 +1,6 @@
 import Ember from "ember";
 
-export function titleCaseString(params/*, hash*/) {
+export function titleCaseString(params) {
   return params;
 }
 

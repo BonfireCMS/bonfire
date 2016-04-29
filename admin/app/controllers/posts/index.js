@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
   searchText: null,
   status: "published",
 
-  filteredPosts: Ember.computed("posts", "searchText", "status", function () {
+  filteredPosts: Ember.computed("posts", "searchText", "status", function getFilteredPosts() {
     const posts = this.get("posts");
     const searchText = this.get("searchText");
     const status = this.get("status");
@@ -21,7 +21,6 @@ export default Ember.Controller.extend({
 
     return filteredPosts;
   }),
-
 
   actions: {
     updateFilter(type) {

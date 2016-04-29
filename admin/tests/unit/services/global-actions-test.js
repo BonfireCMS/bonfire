@@ -1,22 +1,12 @@
 /* jshint expr:true */
-import { expect } from 'chai';
-import {
-  describeModule,
-  it
-} from 'ember-mocha';
+import { expect } from "chai";
+import { describeModule, it } from "ember-mocha";
 
-describeModule(
-  'service:global-actions',
-  'GlobalActionsService',
-  {
-    // Specify the other units that are required for this test.
-    // needs: ['service:foo']
-  },
-  function() {
-    // Replace this with your real tests.
-    it('exists', function() {
-      let service = this.subject();
-      expect(service).to.be.ok;
-    });
-  }
-);
+describeModule("service:global-actions", "GlobalActionsService", { }, function () {
+  // Replace this with your real tests.
+  it("exists", function () {
+    const service = this.subject();
+
+    expect(service).to.be.ok;
+  });
+});

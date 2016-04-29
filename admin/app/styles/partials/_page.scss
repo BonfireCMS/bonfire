@@ -31,6 +31,7 @@
       display: flex;
       align-items: center;
       padding: 0 20px;
+      background-color: $white;
       cursor: pointer;
       .icon {
         @extend .f-blue;
@@ -45,6 +46,8 @@
       display: flex;
       flex-direction: row;
       align-items: center;
+      margin-left: 10px;
+      background-color: $white;
       transition: opacity 1s ease;
       .icon {
         @extend .f-blue;
@@ -59,8 +62,9 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      align-items: center;
       background-color: $white;
-      height: 75px;
+      max-height: 90px;
       box-shadow: 2px 1px 4px rgba(0, 0, 0, .25), -2px 1px 4px rgba(0, 0, 0, .25);
       margin-bottom: 10px;
       &:hover {
@@ -71,6 +75,11 @@
         padding: 30px 20px;
         font-size: 1.2rem;
         line-height: 1;
+      }
+      @include element("author") {
+        @extend .f-orange;
+        font-size: .9rem;
+        margin: 14px 0 0;
       }
       @include element("meta") {
         @extend .f-orange;
@@ -93,5 +102,11 @@
 .meta {
   @include element("item") {
     padding: 8px 15px;
+  }
+}
+
+@media only screen and (max-width: 769px) {
+  .page {
+    margin-left: 60px;
   }
 }

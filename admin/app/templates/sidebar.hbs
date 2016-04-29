@@ -1,31 +1,34 @@
 <div class="navigation navigation_global">
   <div class="logo">
-    <img src="/bonfire/images/logo.png" />
+    {{#link-to "index"}}
+    <img class="logo__image" src="/bonfire/images/logo.png" />
+    {{/link-to}}
+    <img class="logo__image_alt" src="/bonfire/images/logo_small.png" / {{action "toggleSideBar"}}>
   </div>
   <div class="navigation__menu navigation_global__menu">
     <ul class="menu menu_global">
       {{#link-to "pages.index" tagName="li" href=false class="menu__item"}}
       <a class="link link_menu" href="{{view.href}}">
         {{fa-icon icon="file-o" class="icon"}}
-        Pages
+        <span class="menu__item__text">Pages</span>
       </a>
       {{/link-to}}
       {{#link-to "posts.index" tagName="li" href=false class="menu__item"}}
       <a class="link link_menu" href="{{view.href}}">
         {{fa-icon icon="align-left" class="icon"}}
-        Posts
+        <span class="menu__item__text">Posts</span>
       </a>
       {{/link-to}}
       {{#link-to "themes.index" tagName="li" href=false class="menu__item"}}
       <a class="link link_menu" href="{{view.href}}">
         {{fa-icon icon="list-alt" class="icon"}}
-        Themes
+        <span class="menu__item__text">Themes</span>
       </a>
       {{/link-to}}
       {{#link-to "settings" tagName="li" href=false class="menu__item"}}
       <a class="link link_menu" href="{{view.href}}">
         {{fa-icon icon="cog" class="icon"}}
-        Settings
+        <span class="menu__item__text">Settings</span>
       </a>
       {{/link-to}}
     </ul>

@@ -19,8 +19,25 @@ body {
 
 .logo {
   padding: 10px 20px;
+  @include element("image") {
+    @include modifier("alt") {
+      display: none;
+    }
+  }
 }
 
 .content-wrapper {
   margin: 30px;
+}
+
+@media only screen and (max-width: 450px) {
+  .logo {
+    padding: 13px 20px;
+    @include element("image") {
+      display: none;
+      @include modifier("alt") {
+        display: inline-block;
+      }
+    }
+  }
 }

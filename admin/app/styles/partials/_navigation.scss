@@ -30,3 +30,22 @@
     }
   }
 }
+
+@media only screen and (max-width: 769px) {
+  .navigation {
+    @include modifier("global") {
+      width: 60px;
+    }
+  }
+
+  .menu {
+    @include element("item") {
+      .link {
+        padding: 20px 3px;
+      }
+      @include element("text") {
+        display: none;
+      }
+    }
+  }
+}

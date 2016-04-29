@@ -13,31 +13,13 @@ body {
   max-width: 1440px;
 }
 
-.page {
-  margin-left: 230px;
-}
-
-.logo {
-  padding: 10px 20px;
-  @include element("image") {
-    @include modifier("alt") {
-      display: none;
-    }
-  }
-}
-
 .content-wrapper {
   margin: 30px;
+  padding-left: 230px;
 }
 
-@media only screen and (max-width: 450px) {
-  .logo {
-    padding: 13px 20px;
-    @include element("image") {
-      display: none;
-      @include modifier("alt") {
-        display: inline-block;
-      }
-    }
+@media only screen and (max-width: 769px) {
+  .content-wrapper {
+    padding-left: 0;
   }
 }

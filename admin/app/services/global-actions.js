@@ -7,6 +7,7 @@ export default Ember.Service.extend({
     // define a single action object
     const actions = {
       pages: {
+        pageTitle: "Pages",
         actionBar: [{
           isIcon: true,
           icon: "plus",
@@ -30,6 +31,7 @@ export default Ember.Service.extend({
         }
       },
       "pages:edit": {
+        pageTitle: "Edit page",
         actionBar: [{
           isIcon: "true",
           icon: "plus",
@@ -44,11 +46,18 @@ export default Ember.Service.extend({
         }
       },
       "pages:new": {
+        pageTitle: "New page",
         actionBar: [],
         pageItem: {
         }
       },
+      "pages:loading": {
+        actionBard: [{
+
+        }]
+      },
       posts: {
+        pageTitle: "Posts",
         actionBar: [{
           isIcon: true,
           icon: "plus",
@@ -72,6 +81,7 @@ export default Ember.Service.extend({
         }
       },
       "posts:edit": {
+        pageTitle: "Edit Post",
         actionBar: [{
           isIcon: "true",
           icon: "plus",
@@ -86,12 +96,20 @@ export default Ember.Service.extend({
         }
       },
       "posts:new": {
+        pageTitle: "New post",
         actionBar: []
       },
+      "posts:loading": {
+        actionBard: [{
+
+        }]
+      },
       themes: {
+        pageTitle: "Themes",
         actionBar: []
       },
       settings: {
+        pageTitle: "Settings",
         actionbar: []
       }
     };

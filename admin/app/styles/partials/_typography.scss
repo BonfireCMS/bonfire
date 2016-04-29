@@ -5,3 +5,10 @@ $base-font-size: 1em;
   text-decoration: none;
   @extend .f-orange;
 }
+
+.heading {
+  @include modifier("title") {
+    @extend .f-orange;
+    font-weight: lighter;
+  }
+}

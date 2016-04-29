@@ -2,8 +2,9 @@
   @include modifier("global") {
     position: fixed;
     width: 230px;
-    top: 0;
+    top: 65px;
     bottom: 0;
+    left: 0;
     @extend .f-bg-brown;
   }
 }
@@ -34,7 +35,9 @@
 @media only screen and (max-width: 769px) {
   .navigation {
     @include modifier("global") {
-      width: 60px;
+      width: 0;
+      opacity: 0;
+      visbility: hidden;
     }
   }
 

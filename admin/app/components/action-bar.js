@@ -8,6 +8,11 @@ export default Ember.Component.extend({
 
     return globalActions[forType].actionBar;
   }),
+  pageTitle: Ember.computed("globalActions", function getPageTitle() {
+    const pageType = this.get("for");
+
+    return this.get("globalActions")[pageType].pageTitle;
+  }),
   tagName: "div",
   classNames: ["action-bar"],
   actions: {

@@ -26,6 +26,8 @@ Router.map(function routerMap() {
 
   // themes
   this.route("themes", function themesRoute() {});
+
+  this.route("dashboard", { path: "/" });
 });
 
 export default Router;

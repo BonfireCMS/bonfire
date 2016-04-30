@@ -6,6 +6,10 @@ export default Ember.Service.extend({
 
     // define a single action object
     const actions = {
+      dashboard: {
+        pageTitle: "",
+        actionBar: []
+      },
       pages: {
         pageTitle: "Pages",
         actionBar: [{

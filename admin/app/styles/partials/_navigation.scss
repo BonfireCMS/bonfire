@@ -1,16 +1,16 @@
 .navigation {
   @include modifier("global") {
+    transition: all .25s linear;
     position: fixed;
     width: 230px;
-    top: 0;
+    top: 65px;
     bottom: 0;
+    left: 0;
     @extend .f-bg-brown;
   }
 }
 
 .menu {
-  @include modifier("global") {
-  }
   @include element("item") {
     transition: background-color .2s ease;
     &:hover, &.active {
@@ -27,6 +27,32 @@
     }
     .icon {
       padding: 0 20px 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 769px) {
+  .navigation {
+    @include modifier("global") {
+      width: 0;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 1000;
+      &.open {
+        width: 230px;;
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .navigation {
+    @include modifier("global") {
+      &.open {
+        width: 100%;
+      }
     }
   }
 }

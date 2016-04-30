@@ -1,7 +1,13 @@
-{{#each actionBarActions as |actionItem|}}
-{{#if actionItem.isIcon}}
-<div class="action-bar__action action-bar__action_{{actionItem.icon}}" {{action "triggerAction" actionItem.action}}>
-  {{fa-icon icon=actionItem.icon class="icon"}}
+<div class="page__title">
+  <div class="logo" {{action "toggleSideBar"}}><img src="/bonfire/images/logo_dark.png" /></div>
+  <h2 class="heading heading_title">{{pageTitle}}</h2>
 </div>
-{{/if}}
-{{/each}}
+<div class="action-bar__actions">
+  {{#each actionBarActions as |actionItem|}}
+  {{#if actionItem.isIcon}}
+  <div class="action-bar__action action-bar__action_{{actionItem.icon}}" {{action "triggerAction" actionItem.action}}>
+    {{fa-icon icon=actionItem.icon class="icon"}}
+  </div>
+  {{/if}}
+  {{/each}}
+</div>

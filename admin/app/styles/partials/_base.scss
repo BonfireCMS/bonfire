@@ -13,14 +13,13 @@ body {
   max-width: 1440px;
 }
 
-.page {
-  margin-left: 230px;
-}
-
-.logo {
-  padding: 10px 20px;
-}
-
 .content-wrapper {
-  margin: 30px;
+  margin: 95px 30px;
+  padding-left: 230px;
+}
+
+@media only screen and (max-width: 769px) {
+  .content-wrapper {
+    padding-left: 0;
+  }
 }

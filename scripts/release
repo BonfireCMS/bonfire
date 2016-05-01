@@ -26,24 +26,6 @@ error() {
   log "\033[1;31m✖ $@\033[0m";
 }
 
-build_admin_app() {
-  pushd admin &> /dev/null
-  install_npm
-  install_bower
-  build_ember --environment production
-  popd &> /dev/null
-}
-
-build_ember() {
-  ember build $@
-}
-
-build_api() {
-  pushd server &> /dev/null
-  install_npm
-  popd &> /dev/null
-}
-
 clean() {
   scripts/clean
 }
@@ -73,12 +55,8 @@ git_release() {
   git release $TAG
 }
 
-install_bower() {
-  bower install --allow-root
-}
-
-install_npm() {
-  npm install
+install_dependencies() {
+  scripts/install
 }
 
 require_version() {
@@ -90,9 +68,6 @@ require_version() {
 
 require_version
 clean
-build_admin_app
-build_api
+install_dependencies
 docker_build
 docker_tag
-docker_push
-git_release

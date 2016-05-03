@@ -19,15 +19,15 @@
         @extend .f-brown;
       }
     }
-    .link {
-      display: block;
-      padding: 20px 8px;
-      width: 100%;
-      transition: color .2s ease;
-    }
-    .icon {
-      padding: 0 20px 0;
-    }
+  }
+  @include element("icon") {
+    padding: 0 20px 0;
+  }
+  @include element("link") {
+    display: block;
+    padding: 20px 8px;
+    width: 100%;
+    transition: color .2s ease;
   }
 }
 
@@ -38,21 +38,19 @@
       opacity: 0;
       visibility: hidden;
       z-index: 1000;
-      &.open {
-        width: 230px;;
-        opacity: 1;
-        visibility: visible;
-      }
+    }
+    @include modifier("open") {
+      width: 230px;;
+      opacity: 1;
+      visibility: visible;
     }
   }
 }
 
 @media only screen and (max-width: 500px) {
   .navigation {
-    @include modifier("global") {
-      &.open {
-        width: 100%;
-      }
+    @include modifier("open") {
+      width: 100%;
     }
   }
 }

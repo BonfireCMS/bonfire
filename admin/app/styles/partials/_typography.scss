@@ -10,5 +10,7 @@ $base-font-size: 1em;
   @include modifier("title") {
     @extend .f-orange;
     font-weight: lighter;
+    margin-left: 10px;
+    margin-bottom: 0;
   }
 }

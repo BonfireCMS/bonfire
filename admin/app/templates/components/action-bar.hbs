@@ -6,7 +6,7 @@
   {{#each actionBarActions as |actionItem|}}
   {{#if actionItem.isIcon}}
   <div class="action-bar__action action-bar__action_{{actionItem.icon}}" {{action "triggerAction" actionItem.action}}>
-    {{fa-icon icon=actionItem.icon class="icon"}}
+    {{fa-icon icon=actionItem.icon class="icon action-bar__icon"}}
   </div>
   {{/if}}
   {{/each}}

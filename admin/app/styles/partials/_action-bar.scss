@@ -28,16 +28,16 @@
         @extend .f-bg-red-light;
       }
     }
-    .icon {
-      color: $white;
-      font-size: 1.25rem;
-      position: relative;
-      transform: translateY(80%);
-    }
     &:hover {
       cursor: pointer;
       @extend .f-bg-blue-light;
     }
+  }
+  @include element("icon") {
+    color: $white;
+    font-size: 1.25rem;
+    position: relative;
+    transform: translateY(80%);
   }
 }
 

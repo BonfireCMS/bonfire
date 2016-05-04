@@ -1,6 +1,6 @@
 .navigation {
   @include modifier("global") {
-    transition: all .25s linear;
+    transition: all .1s linear;
     position: fixed;
     width: 230px;
     top: 65px;

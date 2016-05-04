@@ -24,10 +24,10 @@
       height: 100%;
       padding: 0 20px 15px;
       margin-top: 20px;
-      @extend .f-orange;
+      @extend .bf-orange;
       transition: color .2s ease;
       &.active, &:hover {
-        @extend .f-brown;
+        @extend .bf-brown;
         @include border-bottom(3, brown);
       }
       &:hover {
@@ -52,7 +52,7 @@
       background-color: $white;
       transition: opacity 1s ease;
       @include element("icon") {
-        @extend .f-blue;
+        @extend .bf-blue;
         font-size: 1.2rem;
         cursor: pointer;
       }

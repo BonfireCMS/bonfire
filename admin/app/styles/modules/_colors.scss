@@ -11,13 +11,13 @@ $brand: (
 );
 
 @each $color, $value in $brand {
-  .f-#{$color} {
+  .bf-#{$color} {
     color: #{$value};
   }
-  .f-bg-#{$color} {
+  .bf-bg-#{$color} {
     background-color: #{$value};
   }
-  .f-bb-#{$color} {
+  .bf-bb-#{$color} {
     border-bottom: 1px solid #{$value};
   }
 }

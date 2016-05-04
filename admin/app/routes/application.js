@@ -8,7 +8,7 @@ export default Ember.Route.extend({
   },
 
   actions: {
-    didTransition() {
+    willTransition() {
       this.controllerFor("sidebar").set("sideBarIsOpen", false);
     },
 

@@ -1,12 +1,12 @@
-<div class="page-list__item__name">
+<div class="post__name">
   {{post.name}}
-  <p class="page-list__item__author">Author: Dylan Foster</p>
+  <p class="post__author">Author: Dylan Foster</p>
 </div>
-<div class="page-list__item__action" {{action "toggleMenu"}}>
+<div class="post__action" {{action "toggleMenu"}}>
   {{fa-icon icon="ellipsis-v" class="icon"}}
 </div>
 {{pop-over
-for="pages"
-popoverItems=pageItemActions.popover
+for=for
+popoverItems=postItemActions.popover
 triggerAction=(action "triggerAction")
 }}

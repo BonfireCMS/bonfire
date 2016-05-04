@@ -17,7 +17,7 @@ export default Ember.Service.extend({
           icon: "plus",
           action: "newPage"
         }],
-        pageItem: {
+        postItem: {
           action: "editPage",
           popover: [{
             icon: "external-link",
@@ -46,13 +46,13 @@ export default Ember.Service.extend({
           action: "destroyPage",
           color: "red"
         }],
-        pageItem: {
+        postItem: {
         }
       },
       "pages:new": {
         pageTitle: "New page",
         actionBar: [],
-        pageItem: {
+        postItem: {
         }
       },
       "pages:loading": {
@@ -67,7 +67,7 @@ export default Ember.Service.extend({
           icon: "plus",
           action: "newPost"
         }],
-        pageItem: {
+        postItem: {
           action: "editPost",
           popover: [{
             icon: "external-link",
@@ -96,7 +96,7 @@ export default Ember.Service.extend({
           action: "",
           color: "red"
         }],
-        pageItem: {
+        postItem: {
         }
       },
       "posts:new": {

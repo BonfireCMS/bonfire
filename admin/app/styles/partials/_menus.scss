@@ -7,21 +7,21 @@
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.25),-4px 4px 8px rgba(0, 0, 0, 0.25);
   border: 1px solid #ccc;
   border-radius: 3px;
-  @include modifier("pages") {
+  @include modifier("post") {
     top: 50px;
   }
-  @include modifier("posts") {
+  @include modifier("page") {
     top: 50px;
   }
   @include element("item") {
     padding: 8px;
     @extend .f-orange;
-    .icon {
-      @extend .f-orange;
-    }
     &:hover {
       @extend .f-bg-brown;
     }
+  }
+  @include element("icon") {
+    @extend .f-orange;
   }
   &:after{
     content: "";

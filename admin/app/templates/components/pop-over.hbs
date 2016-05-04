@@ -4,7 +4,7 @@
   <ul class="popover__content">
     {{#each popoverItems as |item|}}
     <li class="popover__item" {{action "triggerAction" item.action}}>
-      {{fa-icon icon=item.icon class="icon"}} {{item.text}}
+      {{fa-icon icon=item.icon class="icon popover__icon"}} {{item.text}}
     </li>
     {{/each}}
   </ul>

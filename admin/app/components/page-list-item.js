@@ -17,6 +17,9 @@ export default Ember.Component.extend({
 
     return globalActions[forType].postItem.action;
   }),
+  singularFor: Ember.computed("for", function () {
+    return this.get("for").singularize();
+  }),
 
   actions: {
     toggleMenu() {

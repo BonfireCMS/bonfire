@@ -1,0 +1,39 @@
+.post{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $white;
+  max-height: 90px;
+  box-shadow: 2px 1px 4px rgba(0, 0, 0, .25), -2px 1px 4px rgba(0, 0, 0, .25);
+  margin-bottom: 10px;
+  &:hover {
+    cursor: pointer;
+  }
+  @include element("name") {
+    @extend .bf-brown;
+    padding: 30px 20px;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+  @include element("author") {
+    @extend .bf-orange;
+    font-size: .9rem;
+    margin: 14px 0 0;
+  }
+  @include element("meta") {
+    @extend .bf-orange;
+    padding: 30px 20px;
+    font-size: .9rem;
+  }
+  @include element("action") {
+    height: 75px;
+    width: 30px;
+    padding: 30px;
+    .icon {
+      @extend .bf-blue;
+      font-size: 1.2rem;
+    }
+  }
+}

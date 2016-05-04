@@ -1,7 +1,7 @@
 {{action-bar for="pages" newPage="newPage" toggleSideBar="toggleSideBar"}}
-<div class="content-wrapper">
+<div class="page__content">
   {{page-filter activeFilter=status updateFilter=(action "updateFilter") searchText=searchText}}
-  <div class="page-list">
+  <div class="post-list">
     {{#each filteredPages as |page|}}
     {{page-list-item for="pages" post=page newPage="newPage" editPage="editPage"}}
     {{/each}}

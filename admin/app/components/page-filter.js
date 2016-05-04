@@ -42,7 +42,7 @@ export default Ember.Component.extend({
       this.set("searchText", null);
       this.toggleProperty("searchBoxIsOpen");
       Ember.run.next(() => {
-        this.$(".form__input_page-filter").focus();
+        this.$(".page-filter__input").focus();
 
         if (this.get("searchBoxIsOpen")) {
           Ember.$(document).on("keyup", this.escapeListener.bind(this));

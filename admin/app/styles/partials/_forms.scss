@@ -13,3 +13,14 @@
     }
   }
 }
+
+.search-box {
+  @include element("toggle") {
+    padding: 20px;
+  }
+  @include element("icon") {
+    @extend .bf-blue;
+    cursor: pointer;
+    font-size: 1.2rem;
+  }
+}

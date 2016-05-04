@@ -3,12 +3,14 @@ $base-font-size: 1em;
 
 .link {
   text-decoration: none;
-  @extend .f-orange;
+  @extend .bf-orange;
 }
 
 .heading {
   @include modifier("title") {
-    @extend .f-orange;
+    @extend .bf-orange;
     font-weight: lighter;
+    margin-left: 10px;
+    margin-bottom: 0;
   }
 }

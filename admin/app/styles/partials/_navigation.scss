@@ -1,12 +1,12 @@
 .navigation {
   @include modifier("global") {
-    transition: all .25s linear;
+    transition: all .1s linear;
     position: fixed;
     width: 230px;
     top: 65px;
     bottom: 0;
     left: 0;
-    @extend .f-bg-brown;
+    @extend .bf-bg-brown;
   }
 }
 
@@ -14,20 +14,20 @@
   @include element("item") {
     transition: background-color .2s ease;
     &:hover, &.active {
-      @extend .f-bg-orange;
+      @extend .bf-bg-orange;
       .link {
-        @extend .f-brown;
+        @extend .bf-brown;
       }
     }
-    .link {
-      display: block;
-      padding: 20px 8px;
-      width: 100%;
-      transition: color .2s ease;
-    }
-    .icon {
-      padding: 0 20px 0;
-    }
+  }
+  @include element("icon") {
+    padding: 0 20px 0;
+  }
+  @include element("link") {
+    display: block;
+    padding: 20px 8px;
+    width: 100%;
+    transition: color .2s ease;
   }
 }
 
@@ -38,21 +38,19 @@
       opacity: 0;
       visibility: hidden;
       z-index: 1000;
-      &.open {
-        width: 230px;;
-        opacity: 1;
-        visibility: visible;
-      }
+    }
+    @include modifier("open") {
+      width: 230px;;
+      opacity: 1;
+      visibility: visible;
     }
   }
 }
 
 @media only screen and (max-width: 500px) {
   .navigation {
-    @include modifier("global") {
-      &.open {
-        width: 100%;
-      }
+    @include modifier("open") {
+      width: 100%;
     }
   }
 }

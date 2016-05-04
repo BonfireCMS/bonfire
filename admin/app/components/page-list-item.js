@@ -3,19 +3,22 @@ import Ember from "ember";
 export default Ember.Component.extend({
   popoverIsShowing: false,
   tagName: "div",
-  classNames: ["page-list__item"],
+  classNames: ["post-list__item", "post"],
   globalActions: Ember.inject.service(),
-  pageItemActions: Ember.computed("globalActions", function pageItemActions() {
+  postItemActions: Ember.computed("globalActions", function postItemActions() {
     const forType = this.get("for");
     const globalActions = this.get("globalActions");
 
-    return globalActions[forType].pageItem;
+    return globalActions[forType].postItem;
   }),
   action: Ember.computed("globalActions", function action() {
     const forType = this.get("for");
     const globalActions = this.get("globalActions");
 
-    return globalActions[forType].pageItem.action;
+    return globalActions[forType].postItem.action;
+  }),
+  singularFor: Ember.computed("for", function () {
+    return this.get("for").singularize();
   }),
 
   actions: {
@@ -30,7 +33,7 @@ export default Ember.Component.extend({
         // popover is closed, open it and add the body listener
         this.set("popoverIsShowing", true);
         this.$(document).on("click", event => {
-          const allowedClicks = ["popover__item", "icon", "page-list__item__action"];
+          const allowedClicks = ["popover__item", "icon", "post__action"];
           const target = event.target;
           const classList = target.classList;
           const isAllowed = allowedClicks.every(item => !classList.contains(item));
@@ -49,7 +52,7 @@ export default Ember.Component.extend({
   click(e) {
     const action = this.get("action");
     const target = e.target;
-    const isClickable = ["page-list__item__action", "icon", "popover__item"].every(item =>
+    const isClickable = ["post__action", "icon", "popover__item"].every(item =>
       !target.classList.contains(item)
     );
 

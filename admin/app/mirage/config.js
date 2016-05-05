@@ -11,4 +11,10 @@ export default function () {
 
     return { posts };
   });
+
+  this.get("/posts/:id", (db, request) => {
+    const post = db.posts.find(request.params.id);
+
+    return { post };
+  });
 }

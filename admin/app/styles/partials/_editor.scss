@@ -1,0 +1,9 @@
+.bf-editor-bar {
+  @extend .page-filter;
+  @include element("list") {
+    @extend .page-filter__list;
+  }
+  @include element("toggle") {
+    @extend .page-filter__filter;
+  }
+}

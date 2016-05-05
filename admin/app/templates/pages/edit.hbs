@@ -1,1 +1,21 @@
 {{action-bar for="pages:edit" newPage="newPage" toggleSideBar="toggleSideBar"}}
+<div class="page__content">
+  {{bf-editor-bar
+  showContent=showContent
+  showPreview=showPreview
+  showSettings=showSettings
+  toggleEditorState=(action "toggleEditorState")
+  }}
+
+  {{#if showContent}}
+  {{bf-editor value=post.content}}
+  {{/if}}
+
+  {{#if showPreview}}
+  {{bf-editor-preview}}
+  {{/if}}
+
+  {{#if showSettings}}
+  <!-- settings -->
+  {{/if}}
+</div>

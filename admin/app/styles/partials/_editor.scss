@@ -33,6 +33,7 @@
   @include element("input") {
     width: 100%;
     margin: 0 0 20px;
+    border: 1px solid #dedede;
   }
   &:focus {
     outline: none;

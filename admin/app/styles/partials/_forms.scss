@@ -1,4 +1,10 @@
 .form {
+  @include element("label") {
+    display: flex;
+    flex-direction: column;
+    @extend .bf-orange;
+    margin: 8px 0;
+  }
   @include element("input") {
     padding: 8px;
     font-size: 1rem;

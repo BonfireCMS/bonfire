@@ -8,11 +8,21 @@
   }}
 
   {{#if showContent}}
-  {{bf-editor value=page.content}}
+  <div class="bf-editor-box">
+    <form class="form bf-editor__form">
+      <div class="form__group">
+        <label class="form__label">Title</label>
+        {{input class="form__input bf-editor__input"value=page.name}}
+      </div>
+      {{bf-editor value=page.markdown}}
+    </form>
+  </div>
   {{/if}}
 
   {{#if showPreview}}
-  {{bf-editor-preview}}
+  <div class="bf-preview-box">
+    {{bf-editor-preview markdown=page.markdown}}
+  </div>
   {{/if}}
 
   {{#if showSettings}}

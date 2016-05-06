@@ -7,5 +7,6 @@ export default Model.extend({
   route: attr("string"),
   createdAt: attr("date"),
   updatedAt: attr("date"),
-  status: attr("string")
+  status: attr("string"),
+  markdown: attr("string")
 });

@@ -89,13 +89,9 @@ export default Ember.Service.extend({
         pageTitle: "Edit Post",
         actionBar: [{
           isIcon: "true",
-          icon: "plus",
-          action: "newPost"
-        }, {
-          isIcon: "true",
-          icon: "trash",
-          action: "",
-          color: "red"
+          icon: "check-square-o",
+          color: "green",
+          action: "savePost"
         }],
         postItem: {
         }

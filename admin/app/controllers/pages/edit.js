@@ -12,9 +12,11 @@ export default Ember.Controller.extend({
       const page = this.get("page");
       const markdown = page.get("markdown");
 
-      page.set("content", /** showdown.makehtml(markdown) **/);
+      page.set("content", showdown.makeHtml(markdown));
+
       page.save().then(() => {
       }).catch(err => {
+        Ember.Logger.log(err);
         page.rollback();
       });
     },

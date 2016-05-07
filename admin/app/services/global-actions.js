@@ -100,7 +100,7 @@ export default Ember.Service.extend({
         actionBar: []
       },
       "posts:loading": {
-        actionBard: [{
+        actionBar: [{
 
         }]
       },

@@ -23,4 +23,14 @@ export default function () {
 
     return { post };
   });
+
+  this.post("/posts", (db, request) => {
+    const payload = JSON.parse(request.requestBody).post;
+
+    payload.name = payload.title.toLowerCase().dasherize();
+
+    const post = db.posts.insert(payload);
+
+    return { post };
+  });
 }

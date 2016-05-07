@@ -47,7 +47,12 @@ export default Ember.Service.extend({
       },
       "pages:new": {
         pageTitle: "New page",
-        actionBar: [],
+        actionBar: [{
+          isIcon: "true",
+          icon: "check-square-o",
+          color: "green",
+          action: "savePage"
+        }],
         postItem: {
         }
       },

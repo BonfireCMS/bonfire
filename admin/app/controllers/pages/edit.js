@@ -1,12 +1,14 @@
 import Ember from "ember";
 
 export default Ember.Controller.extend({
+  showdown: Ember.inject.service(),
   showContent: true,
   showPreview: false,
   showSettings: false,
 
   actions: {
     savePage() {
+      const showdown = this.get("showdown");
       const page = this.get("page");
       const markdown = page.get("markdown");
 

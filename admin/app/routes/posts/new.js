@@ -19,8 +19,8 @@ export default Ember.Route.extend({
       if (post.get("isNew")) {
         // the new post was never saved so we'll destroy it and reset the properties
         post.destroyRecord();
-        this.controller.setProperties({ markdown, title });
       }
+      this.controller.setProperties({ markdown, title });
       this._super(transition);
     }
   }

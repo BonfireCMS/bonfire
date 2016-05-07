@@ -5,6 +5,7 @@ const inflection = require("inflection");
 
 module.exports = function (sequelize, DataTypes) {
   const Post = sequelize.define("Post", {
+    // TODO: bump size
     content: DataTypes.STRING(10000),
     markdown: DataTypes.STRING(10000),
     name: {

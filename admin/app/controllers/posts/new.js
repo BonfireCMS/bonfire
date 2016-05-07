@@ -1,26 +1,27 @@
 import Ember from "ember";
 
 export default Ember.Controller.extend({
+  postType: "post",
   showdown: Ember.inject.service(),
   showContent: true,
   showPreview: false,
   showSettings: false,
 
   actions: {
-    savePage() {
+    savePost() {
       const markdown = this.get("markdown");
       const content = this.get("showdown").makeHtml(markdown);
-      const page = this.get("page");
+      const post = this.get("post");
       const title = this.get("title");
 
-      page.setProperties({ content, markdown, title });
+      post.setProperties({ content, markdown, title });
 
-      page.save().then(() => {
-        page.reload();
+      post.save().then(() => {
+        post.reload();
         // TODO: need notifier
       }).catch(err => {
         Ember.Logger.log(err);
-        page.rollbackAttributes();
+        post.rollbackAttributes();
       });
     },
     toggleEditorState(state) {

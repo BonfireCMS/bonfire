@@ -91,7 +91,7 @@ describe("Controller", function () {
 
       beforeEach(function () {
         return helpers.createPost({
-          name: "foo",
+          title: "foo",
           type: "post",
           status: "published"
         }).then(created => {
@@ -134,7 +134,7 @@ describe("Controller", function () {
       it("creates a new Model instance", function (done) {
         req.body = {
           post: {
-            name: "bar",
+            title: "bar",
             type: "post",
             status: "published"
           }
@@ -150,7 +150,7 @@ describe("Controller", function () {
 
       it("returns BadRequestError if request body is invalid", function (done) {
         req.body = {
-          name: "bar",
+          title: "bar",
           type: "post",
           status: "published"
         };
@@ -165,14 +165,14 @@ describe("Controller", function () {
       it("returns ValidationError for invalid data", function (done) {
         req.body = {
           post: {
-            name: "foo",
+            title: "foo",
             type: "post",
             status: "published"
           }
         };
 
         helpers.createPost({
-          name: "foo",
+          title: "foo",
           type: "post",
           status: "published"
         }).then(() => {
@@ -194,7 +194,7 @@ describe("Controller", function () {
 
       beforeEach(function () {
         return helpers.createPost({
-          name: "foo",
+          title: "foo",
           type: "post",
           status: "published"
         }).then(created => {
@@ -235,7 +235,7 @@ describe("Controller", function () {
         req.params.id = post.id;
         req.body = {
           post: {
-            name: "bar"
+            title: "bar"
           }
         };
 
@@ -255,7 +255,7 @@ describe("Controller", function () {
 
       beforeEach(function () {
         return helpers.createPost({
-          name: "foo",
+          title: "foo",
           type: "post",
           status: "published"
         }).then(created => {

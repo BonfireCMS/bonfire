@@ -45,7 +45,7 @@ describe("App", function () {
 
     describe("GET /:slug", function () {
       beforeEach(function () {
-        return helpers.createPost({ name: "baz", type: "post" }).then(post => {
+        return helpers.createPost({ title: "baz", type: "post" }).then(post => {
           return helpers.createSetting("blogPage", post.id);
         });
       });

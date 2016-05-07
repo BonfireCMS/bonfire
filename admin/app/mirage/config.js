@@ -17,4 +17,10 @@ export default function () {
 
     return { post };
   });
+
+  this.put("/posts/:id", (db, request) => {
+    const post = db.posts.update(request.params.id, JSON.parse(request.requestBody).post);
+
+    return { post };
+  });
 }

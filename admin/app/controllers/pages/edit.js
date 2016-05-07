@@ -6,9 +6,18 @@ export default Ember.Controller.extend({
   showSettings: false,
 
   actions: {
+    savePage() {
+      const page = this.get("page");
+      const markdown = page.get("markdown");
+
+      page.set("content", /** showdown.makehtml(markdown) **/);
+      page.save().then(() => {
+      }).catch(err => {
+        page.rollback();
+      });
+    },
     toggleEditorState(state) {
       const stateToProp = `show${state.capitalize()}`;
-      console.log(stateToProp);
       const props = ["showContent", "showPreview", "showSettings"];
 
       props.forEach(this.resetProp.bind(this));

@@ -1,4 +1,4 @@
-{{action-bar for="pages:edit" newPage="newPage" toggleSideBar="toggleSideBar"}}
+{{action-bar for="pages:edit" savePage=(action "savePage") toggleSideBar="toggleSideBar"}}
 <div class="page__content">
   {{bf-editor-bar
   showContent=showContent
@@ -14,14 +14,14 @@
         <label class="form__label">Title</label>
         {{input class="form__input bf-editor__input"value=page.name}}
       </div>
-      {{bf-editor value=page.markdown}}
+      {{bf-editor value=page.markdown parentController=this}}
     </form>
   </div>
   {{/if}}
 
   {{#if showPreview}}
   <div class="bf-preview-box">
-    {{bf-editor-preview markdown=page.markdown}}
+    {{bf-editor-preview markdown=page.markdown parentController=this}}
   </div>
   {{/if}}
 

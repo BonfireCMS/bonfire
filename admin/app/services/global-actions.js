@@ -38,13 +38,9 @@ export default Ember.Service.extend({
         pageTitle: "Edit page",
         actionBar: [{
           isIcon: "true",
-          icon: "plus",
-          action: "newPage"
-        }, {
-          isIcon: "true",
-          icon: "trash",
-          action: "destroyPage",
-          color: "red"
+          icon: "check-square-o",
+          color: "green",
+          action: "savePage"
         }],
         postItem: {
         }
@@ -56,7 +52,7 @@ export default Ember.Service.extend({
         }
       },
       "pages:loading": {
-        actionBard: [{
+        actionBar: [{
 
         }]
       },

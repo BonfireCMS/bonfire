@@ -1,1 +1,31 @@
 {{action-bar for="posts:edit" newPost="newPost" toggleSideBar="toggleSideBar"}}
+<div class="page__content">
+  {{bf-editor-bar
+  showContent=showContent
+  showPreview=showPreview
+  showSettings=showSettings
+  toggleEditorState=(action "toggleEditorState")
+  }}
+
+  {{#if showContent}}
+  <div class="bf-editor-box">
+    <form class="form bf-editor__form">
+      <div class="form__group">
+        <label class="form__label">Title</label>
+        {{input class="form__input bf-editor__input" value=post.title}}
+      </div>
+      {{bf-editor value=post.markdown parentController=this}}
+    </form>
+  </div>
+  {{/if}}
+
+  {{#if showPreview}}
+  <div class="bf-preview-box">
+    {{bf-editor-preview markdown=post.markdown parentController=this}}
+  </div>
+  {{/if}}
+
+  {{#if showSettings}}
+  <!-- settings -->
+  {{/if}}
+</div>

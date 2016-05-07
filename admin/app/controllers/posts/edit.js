@@ -7,18 +7,18 @@ export default Ember.Controller.extend({
   showSettings: false,
 
   actions: {
-    savePage() {
+    savePost() {
       const showdown = this.get("showdown");
-      const page = this.get("page");
-      const markdown = page.get("markdown");
+      const post = this.get("post");
+      const markdown = post.get("markdown");
 
-      page.set("content", showdown.makeHtml(markdown));
+      post.set("content", showdown.makeHtml(markdown));
 
-      page.save().then(() => {
+      post.save().then(() => {
         // TODO: need notifier
       }).catch(err => {
         Ember.Logger.log(err);
-        page.rollback();
+        post.rollback();
       });
     },
     toggleEditorState(state) {

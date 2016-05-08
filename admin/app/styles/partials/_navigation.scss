@@ -37,7 +37,7 @@
       width: 0;
       opacity: 0;
       visibility: hidden;
-      z-index: 1000;
+      z-index: 6000;
     }
     @include modifier("open") {
       width: 230px;;

@@ -1,18 +1,30 @@
 .ember-notify-cn {
   position: fixed;
   display: block;
-  margin: 10px;
+  margin-top: 10px;
   width: 300px;
   right: -10px;
   top: 45px;
-  z-index: 1000;
+  bottom: auto;
+  z-index: 1 !important;
   .callout {
     padding: 20px;
     color: $white;
     border: none;
     &.success {
+      margin: 10px 0;
       @extend .bf-bg-green;
       box-shadow: 0 1px 1px rgba(0, 0, 0, .75);
     }
+  }
+}
+
+.ember-notify-default.ember-notify-cn {
+  bottom: auto;
+}
+
+@media only screen and (max-width: 680px) {
+  .ember-notify-cn {
+    padding-left: 0 !important;
   }
 }

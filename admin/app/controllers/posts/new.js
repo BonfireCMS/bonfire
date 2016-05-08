@@ -1,7 +1,7 @@
 import Ember from "ember";
 
 export default Ember.Controller.extend({
-  postType: "post",
+  notify: Ember.inject.service(),
   showdown: Ember.inject.service(),
   showContent: true,
   showPreview: false,
@@ -17,8 +17,8 @@ export default Ember.Controller.extend({
       post.setProperties({ content, markdown, title });
 
       post.save().then(() => {
+        this.get("notify").success("Post saved!");
         post.reload();
-        // TODO: need notifier
       }).catch(err => {
         Ember.Logger.log(err);
         post.rollbackAttributes();

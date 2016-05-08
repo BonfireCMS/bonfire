@@ -1,6 +1,7 @@
 import Ember from "ember";
 
 export default Ember.Controller.extend({
+  notify: Ember.inject.service(),
   showdown: Ember.inject.service(),
   showContent: true,
   showPreview: false,
@@ -15,10 +16,11 @@ export default Ember.Controller.extend({
       post.set("content", showdown.makeHtml(markdown));
 
       post.save().then(() => {
-        // TODO: need notifier
+        this.get("notify").success("Post updated!");
+        post.reload();
       }).catch(err => {
         Ember.Logger.log(err);
-        post.rollback();
+        post.rollbackAttributes();
       });
     },
     toggleEditorState(state) {

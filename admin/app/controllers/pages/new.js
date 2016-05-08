@@ -1,6 +1,7 @@
 import Ember from "ember";
 
 export default Ember.Controller.extend({
+  notify: Ember.inject.service(),
   showdown: Ember.inject.service(),
   showContent: true,
   showPreview: false,
@@ -16,8 +17,8 @@ export default Ember.Controller.extend({
       page.setProperties({ content, markdown, title });
 
       page.save().then(() => {
+        this.get("notify").success("Page saved!");
         page.reload();
-        // TODO: need notifier
       }).catch(err => {
         Ember.Logger.log(err);
         page.rollbackAttributes();

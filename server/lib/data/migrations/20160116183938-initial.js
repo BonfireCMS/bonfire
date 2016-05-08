@@ -63,7 +63,16 @@ module.exports = {
         type: Sequelize.STRING(10000),
         allowNull: true
       },
+      markdown: {
+        type: Sequelize.STRING(10000),
+        allowNull: true
+      },
+      // slugified title
       name: {
+        type: Sequelize.STRING,
+        unique: true
+      },
+      title: {
         type: Sequelize.STRING,
         unique: true
       },

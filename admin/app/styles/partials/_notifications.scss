@@ -1,0 +1,18 @@
+.ember-notify-cn {
+  position: fixed;
+  display: block;
+  margin: 10px;
+  width: 300px;
+  right: -10px;
+  top: 45px;
+  z-index: 1000;
+  .callout {
+    padding: 20px;
+    color: $white;
+    border: none;
+    &.success {
+      @extend .bf-bg-green;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, .75);
+    }
+  }
+}

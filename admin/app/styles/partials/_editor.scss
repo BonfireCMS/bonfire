@@ -1,0 +1,41 @@
+.bf-editor-bar {
+  @extend .page-filter;
+  @include element("list") {
+    @extend .page-filter__list;
+  }
+  @include element("toggle") {
+    @extend .page-filter__filter;
+  }
+}
+
+.bf-editor-box {
+  width: 100%;
+  height: calc(100vh);
+  padding: 20px;
+  background-color: $white;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.bf-preview-box {
+  @extend .bf-editor-box;
+}
+
+.bf-editor {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #dedede;
+  padding: 20px;
+  font-size: 1rem;
+  resize: none;
+  @include element("form") {
+    height: calc(100% - 96px);
+  }
+  @include element("input") {
+    width: 100%;
+    margin: 0 0 20px;
+    border: 1px solid #dedede;
+  }
+  &:focus {
+    outline: none;
+  }
+}

@@ -10,5 +10,7 @@ module.exports = function(defaults) {
     }
   });
 
+  app.import("bower_components/showdown/dist/showdown.js");
+
   return app.toTree();
 };

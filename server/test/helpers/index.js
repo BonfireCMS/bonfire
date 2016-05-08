@@ -65,7 +65,7 @@ function setFrontPage() {
     type.value = "page";
     return type.save();
   }).then(function () {
-    return Post.create({ name: "my-front-page" });
+    return Post.create({ title: "My Front Page" });
   }).then(post => {
     return Setting.find({ where: { key: "frontPage" }}).then(page => {
       page.value = post.id;

@@ -44,6 +44,7 @@
     "ember-export-application-global": "^1.0.5",
     "ember-load-initializers": "^0.5.1",
     "ember-moment": "6.1.0",
+    "ember-notify": "5.0.4",
     "ember-resolver": "^2.0.3",
     "ember-truth-helpers": "1.2.0",
     "eslint-config-ember": "0.3.0",
@@ -63,8 +64,14 @@
       "consistent-return": 0,
       "no-implicit-coercion": 0,
       "no-invalid-this": 0,
-      "max-len": [1, 100],
-      "quote-props": [2, "as-needed"]
+      "max-len": [
+        1,
+        100
+      ],
+      "quote-props": [
+        2,
+        "as-needed"
+      ]
     }
   }
 }

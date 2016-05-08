@@ -38,25 +38,26 @@ export default Ember.Service.extend({
         pageTitle: "Edit page",
         actionBar: [{
           isIcon: "true",
-          icon: "plus",
-          action: "newPage"
-        }, {
-          isIcon: "true",
-          icon: "trash",
-          action: "destroyPage",
-          color: "red"
+          icon: "check-square-o",
+          color: "green",
+          action: "savePage"
         }],
         postItem: {
         }
       },
       "pages:new": {
         pageTitle: "New page",
-        actionBar: [],
+        actionBar: [{
+          isIcon: "true",
+          icon: "check-square-o",
+          color: "green",
+          action: "savePage"
+        }],
         postItem: {
         }
       },
       "pages:loading": {
-        actionBard: [{
+        actionBar: [{
 
         }]
       },
@@ -88,23 +89,24 @@ export default Ember.Service.extend({
         pageTitle: "Edit Post",
         actionBar: [{
           isIcon: "true",
-          icon: "plus",
-          action: "newPost"
-        }, {
-          isIcon: "true",
-          icon: "trash",
-          action: "",
-          color: "red"
+          icon: "check-square-o",
+          color: "green",
+          action: "savePost"
         }],
         postItem: {
         }
       },
       "posts:new": {
         pageTitle: "New post",
-        actionBar: []
+        actionBar: [{
+          isIcon: "true",
+          icon: "check-square-o",
+          color: "green",
+          action: "savePost"
+        }]
       },
       "posts:loading": {
-        actionBard: [{
+        actionBar: [{
 
         }]
       },

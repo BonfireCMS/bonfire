@@ -8,20 +8,19 @@ export default Ember.Controller.extend({
   showSettings: false,
 
   actions: {
-    savePage() {
-      const markdown = this.get("markdown");
-      const content = this.get("showdown").makeHtml(markdown);
-      const page = this.get("page");
-      const title = this.get("title");
+    savePost() {
+      const showdown = this.get("showdown");
+      const post = this.get("post");
+      const markdown = post.get("markdown");
 
-      page.setProperties({ content, markdown, title });
+      post.set("content", showdown.makeHtml(markdown));
 
-      page.save().then(() => {
-        this.get("notify").success("Page saved!");
-        page.reload();
+      post.save().then(() => {
+        this.get("notify").success("Post updated!");
+        post.reload();
       }).catch(err => {
         Ember.Logger.log(err);
-        page.rollbackAttributes();
+        post.rollbackAttributes();
       });
     },
     toggleEditorState(state) {

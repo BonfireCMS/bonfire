@@ -17,11 +17,15 @@
   @include element("action") {
     height: 50px;
     width: 50px;
-    @extend .bf-bg-blue;
     border-radius: 100%;
     margin-right: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
     transition: background-color .2s ease;
+    @include modifier("check-square-o") {
+      &:hover {
+        @extend .bf-bg-green-light;
+      }
+    }
     @include modifier("trash") {
       @extend .bf-bg-red;
       &:hover {

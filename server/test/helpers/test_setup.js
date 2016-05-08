@@ -22,13 +22,13 @@ const fixtures = [{
   data: {
     content: "foo",
     type: "post",
-    name: "something"
+    title: "something"
   }
 }, {
   type: "post",
   data: {
     type: "page",
-    name: "bar",
+    title: "bar",
     route: "/bar"
   }
 }, {

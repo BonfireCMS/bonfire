@@ -88,7 +88,7 @@ describe("Controller | Site", function () {
         return this;
       };
 
-      return helpers.createPost({ name: "baz", type: "post" }).then(post => {
+      return helpers.createPost({ title: "baz", type: "post" }).then(post => {
         return models.Setting.find({ where: { key: "postsPage" }}).then(setting => {
           setting.value = post.id;
           return setting.save();
@@ -133,7 +133,7 @@ describe("Controller | Site", function () {
     it("renders a nested route with page.hbs", function (done) {
       helpers.createPost({
         type: "page",
-        name: "bird",
+        title: "bird",
         route: "/nested/bird"
       }).then(post => {
         req.path = "/nested/bird";
@@ -149,7 +149,7 @@ describe("Controller | Site", function () {
     it("renders a nested route with index.hbs if it is set as blogPage and the path matches post.path", function (done) {
       helpers.createPost({
         type: "page",
-        name: "bird",
+        title: "bird",
         route: "/nested/bird"
       }).then(post => {
         return helpers.setBlogPage(post.id);

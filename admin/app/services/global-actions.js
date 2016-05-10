@@ -28,6 +28,10 @@ export default Ember.Service.extend({
             action: "editPage",
             text: "Edit page"
           }, {
+            icon: "thumbs-o-up",
+            action: "publish",
+            text: "Publish page"
+          }, {
             icon: "trash",
             action: "",
             text: "Trash"
@@ -78,6 +82,10 @@ export default Ember.Service.extend({
             icon: "edit",
             action: "editPost",
             text: "Edit post"
+          }, {
+            icon: "thumbs-o-up",
+            action: "publish",
+            text: "Publish page"
           }, {
             icon: "trash",
             action: "",

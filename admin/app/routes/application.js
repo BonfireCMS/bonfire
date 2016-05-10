@@ -1,6 +1,7 @@
 import Ember from "ember";
 
 export default Ember.Route.extend({
+  notify: Ember.inject.service(),
   activate() {
     if ("ontouchstart" in document.documentElement) {
       document.documentElement.className += "touch";
@@ -30,6 +31,18 @@ export default Ember.Route.extend({
     },
     newPost() {
       this.send("goTo", "posts.new");
+    },
+    publish(postId) {
+      const post = this.store.peekRecord("post", postId);
+
+      post.set("status", "published");
+      post.save().then(() => {
+        post.reload();
+        this.get("notify").success("Your post has been published!");
+      }).catch(err => {
+        post.rollbackAttributes();
+        Ember.Logger.log(err);
+      });
     },
     toggleSideBar() {
       this.controllerFor("sidebar").toggleProperty("sideBarIsOpen");

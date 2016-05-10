@@ -3,7 +3,13 @@
   {{page-filter activeFilter=status updateFilter=(action "updateFilter") searchText=searchText}}
   <div class="post-list">
     {{#each filteredPages as |page|}}
-    {{page-list-item for="pages" post=page newPage="newPage" editPage="editPage"}}
+    {{page-list-item
+    for="pages"
+    post=page
+    newPage="newPage"
+    editPage="editPage"
+    publish="publish"
+    }}
     {{/each}}
   </div>
 </div>

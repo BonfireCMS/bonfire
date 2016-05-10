@@ -87,6 +87,7 @@ export default Ember.Service.extend({
             action: "publish",
             text: "Publish page"
           }, {
+            icon: "trash",
             action: "",
             text: "Trash"
           }]

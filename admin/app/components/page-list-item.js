@@ -45,6 +45,7 @@ export default Ember.Component.extend({
       }
     },
     triggerAction(type) {
+      this.set("popoverIsShowing", false);
       this.sendAction(type, this.get("post.id"));
     }
   },

@@ -21,7 +21,7 @@ export default Ember.Service.extend({
           action: "editPage",
           popover: [{
             icon: "external-link",
-            action: "",
+            action: "openExternalLink",
             text: "View page"
           }, {
             icon: "edit",
@@ -76,7 +76,7 @@ export default Ember.Service.extend({
           action: "editPost",
           popover: [{
             icon: "external-link",
-            action: "",
+            action: "openExternalLink",
             text: "View post"
           }, {
             icon: "edit",

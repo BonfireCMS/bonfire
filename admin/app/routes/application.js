@@ -44,6 +44,9 @@ export default Ember.Route.extend({
         Ember.Logger.log(err);
       });
     },
+    openExternalLink(link) {
+      window.open(link, "_blank");
+    },
     toggleSideBar() {
       this.controllerFor("sidebar").toggleProperty("sideBarIsOpen");
     }

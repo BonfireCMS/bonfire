@@ -25,6 +25,13 @@ export default Ember.Controller.extend({
   actions: {
     updateFilter(type) {
       this.set("status", type);
+    },
+
+    viewPage(page) {
+      const siteRoot = window.location.origin;
+      const pageLink = `${siteRoot}${page.get("route")}`;
+
+      this.send("openExternalLink", pageLink);
     }
   }
 });

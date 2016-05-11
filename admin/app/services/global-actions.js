@@ -124,7 +124,7 @@ export default Ember.Service.extend({
       },
       settings: {
         pageTitle: "Settings",
-        actionbar: []
+        actionBar: []
       }
     };
 

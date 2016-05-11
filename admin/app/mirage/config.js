@@ -33,4 +33,10 @@ export default function () {
 
     return { post };
   });
+
+  this.del("/posts/:id", (db, request) => {
+    db.posts.remove(request.params.id);
+
+    return {};
+  });
 }

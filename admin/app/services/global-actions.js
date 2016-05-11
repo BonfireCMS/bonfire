@@ -33,7 +33,7 @@ export default Ember.Service.extend({
             text: "Publish page"
           }, {
             icon: "trash",
-            action: "",
+            action: "removePage",
             text: "Trash"
           }]
         }
@@ -88,7 +88,7 @@ export default Ember.Service.extend({
             text: "Publish page"
           }, {
             icon: "trash",
-            action: "",
+            action: "removePost",
             text: "Trash"
           }]
         }

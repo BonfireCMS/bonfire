@@ -44,6 +44,7 @@ export default Ember.Route.extend({
         Ember.Logger.log(err);
       });
     },
+
     removePost(postId) {
       this.store.findRecord("post", postId).then(post => {
         post.set("status", "trash");
@@ -53,6 +54,7 @@ export default Ember.Route.extend({
           this.get("notify").success("Post sent to trash");
         }).catch(err => {
           post.rollbackAttributes();
+          Ember.Logger.log(err);
         });
       });
     },
